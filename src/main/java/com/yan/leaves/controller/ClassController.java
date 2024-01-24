@@ -79,8 +79,8 @@ public class ClassController {
 		if(result.hasErrors()) {
 			return "registration-edit";
 		}
-		var id=regService.save(form);
-		return "redirect:/classes/registration/%d".formatted(id);
+		regService.save(form);
+		return "redirect:/classes/registration/%d".formatted(form.getClassId(),form.getStudentId());
 	}
 
 	@GetMapping("registration/{classId}/{studentId}")
@@ -92,7 +92,7 @@ public class ClassController {
 	
 	@ModelAttribute(name="classForm")
 	ClassForm classForm(@RequestParam(name = "id", required = false) Optional<Integer> id) {
-		return id.filter(a -> a> 0).map(clsService::findInfoById).orElse(new ClassForm(0, 0, null, 0, null));
+		return id.filter(a -> a > 0).map(clsService::findById).orElse(new ClassForm());
 	}
 	
 	@ModelAttribute(name="registForm")
@@ -101,7 +101,7 @@ public class ClassController {
 			@RequestParam(name="classId",required=false,defaultValue = "0") int classId) {
 		//edit 
 		if(registId>0) {
-			return regService.getFormById(registId);
+			return regService.getFormById(classId,registId);
 		}
 		var form=new RegistrationForm();
 		form.setClassId(classId);

@@ -24,10 +24,13 @@
 	</c:import>
 	<div class="container">
 		<h3 class="my-4">${empty param.id ? 'Add New ' : 'Edit '}Teacher</h3>
-		<div class="class row">
+		<div class="row">
 			<c:url value="/teachers" var="save"></c:url>
 			<sf:form method="post" action="${save}" modelAttribute="form"
 				cssClass="col-lg-6 col-md-9 col-sm-12">
+				
+				<sf:errors path="*" cssClass="alert alert-warning" element="div"></sf:errors>
+				
 				<sf:hidden path="id" />
 				
 				<div class="mb-3">

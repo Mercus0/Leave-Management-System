@@ -23,8 +23,7 @@ public class ClassForm {
 	}
 	
 	private int id;
-	
-	@NotEmpty(message="Please select teacher.")
+
 	@Min(value = 1,message="Please select teacher.")
 	private int teacherName;
 	

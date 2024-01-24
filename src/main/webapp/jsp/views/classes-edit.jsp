@@ -29,23 +29,28 @@
 				<c:url var="save" value="/classes"></c:url>
 				<sf:form action="${save}" method="post" modelAttribute="classForm">
 					<sf:hidden path="id" />
+					
+					<sf:errors path="*" cssClass="alert alert-warning" element="div"> </sf:errors>
 					<!-- Teacher id -->
 					<div class="mb-3">
 						<label class="form-label">Teacher</label>
 						<sf:select path="teacherName" items="${teachers}" itemValue="id" itemLabel="name"
 							cssClass="form-select"></sf:select>
+							<sf:errors path="teacherName" cssClass=""></sf:errors>
 					</div>
 					<div class="row mb-2">
 						<!-- Start date -->
 						<div class="col">
 							<label class="form-label">Start Date</label>
 							<sf:input path="start" type="date" cssClass="form-control" />
+							<sf:errors path="start"></sf:errors>
 						</div>
 						<!-- months -->
 						<div class="col">
 							<label class="form-label">Months</label>
 							<sf:input path="months" type="number" cssClass="form-control"
 								placeholder="Enter Months" />
+								<sf:errors path="months"></sf:errors>
 						</div>
 					</div>
 
@@ -53,6 +58,7 @@
 					<div class="mb-3">
 						<label class="form-label">Description</label>
 						<sf:textarea path="description" cssClass="form-control"/>
+						<sf:errors path="description"></sf:errors>
 					</div>
 					<button type="submit" class="btn btn-outline-danger">Save</button>
 

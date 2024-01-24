@@ -29,8 +29,11 @@
 		
 		<div class="row">
 			<sf:form method="post" modelAttribute="registForm" cssClass="col-6">
-				<sf:hidden path="id"/>
+				<sf:hidden path="studentId"/>
 				<sf:hidden path="classId"/>
+				<sf:hidden path="registDate"/>
+				
+				<sf:errors path=""></sf:errors>
 
 				<div class="mb-3">
 					<label class="form-label">Start Date</label>

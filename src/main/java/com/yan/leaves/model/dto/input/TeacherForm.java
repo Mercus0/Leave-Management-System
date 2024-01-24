@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class TeacherForm {
 	
@@ -32,6 +33,7 @@ public class TeacherForm {
 	@NotEmpty(message="Please enter email address.")
 	private String email;
 	
+	@NotNull(message = "Please enter assign date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate assignDate;
 	

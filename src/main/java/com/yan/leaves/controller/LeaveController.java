@@ -5,12 +5,16 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yan.leaves.model.dto.input.LeaveForm;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/leaves")
@@ -27,12 +31,17 @@ public class LeaveController {
 	}
 	
 	@GetMapping("/edit")
-	public String edit(@RequestParam Optional<Integer> id,ModelMap model) {
+	public String edit(@RequestParam int id,@RequestParam int studentId) {
 		return "leaves-edit";
 	}
 	
 	@PostMapping
-	public String save(LeaveForm form) {
+	public String save(@Valid @ModelAttribute LeaveForm form,BindingResult result) {
 		return "";
+	}
+	
+	@ModelAttribute("form")
+	LeaveForm form(@RequestParam int classId,@RequestParam int studentId) {
+		return new LeaveForm(classId,studentId);
 	}
 }

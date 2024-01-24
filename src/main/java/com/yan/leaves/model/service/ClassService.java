@@ -26,14 +26,15 @@ import com.yan.leaves.model.service.mapper.ClassListVoRowMapper;
 public class ClassService {
 	
 	private static final String SELECT_PROJECTION = """
-			select c.id id,t.id teacherId, a.name teacherName, t.phone teacherPhone,
-			c.start_date startDate, c.months,c.description, count(r.id) studentCount
-			from classes c join teacher t on t.id=c.teacher_id 
-			join account a on on a.id = t.id
-			left join registration r on c.id = r.classes_id where 1=1
-			""";
+	        SELECT c.id AS id, t.id AS teacherId, a.name AS teacherName, t.phone AS teacherPhone,
+	        c.start_date AS startDate, c.months, c.description, COUNT(r.student_id) AS studentCount
+	        FROM classes c
+	        JOIN teacher t ON t.id = c.teacher_id
+	        JOIN account a ON a.id = t.id
+	        LEFT JOIN registration r ON c.id = r.classes_id
+	        """;
 
-	private static final String SELECT_GROUPBY = "group by c.id,t.id,a.name,t.phone,c.start_date,c.month,c.description";
+	private static final String SELECT_GROUPBY = " group by c.id,t.id,a.name,t.phone,c.start_date,c.months,c.description";
 	
 	private NamedParameterJdbcTemplate template;
 	private SimpleJdbcInsert insert;
@@ -55,24 +56,39 @@ public class ClassService {
 	public List<ClassListVO> search(Optional<String> teacher,Optional<LocalDate> from,Optional<LocalDate> to){
 		
 		var sb=new StringBuffer(SELECT_PROJECTION);
-		sb.append(" where 1 =1");
+		sb.append(" where 1 =1 ");
 		
 		var param=new HashMap<String, Object>();
 		
-		sb.append(teacher.filter(StringUtils::hasText).map(a -> {
-			param.put("teacher", a.toLowerCase().concat("%"));
-			return "and lower(a.name) like :teacher";
-		}));
+		teacher.ifPresent(a -> {
+	        param.put("teacher", a.toLowerCase().concat("%"));
+	        sb.append(" and lower(a.name) like :teacher");
+	    });
+
+	    from.ifPresent(a -> {
+	        param.put("from", Date.valueOf(a));
+	        sb.append(" and c.start_date >= :from");
+	    });
+
+	    to.ifPresent(a -> {
+	        param.put("to", Date.valueOf(a));
+	        sb.append(" and c.start_date <= :to");
+	    });
 		
-		sb.append(from.map(a -> {
-			param.put("from", Date.valueOf(a));
-			return "and c.start_date >= :from";
-		}));
-		
-		sb.append(to.map(a -> {
-			param.put("to", Date.valueOf(a));
-			return "and c.start_date <= :to";
-		}));
+//		sb.append(teacher.filter(StringUtils::hasText).map(a -> {
+//			param.put("teacher", a.toLowerCase().concat("%"));
+//			return "and lower(a.name) like :teacher";
+//		}));
+//		
+//		sb.append(from.map(a -> {
+//			param.put("from", Date.valueOf(a));
+//			return "and c.start_date >= :from";
+//		}));
+//		
+//		sb.append(to.map(a -> {
+//			param.put("to", Date.valueOf(a));
+//			return "and c.start_date <= :to";
+//		}));
 		
 		sb.append(SELECT_GROUPBY);
 		

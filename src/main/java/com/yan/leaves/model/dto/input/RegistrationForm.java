@@ -35,6 +35,7 @@ public class RegistrationForm {
 	
 	@NotEmpty(message = "Please enter Phone number.")
 	private String phone;
+	
 	private String education;
 
 	public int getClassId() {

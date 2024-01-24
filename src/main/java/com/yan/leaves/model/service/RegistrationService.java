@@ -81,7 +81,7 @@ public class RegistrationService {
 	
 	public RegistrationForm getFormById(int classId, int studentId) {
 		var form=new RegistrationForm();
-		form.setClassId(id);
+		form.setClassId(classId);
 		return form;
 	}
 }
