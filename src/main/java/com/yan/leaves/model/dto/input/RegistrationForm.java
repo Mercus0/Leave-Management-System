@@ -1,13 +1,39 @@
 package com.yan.leaves.model.dto.input;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.validation.constraints.NotEmpty;
+
 public class RegistrationForm {
 	public RegistrationForm() {
-
+		
 	}
-
+	public RegistrationForm(int classId, int studentId, LocalDate registDate, String studentName, String email,
+			String phone, String education) {
+		super();
+		this.classId = classId;
+		this.studentId = studentId;
+		this.registDate=registDate;
+		this.studentName=studentName;
+		this.email=email;
+		this.phone=phone;
+		this.education=education;
+	}
+	
 	private int classId;
+	private int studentId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate registDate;
+	
+	@NotEmpty(message = "Please enter student name.")
 	private String studentName;
+	
+	@NotEmpty(message = "Please enter Email Address.")
 	private String email;
+	
+	@NotEmpty(message = "Please enter Phone number.")
 	private String phone;
 	private String education;
 
@@ -17,6 +43,22 @@ public class RegistrationForm {
 
 	public void setClassId(int classId) {
 		this.classId = classId;
+	}
+
+	public int getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+
+	public LocalDate getRegistDate() {
+		return registDate;
+	}
+
+	public void setRegistDate(LocalDate registDate) {
+		this.registDate = registDate;
 	}
 
 	public String getStudentName() {

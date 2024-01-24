@@ -4,11 +4,14 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class TeacherForm {
+	
 	public TeacherForm() {
-
+		
 	}
-
+	
 	public TeacherForm(int id, String name, String phone, String email, LocalDate assignDate) {
 		super();
 		this.id = id;
@@ -18,13 +21,20 @@ public class TeacherForm {
 		this.assignDate = assignDate;
 	}
 
-	public int id;
+	private int id;
+	
+	@NotEmpty(message="Please enter teacher name.")
 	private String name;
+	
+	@NotEmpty(message="Please enter Phone number.")
 	private String phone;
+	
+	@NotEmpty(message="Please enter email address.")
 	private String email;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate assignDate;
-
+	
 	public int getId() {
 		return id;
 	}

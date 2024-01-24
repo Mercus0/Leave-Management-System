@@ -48,12 +48,16 @@
 			<ul class="nav nav-pills">
 				<li class="nav-item">
 					<button class="nav-link active" data-bs-toggle="pill"
-						data-bs-target="#registrations">Registrations</button>
+						data-bs-target="#registrations">
+						<i class="bi bi-people-fill"></i>
+						Registrations</button>
 				</li>
 
 				<li class="nav-item">
 					<button class="nav-link" data-bs-toggle="pill"
-						data-bs-target="#leaves">Leaves Applications</button>
+						data-bs-target="#leaves">
+						<i class="bi bi-person-add"></i>
+						Leaves Applications</button>
 				</li>
 			</ul>
 
@@ -61,11 +65,15 @@
 			<c:url var="editClass" value="/classes/edit">
 				<c:param name="id" value="1"></c:param>
 			</c:url>
-				<a href="${editClass}" class="btn btn-outline-danger"> Edit Class </a>
+				<a href="${editClass}" class="btn btn-outline-danger"> 
+				<i class="bi bi-pencil"></i>
+				Edit Class </a>
 			<c:url var="addRegistration" value="/classes/registration">
-				<c:param name="classsId" value="1"></c:param>
+				<c:param name="classId" value="1"></c:param>
 			</c:url>
-				<a href="${addRegistration}" class="btn btn-outline-primary"> Add New Registration </a>
+				<a href="${addRegistration}" class="btn btn-outline-primary"> 
+				<i class="bi bi-plus-lg"></i>
+				Add New Registration </a>
 			</div>
 		</div>
 		<div class="tab-content" id="contents">

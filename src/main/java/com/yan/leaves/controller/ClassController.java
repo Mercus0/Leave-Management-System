@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,8 @@ import com.yan.leaves.model.dto.input.RegistrationForm;
 import com.yan.leaves.model.service.ClassService;
 import com.yan.leaves.model.service.RegistrationService;
 import com.yan.leaves.model.service.TeacherService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/classes")
@@ -47,7 +50,10 @@ public class ClassController {
 	}
 
 	@PostMapping
-	public String save(@ModelAttribute(name="classForm") ClassForm form) {
+	public String save(@Valid @ModelAttribute(name="classForm") ClassForm form,BindingResult result) {
+		if(result.hasErrors()) {
+			return "classes-edit";
+		}
 		//save form
 		var id=clsService.save(form);
 		//redirect to details view
@@ -63,40 +69,43 @@ public class ClassController {
 
 	@GetMapping("registration")
 	public String editRegistration(
-			@RequestParam(name="id",required=false,defaultValue = "0") int id,
-			@RequestParam(name="classId",required=false,defaultValue = "0") int classId) {
+			@RequestParam(name="studentId",required=false,defaultValue = "0") int studentId,
+			@RequestParam(name="classId",required=false,defaultValue = "0")int classId) {
 		return "registration-edit";
 	}
 
 	@PostMapping("registration")
-	public String saveRegistration(@ModelAttribute(name="registForm") RegistrationForm form) {
+	public String saveRegistration(@Valid @ModelAttribute(name="registForm") RegistrationForm form,BindingResult result) {
+		if(result.hasErrors()) {
+			return "registration-edit";
+		}
 		var id=regService.save(form);
-		return "redirect:/classes/registration/%id".formatted(id);
+		return "redirect:/classes/registration/%d".formatted(id);
 	}
 
-	@GetMapping("registration/{id}")
-	public String showRegistrationDetails(@PathVariable(name="id") int id, ModelMap model) {
-		var result=regService.findDetailsById(id);
+	@GetMapping("registration/{classId}/{studentId}")
+	public String showRegistrationDetails(@PathVariable(name="classId") int classId,@PathVariable(name="studentId") int studentId, ModelMap model) {
+		var result=regService.findDetailsById(classId,studentId);
 		model.put("dto", result);
 		return "registration-details";
 	}
 	
 	@ModelAttribute(name="classForm")
 	ClassForm classForm(@RequestParam(name = "id", required = false) Optional<Integer> id) {
-		return id.filter(a -> a> 0).map(clsService::findById).orElse(new ClassForm());
+		return id.filter(a -> a> 0).map(clsService::findInfoById).orElse(new ClassForm(0, 0, null, 0, null));
 	}
 	
 	@ModelAttribute(name="registForm")
 	RegistrationForm registform(
-			@RequestParam(name="id",required=false,defaultValue = "0") int id,
+			@RequestParam(name="registId",required=false,defaultValue = "0") int registId,
 			@RequestParam(name="classId",required=false,defaultValue = "0") int classId) {
 		//edit 
-		if(id>0) {
-			return regService.getFormById(id);
+		if(registId>0) {
+			return regService.getFormById(registId);
 		}
 		var form=new RegistrationForm();
 		form.setClassId(classId);
-		return  form;
+		return form;
 	}
 	
 }
