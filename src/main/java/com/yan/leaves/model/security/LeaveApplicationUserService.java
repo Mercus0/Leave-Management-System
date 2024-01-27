@@ -27,13 +27,13 @@ public class LeaveApplicationUserService implements UserDetailsService {
 		if(!list.isEmpty()) {
 			var account=list.get(0);
 			return User.builder()
-					.username(account.getEamil())
+					.username(account.getEmail())
 					.password(account.getPassword())
 					.authorities(account.getRole())
 					.accountExpired(account.isDeleted())
 					.build();
 		}
-		return null;
+		throw new UsernameNotFoundException(username);
 	}
 
 }

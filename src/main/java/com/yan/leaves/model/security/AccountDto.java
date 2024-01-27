@@ -4,7 +4,7 @@ public class AccountDto {
 	private int id;
 	private String name;
 	private String role;
-	private String eamil;
+	private String email;
 	private String password;
 	private boolean deleted;
 
@@ -32,12 +32,12 @@ public class AccountDto {
 		this.role = role;
 	}
 
-	public String getEamil() {
-		return eamil;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEamil(String eamil) {
-		this.eamil = eamil;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {

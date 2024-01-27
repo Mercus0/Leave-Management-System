@@ -16,6 +16,7 @@ D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\mode
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\output\ClassDetailsVO.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\output\TeacherListVO.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\output\ClassListVO.java
+D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\security\AdminUserInitializer.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\controller\StudentController.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\input\RegistrationForm.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\input\ClassForm.java

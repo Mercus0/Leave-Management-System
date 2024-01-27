@@ -19,5 +19,4 @@ public class RegistrationListVO {
 	public void setStudent(StudentListVO student) {
 		this.student = student;
 	}
-
 }

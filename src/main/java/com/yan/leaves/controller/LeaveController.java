@@ -30,8 +30,8 @@ public class LeaveController {
 		return "leaves";
 	}
 	
-	@GetMapping("/edit")
-	public String edit(@RequestParam int id,@RequestParam int studentId) {
+	@GetMapping("edit")
+	public String edit(@RequestParam(name="id",required=false) Optional<Integer> id,@RequestParam(name="studentId",required=false) Optional<Integer> studentId) {
 		return "leaves-edit";
 	}
 	
@@ -41,7 +41,7 @@ public class LeaveController {
 	}
 	
 	@ModelAttribute("form")
-	LeaveForm form(@RequestParam int classId,@RequestParam int studentId) {
+	LeaveForm form(@RequestParam(name="classId",required = false,defaultValue = "0") int classId,@RequestParam(name="studentId",required = false,defaultValue = "0") int studentId) {
 		return new LeaveForm(classId,studentId);
 	}
 }
