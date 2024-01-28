@@ -6,7 +6,7 @@
 	<artifactId>buc-application</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -24,9 +24,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>8.0.1.Final</version>
 		</dependency>
-
-		<!--
-		https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
@@ -140,7 +138,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
-					<release>17</release>
+					<release>20</release>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -158,5 +156,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

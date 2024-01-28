@@ -58,21 +58,19 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 			password-parameter="password"
 			username-parameter="username"
 		/>
-		<security:logout />
+		<security:logout logout-url="/signout"
+			logout-success-url="/"
+			invalidate-session="true"
+		/>
 		
-		<security:intercept-url pattern="/signin"
-			access="permitAll" />
-		
-		<security:intercept-url pattern="/classes/**"
-			access="hasAnyAuthority('Admin','Teacher')" />
-		<security:intercept-url pattern="/leaves/**"
-			access="hasAnyAuthority('Admin','Teacher','Student')" />
-		<security:intercept-url pattern="/students/**"
-			access="hasAnyAuthority('Admin','Teacher')" />
-		<security:intercept-url pattern="/teachers/**"
-			access="hasAuthority('Admin')" />
-		<security:intercept-url pattern="/home"
-			access="isAuthenticated()" />
+		<security:intercept-url pattern="/signin" access="permitAll" />
+		<security:intercept-url pattern="/home" access="isAuthenticated()" />
+		<security:intercept-url pattern="/classes/**" access="hasAnyAuthority('Admin','Teacher')" />
+		<security:intercept-url pattern="/leaves/**" access="hasAnyAuthority('Admin','Teacher','Student')" />
+		<security:intercept-url pattern="/students/**" access="hasAnyAuthority('Admin','Teacher')" />
+		<security:intercept-url pattern="/teachers/**" access="hasAuthority('Admin')" />
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		<security:intercept-url pattern="/" access="permitAll" />
 	</security:http>
 
 </beans>

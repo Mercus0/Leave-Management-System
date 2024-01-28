@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Leave | Sign In</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -26,29 +27,31 @@
 			<div class="card-header">
 				<i class="bi-door-open"></i>Sign In
 			</div>
-			
+
 			<div class="card-body">
-				<c:url var = "signin" value="/signin"></c:url>
-					<sf:form action="${signin}" method="post">
-						<c:if test="${not empty param.error}">
-							<div class="alert alert-warning">Login Error.</div>
-						</c:if>
-							<div class="mb-3">
-								<label class="form-label">Email</label>
-								<input type="email" name="username" placeholder="Enter Email Address" class="form-control" />
-							</div>
-							
-							<div class="mb-3">
-								<label class="form-label">Password</label>
-								<input type="password" name="password" placeholder="Enter your password"  class="form-control" />
-							</div>
-							
-							<div class="mb-3">
-								<button type="submit" class="btn btn-outline-success">
-									<i class="bi bi-door-open"></i>Sign In
-								</button>
-							</div>
-					</sf:form>
+				<c:url var="signin" value="/signin"></c:url>
+				<sf:form action="${signin}" method="POST">
+					<c:if test="${not empty param.error}">
+						<div class="alert alert-warning">Login Error.</div>
+					</c:if>
+					<div class="mb-3">
+						<label class="form-label">Email</label> <input type="email"
+							name="username" placeholder="Enter Email Address"
+							class="form-control" />
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Password</label> <input type="password"
+							name="password" placeholder="Enter your password"
+							class="form-control" />
+					</div>
+
+					<div class="mb-3">
+						<button type="submit" class="btn btn-outline-success">
+							<i class="bi bi-door-open"></i>Sign In
+						</button>
+					</div>
+				</sf:form>
 			</div>
 		</div>
 	</div>

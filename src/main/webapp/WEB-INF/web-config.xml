@@ -12,7 +12,7 @@ http://www.springframework.org/schema/mvc https://www.springframework.org/schema
 <mvc:annotation-driven></mvc:annotation-driven>
 <context:component-scan base-package="com.yan.leaves.controller"/>
 
-<mvc:view-resolvers>
+<mvc:view-resolvers> 
 	<mvc:jsp prefix="/jsp/views/" suffix=".jsp"/>
 </mvc:view-resolvers>
 
