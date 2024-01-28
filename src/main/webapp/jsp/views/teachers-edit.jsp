@@ -43,14 +43,16 @@
 					<sf:input path="phone" type="text" placeholder="Enter Teacher Phone"
 						cssClass="form-control" />
 				</div>
-				<div class="mb-3">
+				
+				<div class="mb-3 ${empty param.id ? '' : 'd-none' }">
 					<label class="form-label">Email</label>
 					<sf:input path="email" type="email" placeholder="Enter Teacher email"
-						cssClass="form-control" />
+						cssClass="form-control"/>
 				</div>
+				
 				<div class="mb-3">
 					<label class="form-label">Assign Date</label>
-					<sf:input path="email" type="date"
+					<sf:input path="assignDate" type="date"
 						cssClass="form-control" />
 				</div>
 				<div>

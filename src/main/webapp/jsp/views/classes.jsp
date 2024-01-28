@@ -25,19 +25,19 @@
 	<div class="container">
 		<h3 class="my-4">Class Management</h3>
 
-		<form action="" class="row mb-4">
+		<form class="row mb-4">
 			<div class="col-auto">
 				<label class="form-label">Name</label>
-				<input type="text" placeholde="search" class="form-control" name="teacher" />
+				<input type="text" value="${ param.teacher }" placeholde="search" class="form-control" name="teacher" />
 			</div>
 			
 			<div class="col-auto">
 				<label class="form-label">From</label>
-				<input type="date" name="from" placeholde="search" class="form-control" />
+				<input type="date" name="from" value="${ param.from } placeholde="search" class="form-control" />
 			</div>
 			<div class="col-auto">
 				<label class="form-label">To</label>
-				<input type="date" placeholde="search" class="form-control" name="to"/>
+				<input type="date" placeholde="search" class="form-control" name="to" value="${ param.to }"/>
 			</div>
 			
 			<div class="col">
@@ -46,7 +46,12 @@
 				<a href="${addNew}" class="btn btn-outline-danger"><i class="bi bi-plus-lg"></i>Add New</a>
 			</div>
 		</form>
-		<table class="table table-hover">
+		<c:choose>
+			<c:when test="${ empty list }">
+				<div class="alert alert-info">There is no data.</div>
+			</c:when>
+			<c:otherwise>
+				<table class="table table-hover">
 			<thead>
 				<tr>
 					<td>Id</td>
@@ -60,27 +65,33 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${list}" var="item">
+			
+			
+			</c:forEach>
 				<tr>
-					<td>1</td>
-					<td>Yan Naing</td>
-					<td>02454547</td>
-					<td>2023-20-2</td>
-					<td>2</td>
-					<td>hello</td>
-					<td>52</td>
+					<td>${ item.id }</td>
+					<td>${ item.teacherName}</td>
+					<td>${ item.teacherPhone}</td>
+					<td>${ item.startDate}</td>
+					<td>${ item.month}</td>
+					<td>${ item.description}</td>
+					<td>${ item.studentCount }</td>
 					<td>
 						<c:url var="edit" value="/classes/edit">
-							<c:param name="id" value="1"></c:param>
+							<c:param name="id" value="${ item.id }"></c:param>
 						</c:url>
 						<a href="${edit}"><i class="bi bi-pencil me-3"></i></a>
 						
-						<c:url var="details" value="/classes/1">
+						<c:url var="details" value="/classes/${item.id}">
 						</c:url>
 							<a href="${details}"><i class="bi bi-cursor"></i></a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

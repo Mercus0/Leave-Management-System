@@ -50,7 +50,7 @@ public class ClassService {
 		
 		insert.setTableName("classes");
 		insert.setGeneratedKeyName("id");
-		insert.setColumnNames(List.of("teacher_id","start_date","months","desription"));
+		insert.setColumnNames(List.of("teacher_id","start_date","months","description"));
 	}
 	
 	public List<ClassListVO> search(Optional<String> teacher,Optional<LocalDate> from,Optional<LocalDate> to){
@@ -75,20 +75,6 @@ public class ClassService {
 	        sb.append(" and c.start_date <= :to");
 	    });
 		
-//		sb.append(teacher.filter(StringUtils::hasText).map(a -> {
-//			param.put("teacher", a.toLowerCase().concat("%"));
-//			return "and lower(a.name) like :teacher";
-//		}));
-//		
-//		sb.append(from.map(a -> {
-//			param.put("from", Date.valueOf(a));
-//			return "and c.start_date >= :from";
-//		}));
-//		
-//		sb.append(to.map(a -> {
-//			param.put("to", Date.valueOf(a));
-//			return "and c.start_date <= :to";
-//		}));
 		
 		sb.append(SELECT_GROUPBY);
 		
@@ -147,7 +133,7 @@ public class ClassService {
 				"teacher_id",form.getTeacherName(),
 				"start_date",Date.valueOf(form.getStart()),
 				"months",form.getMonths(),
-				"desription",form.getDescription()
+				"description",form.getDescription()
 				));
 		return genratedId.intValue();
 	}

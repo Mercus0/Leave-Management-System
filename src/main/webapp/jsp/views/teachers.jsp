@@ -27,18 +27,18 @@
 		<form class="mb-4 row">
 			<div class=col-auto>
 				<label for="" class="form-label">Name</label> <input
-					class="form-control" type="text" placeholder="Search Name"
+					class="form-control" value="${ param.name }" type="text" placeholder="Search Name"
 					name="name">
 			</div>
 			<div class=col-auto>
 				<label for="" class="form-label">Phone</label> <input
-					class="form-control" type="tel" placeholder="Search Phone"
-					name="name">
+					class="form-control" value="${ param.phone }" type="tel" placeholder="Search Phone"
+					name="phone">
 			</div>
 			<div class=col-auto>
 				<label for="" class="form-label">Email</label> <input
-					class="form-control" type="email" placeholder="Search Email"
-					name="name">
+					class="form-control" value="${ param.email }" type="email" placeholder="Search Email"
+					name="email">
 			</div>
 			<div class="col mt-4">
 				<button class="btn btn-outline-success me-2" type="submit">
@@ -50,8 +50,14 @@
 				</a>
 			</div>
 		</form>
-
-		<table class="table table-hover">
+		
+		<c:choose>
+			<c:when test="${ empty list }">
+				<div class="alert alert-info">There is no data.</div>
+			</c:when>
+			
+			<c:otherwise>
+				<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -64,19 +70,24 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>Yan Naing</td>
-					<td>09423031913</td>
-					<td>yannaingedu@gmail.com</td>
-					<td>2022-09-01</td>
-					<td>5</td>
-					<td><c:url var="edit" value="/teachers/edit">
-							<c:param name="id" value="1"></c:param>
-						</c:url> <a href="${edit}"><i class="bi bi-pencil"></i></a></td>
-				</tr>
+				<c:forEach items="${ list }" var="t">
+					<tr>
+						<td>${ t.id }</td>
+						<td>${ t.name }</td>
+						<td>${ t.phone }</td>
+						<td>${ t.email }</td>
+						<td>${ t.assignDate }</td>
+						<td>${ t.classCount }</td>
+						<td><c:url var="edit" value="/teachers/edit">
+								<c:param name="id" value="${ t.id }"></c:param>
+							</c:url> <a href="${edit}"><i class="bi bi-pencil"></i></a></td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
+			</c:otherwise>
+		</c:choose>
+		
 	</div>
 </body>
 </html>
