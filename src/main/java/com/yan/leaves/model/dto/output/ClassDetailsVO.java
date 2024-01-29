@@ -3,6 +3,9 @@ package com.yan.leaves.model.dto.output;
 import java.util.*;
 
 public class ClassDetailsVO {
+	public ClassDetailsVO() {
+		
+	}
 
 	private ClassListVO classInfo;
 

@@ -29,8 +29,9 @@
 			<div class="col">
 				<div class="card">
 					<div class="card-header bg-primary">
-						Class Information
+						Student Information
 					</div>
+				 
 					<div class="card-body">
 						<div class="mb-3">
 							<label for="" class="form-label">Student Name</label>
@@ -49,12 +50,13 @@
 							<span class="form-control">${ dto.registDate }</span>
 						</div>
 					</div>
+					 
 				</div>
 			</div>
 			<div class="col">
 				<div class="card">
 					<div class="card-header">
-						Student Information
+						Class Information
 					</div>
 					<div class="card-body">
 						<div class="mb-3">

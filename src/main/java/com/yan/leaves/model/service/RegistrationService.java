@@ -1,12 +1,14 @@
 package com.yan.leaves.model.service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
@@ -60,28 +62,70 @@ public class RegistrationService {
 				""",
 				Map.of("classId",classId,"studentId",studentId), Date.class);
 		result.setRegistDate(registDate.toLocalDate());
-		result.setClassinfo(classsService.findInfoById(classId));
+		result.setClassInfo(classsService.findInfoById(classId));
 		result.setStudent(studentService.findInfoById(studentId));
 		return result;
 	}
 	
-	private void create(RegistrationForm form) {
-		// TODO Auto-generated method stub
+	public RegistrationForm getFormById(int classId, int studentId) {
+		var sql="""
+				select r.classes_id classId, r.student_id studentId, r.registration_date registDate,
+				a.name studentName, a.email, s.phone, s.education
+				from registration r join student s on r.student_id = s.id join account a on s.id = a.id
+				where r.classes_id = :classId and r.student_id = :studentId
+				""";
 		
+		return template.queryForObject(sql, Map.of(
+				"classId",classId,
+				"studentId",studentId
+				), new BeanPropertyRowMapper<>(RegistrationForm.class));
+	}
+	
+	public List<RegistrationListVO> searchByClassId(int id){
+		return template.query(SELECT_BY_CLASS, Map.of("classId",id), new BeanPropertyRowMapper<>(RegistrationListVO.class));
+	}
+	
+	
+	private void create(RegistrationForm form) {
+		var studentId = studentService.findStudentByEmail(form.getEmail());
+		if(null == studentId) {
+			studentId=studentService.createStudent(form);
+		}
+		form.setStudentId(studentId);
+		
+		if(form.getRegistDate()==null) {
+			form.setRegistDate(LocalDate.now());
+		}
+		
+		regInsert.execute(Map.of(
+				"classes_id",form.getClassId(),
+				"student_id",form.getStudentId(),
+				"registration_date",Date.valueOf(form.getRegistDate())
+				));
 	}
 
 	private void update(RegistrationForm form) {
-		// TODO Auto-generated method stub
+		template.update("""
+				update registration
+				set registration_date = :registDate
+				where classes_id = :classId and student_id = :studentId
+				""", Map.of(
+						"registDate",Date.valueOf(form.getRegistDate()),
+						"classId",form.getClassId(),
+						"studentId",form.getStudentId()
+						));
 		
+		template.update("""
+				update student
+				set phone = :phone, education = :education
+				where id = :id
+				""", Map.of(
+						"phone",form.getPhone(),
+						"education",form.getEducation(),
+						"id",form.getStudentId()
+						));
 	}
 
-	public List<RegistrationListVO> searchByClassId(int id){
-		return List.of();
-	}
 	
-	public RegistrationForm getFormById(int classId, int studentId) {
-		var form=new RegistrationForm();
-		form.setClassId(classId);
-		return form;
-	}
+	
 }

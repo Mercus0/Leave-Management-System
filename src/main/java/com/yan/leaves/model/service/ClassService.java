@@ -11,11 +11,9 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.yan.leaves.model.dto.input.ClassForm;
 import com.yan.leaves.model.dto.output.ClassDetailsVO;
@@ -25,7 +23,7 @@ import com.yan.leaves.model.service.mapper.ClassListVoRowMapper;
 
 @Service
 public class ClassService {
-	private RowMapper<ClassListVO> mapper;
+	
 	private static final String SELECT_PROJECTION = """
 	        SELECT c.id AS id, t.id AS teacherId, a.name AS teacherName, t.phone AS teacherPhone,
 	        c.start_date AS startDate, c.months, c.description, COUNT(r.student_id) AS studentCount

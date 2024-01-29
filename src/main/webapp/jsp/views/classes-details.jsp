@@ -96,7 +96,7 @@
 					<div class="alert alert-info">There is no leaves.</div>
 				</c:when>
 				<c:otherwise>
-					<c:import url="/jsp/include/class-leaves.jsp"></c:import>
+					 <c:import url="/jsp/include/class-leaves.jsp"></c:import> 
 				</c:otherwise>
 			</c:choose>
 			</div>

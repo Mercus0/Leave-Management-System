@@ -13,8 +13,6 @@
 	</thead>
 	<tbody>
 	<c:forEach items="${dto.registrations }" var="item">
-		
-	</c:forEach>
 		<tr>
 			<td>${item.registrationDate }</td>
 			<td>${item.student }</td>
@@ -36,5 +34,6 @@
 				</a>
 			</td>
 		</tr>
+	</c:forEach>	
 	</tbody>
 </table>

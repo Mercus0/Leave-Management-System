@@ -24,7 +24,7 @@
 	</c:import>
 	<div class="container">
 		<h3 class="my-4">
-			${ empty param.id ? 'Add New' :'Edit'} Registration
+			${ empty param.studentId ? 'Add New' :'Edit'} Registration
 		</h3>
 		
 		<div class="row">

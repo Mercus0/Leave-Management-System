@@ -13,13 +13,15 @@
 		</tr>
 	</thead>
 	<tbody>
+	<c:forEach items="${dto.leaves}" var="item">
 		<tr>
-			<td>Yan Naing</td>
-			<td>09423031913</td>
-			<td>2024-01-15</td>
-			<td>2024-01-20</td>
-			<td>5</td>
-			<td>For exam</td>
+			<td>${item.student}</td>
+			<td>${item.studentPhone}</td>
+			<td>${item.applyDate}</td>
+			<td>${item.startDate}</td>
+			<td>${item.days}</td>
+			<td>${item.reason}</td>
 		</tr>
+	</c:forEach>
 	</tbody>
 </table>

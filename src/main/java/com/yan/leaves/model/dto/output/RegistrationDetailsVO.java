@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class RegistrationDetailsVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate registDate;
-	private ClassListVO classinfo;
+	private ClassListVO classInfo;
 	private StudentListVO student;
 
 	public LocalDate getRegistDate() {
@@ -18,12 +18,12 @@ public class RegistrationDetailsVO {
 		this.registDate = registDate;
 	}
 
-	public ClassListVO getClassinfo() {
-		return classinfo;
+	public ClassListVO getClassInfo() {
+		return classInfo;
 	}
 
-	public void setClassinfo(ClassListVO classinfo) {
-		this.classinfo = classinfo;
+	public void setClassInfo(ClassListVO classInfo) {
+		this.classInfo = classInfo;
 	}
 
 	public StudentListVO getStudent() {
@@ -33,5 +33,4 @@ public class RegistrationDetailsVO {
 	public void setStudent(StudentListVO student) {
 		this.student = student;
 	}
-
 }
