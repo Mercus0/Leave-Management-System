@@ -80,7 +80,7 @@ public class TeacherService {
 			params.put("phone", a.concat("%"));
 			return "and t.phone like :phone ";
 		}).orElse(""));
-
+  
 		var sql = "%s where 1=1 %s %s".formatted(SELECT_PROJECTION, where.toString(), SELECT_GROUP_BY);
 		return template.query(sql, params, mapper);
 	}

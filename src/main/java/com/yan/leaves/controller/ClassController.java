@@ -80,7 +80,7 @@ public class ClassController {
 			return "registration-edit";
 		}
 		regService.save(form);
-		return "redirect:/classes/registration/%d".formatted(form.getClassId(),form.getStudentId());
+		return "redirect:/classes/registration/%d/%d".formatted(form.getClassId(),form.getStudentId());
 	}
 
 	@GetMapping("registration/{classId}/{studentId}")
@@ -97,11 +97,11 @@ public class ClassController {
 	
 	@ModelAttribute(name="registForm")
 	RegistrationForm registform(
-			@RequestParam(name="registId",required=false,defaultValue = "0") int registId,
+			@RequestParam(name="studentId",required=false,defaultValue = "0") int studentId,
 			@RequestParam(name="classId",required=false,defaultValue = "0") int classId) {
 		//edit 
-		if(registId>0) {
-			return regService.getFormById(classId,registId);
+		if(studentId>0) {
+			return regService.getFormById(classId,studentId);
 		}
 		var form=new RegistrationForm();
 		form.setClassId(classId);

@@ -42,6 +42,7 @@
 			
 			<div class="col">
 				<button class="btn btn-outline-success me-2"><i class="bi bi-search"></i>Search</button>
+				
 				<c:url var="addNew" value="/classes/edit"></c:url>
 				<a href="${addNew}" class="btn btn-outline-danger"><i class="bi bi-plus-lg"></i>Add New</a>
 			</div>
@@ -66,15 +67,12 @@
 			</thead>
 			<tbody>
 			<c:forEach items="${list}" var="item">
-			
-			
-			</c:forEach>
 				<tr>
 					<td>${ item.id }</td>
 					<td>${ item.teacherName}</td>
 					<td>${ item.teacherPhone}</td>
 					<td>${ item.startDate}</td>
-					<td>${ item.month}</td>
+					<td>${ item.months}</td>
 					<td>${ item.description}</td>
 					<td>${ item.studentCount }</td>
 					<td>
@@ -88,6 +86,8 @@
 							<a href="${details}"><i class="bi bi-cursor"></i></a>
 					</td>
 				</tr>
+			</c:forEach>
+				
 			</tbody>
 		</table>
 			</c:otherwise>

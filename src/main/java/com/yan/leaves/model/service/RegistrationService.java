@@ -50,7 +50,7 @@ public class RegistrationService {
 			update(form);
 			return;
 		}
-		create(form);
+		 create(form);
 	}
 	
 	public RegistrationDetailsVO findDetailsById(int classId, int studentId) {
@@ -60,7 +60,7 @@ public class RegistrationService {
 				""",
 				Map.of("classId",classId,"studentId",studentId), Date.class);
 		result.setRegistDate(registDate.toLocalDate());
-		result.setClassinfo(classsService.findDetailsById(classId));
+		result.setClassinfo(classsService.findInfoById(classId));
 		result.setStudent(studentService.findInfoById(studentId));
 		return result;
 	}

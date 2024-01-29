@@ -44,6 +44,7 @@
 				<button class="btn btn-outline-success me-2" type="submit">
 				<i class="bi bi-search"></i>
 				Search</button>
+				
 				<c:url var="addNew" value="/teachers/edit"></c:url>
 				<a class="btn btn-outline-success my-2 my-sm-0" href="${addNew}">
 					<i class="bi bi-plus-lg"></i>Add
@@ -78,6 +79,7 @@
 						<td>${ t.email }</td>
 						<td>${ t.assignDate }</td>
 						<td>${ t.classCount }</td>
+						
 						<td><c:url var="edit" value="/teachers/edit">
 								<c:param name="id" value="${ t.id }"></c:param>
 							</c:url> <a href="${edit}"><i class="bi bi-pencil"></i></a></td>

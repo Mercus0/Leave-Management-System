@@ -27,6 +27,7 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-9 col-sm-12">
 				<c:url var="save" value="/classes"></c:url>
+				
 				<sf:form action="${save}" method="post" modelAttribute="classForm">
 					<sf:hidden path="id" />
 					
@@ -61,7 +62,6 @@
 						<sf:errors path="description"></sf:errors>
 					</div>
 					<button type="submit" class="btn btn-outline-danger">Save</button>
-
 				</sf:form>
 			</div>
 		</div>

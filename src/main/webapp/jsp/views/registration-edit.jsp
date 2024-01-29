@@ -38,14 +38,14 @@
 				<div class="mb-3">
 					<label class="form-label">Start Date</label>
 					<span class="form-control">
-						2022-10-03
+						${param.startDate}
 					</span>
 				</div>
 				
 				<div class="mb-3">
 					<label class="form-label">Teacher</label>
 					<span class="form-control">
-						Min Lwin
+						${param.teacherName}
 					</span>
 				</div>
 				
@@ -61,7 +61,7 @@
 				
 				<div class="mb-3">
 					<label class="form-label">Phone</label>
-					<sf:input path="phone" type="phone" placeholder="Enter Phone Number" cssClass="form-control"/>
+					<sf:input path="phone" type="tel" placeholder="Enter Phone Number" cssClass="form-control"/>
 				</div>
 				
 				<div class="mb-3">
