@@ -26,31 +26,31 @@
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavId">
 			<ul class="navbar-nav">
-			
 
-					<li class="nav-item"><a
-						class="nav-link ${param.view eq 'home' ? 'active' : ''}"
-						href="${home}">Home</a></li>
 
-					<li class="nav-item"><a
-						class="nav-link ${param.view eq 'classes' ? 'active' : ''}"
-						href="${classes}"> <i class="bi bi-mortarboard"></i> Classes
-					</a></li>
+				<li class="nav-item"><a
+					class="nav-link ${param.view eq 'home' ? 'active' : ''}"
+					href="${home}">Home</a></li>
 
-					<li class="nav-item"><a
-						class="nav-link ${param.view eq 'teachers' ? 'active' : ''}"
-						href="${teachers}"> <i class="bi bi-people"></i> Teachers
-					</a></li>
+				<li class="nav-item"><a
+					class="nav-link ${param.view eq 'classes' ? 'active' : ''}"
+					href="${classes}"> <i class="bi bi-mortarboard"></i> Classes
+				</a></li>
 
-					<li class="nav-item"><a
-						class="nav-link ${param.view eq 'students' ? 'active' : ''}"
-						href="${students}"> <i class="bi bi-people-fill"></i> Students
-					</a></li>
+				<li class="nav-item"><a
+					class="nav-link ${param.view eq 'teachers' ? 'active' : ''}"
+					href="${teachers}"> <i class="bi bi-people"></i> Teachers
+				</a></li>
 
-					<li class="nav-item"><a
-						class="nav-link ${param.view eq 'leaves' ? 'active' : ''}"
-						href="${leaves}"> <i class="bi bi-inbox"></i> Leaves
-					</a></li>
+				<li class="nav-item"><a
+					class="nav-link ${param.view eq 'students' ? 'active' : ''}"
+					href="${students}"> <i class="bi bi-people-fill"></i> Students
+				</a></li>
+
+				<li class="nav-item"><a
+					class="nav-link ${param.view eq 'leaves' ? 'active' : ''}"
+					href="${leaves}"> <i class="bi bi-inbox"></i> Leaves
+				</a></li>
 
 				<li class="nav-item"><a class="nav-link" id="logoutMenu"> <i
 						class="bi bi-lock"></i>Sign Out

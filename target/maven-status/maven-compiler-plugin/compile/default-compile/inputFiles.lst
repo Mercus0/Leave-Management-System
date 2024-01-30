@@ -1,5 +1,6 @@
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\service\TeacherService.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\output\RegistrationDetailsVO.java
+D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\input\StudentForm.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\service\ClassService.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\controller\ClassController.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\controller\HomeController.java
@@ -24,5 +25,6 @@ D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\mode
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\input\LeaveForm.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\service\mapper\ClassFormRowMapper.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\input\TeacherForm.java
+D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\output\StudentDetailsVO.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\output\StudentListVO.java
 D:\JDC\Final Project(BUC-yns)\leave-management\src\main\java\com\yan\leaves\model\dto\output\LeaveListVO.java

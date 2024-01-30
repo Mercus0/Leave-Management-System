@@ -1,6 +1,7 @@
 package com.yan.leaves.model.dto.output;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,6 +10,7 @@ public class RegistrationListVO {
 	private RegistrationListVO() {
 
 	}
+
 	public RegistrationListVO(int classId, int teacherId, String teacher, LocalDate startDate, int studentId,
 			String student, String studentPhone, LocalDate registrationDate) {
 		super();
@@ -25,6 +27,7 @@ public class RegistrationListVO {
 	private int classId;
 	private int teacherId;
 	private String teacher;
+	private String classInfo;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
@@ -56,6 +59,14 @@ public class RegistrationListVO {
 
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
+	}
+
+	public String getClassInfo() {
+		return classInfo;
+	}
+
+	public void setClassInfo(String classInfo) {
+		this.classInfo = classInfo;
 	}
 
 	public LocalDate getStartDate() {
@@ -96,6 +107,28 @@ public class RegistrationListVO {
 
 	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(classId, registrationDate, startDate, student, studentId, studentPhone, teacher,
+				teacherId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RegistrationListVO other = (RegistrationListVO) obj;
+		return classId == other.classId
+				&& Objects.equals(registrationDate, other.registrationDate)
+				&& Objects.equals(startDate, other.startDate) && Objects.equals(student, other.student)
+				&& studentId == other.studentId && Objects.equals(studentPhone, other.studentPhone)
+				&& Objects.equals(teacher, other.teacher) && teacherId == other.teacherId;
 	}
 
 }

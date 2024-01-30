@@ -25,7 +25,7 @@
 	<div class="container">
 		<h3 class="my-4">Teacher Management</h3>
 		<form class="mb-4 row">
-			<div class=col-auto>
+			<div class="col-auto">
 				<label for="" class="form-label">Name</label> <input
 					class="form-control" value="${ param.name }" type="text" placeholder="Search Name"
 					name="name">

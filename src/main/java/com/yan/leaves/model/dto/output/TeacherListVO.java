@@ -5,6 +5,21 @@ import java.time.LocalDate;
 import com.yan.leaves.model.dto.input.TeacherForm;
 
 public class TeacherListVO {
+	
+	public TeacherListVO() {
+		
+	}
+	
+	public TeacherListVO(int id, String name, String phone, String email, LocalDate assignDate, Long classCount) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.assignDate = assignDate;
+		this.classCount = classCount;
+	}
+
 	private int id;
 	private String name;
 	private String phone;
@@ -12,8 +27,7 @@ public class TeacherListVO {
 	private LocalDate assignDate;
 	private Long classCount;
 	
-	
-	//check here
+
 	public TeacherForm form() {
 		return new TeacherForm(id,name,phone,email,assignDate);
     }

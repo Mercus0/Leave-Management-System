@@ -1,36 +1,24 @@
-package com.yan.leaves.model.dto.output;
+package com.yan.leaves.model.dto.input;
 
-import com.yan.leaves.model.dto.input.StudentForm;
-
-public class StudentListVO {
-	
-	public StudentListVO() {
-		
+public class StudentForm {
+	public StudentForm() {
+		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public StudentListVO(int id, String name, String phone, String email, String education, long classCount) {
+
+	public StudentForm(int id, String name, String phone, String email, String education) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
-		this.education = education;
-		this.classCount = classCount;
+		this.Education = education;
 	}
-
 
 	private int id;
 	private String name;
 	private String phone;
 	private String email;
-	private String education;
-	private long classCount;
-	
-	public StudentForm form() {
-		return new StudentForm(id,name,phone,email,education);
-	}
-	
+	private String Education;
 
 	public int getId() {
 		return id;
@@ -65,19 +53,11 @@ public class StudentListVO {
 	}
 
 	public String getEducation() {
-		return education;
+		return Education;
 	}
 
 	public void setEducation(String education) {
-		this.education = education;
-	}
-
-	public long getClassCount() {
-		return classCount;
-	}
-
-	public void setClassCount(long classCount) {
-		this.classCount = classCount;
+		Education = education;
 	}
 
 }

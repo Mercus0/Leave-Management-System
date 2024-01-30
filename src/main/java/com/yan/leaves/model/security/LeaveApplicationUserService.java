@@ -20,7 +20,7 @@ public class LeaveApplicationUserService implements UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username){
 		var list = template.query("select * from account where email = :email",
 				Map.of("email", username),
 				new BeanPropertyRowMapper<>(AccountDto.class));
