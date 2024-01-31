@@ -18,8 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.yan.leaves.model.dto.input.RegistrationForm;
+import com.yan.leaves.model.dto.input.StudentForm;
 import com.yan.leaves.model.dto.output.StudentDetailsVO;
 import com.yan.leaves.model.dto.output.StudentListVO;
+
+import jakarta.validation.Valid;
 
 @Service
 public class StudentService {
@@ -105,7 +108,8 @@ public class StudentService {
 		studentInsert.execute(
 				Map.of("id", generatedId.intValue(),
 						"phone", form.getPhone(),
-						"education", form.getEducation()));
+						"education", form.getEducation(),
+						"realId",form.getRealId()));
 		return generatedId.intValue();
 	}
 
@@ -116,5 +120,25 @@ public class StudentService {
 		result.setRegistrations(registrationService.searchByStudentId(studentId));
 
 		return result;
+	}
+	
+	@Transactional
+	public Integer editStudent(@Valid StudentForm form) {
+		//update into account
+		template.update("update account set name = :name, email = :email where id = :id", 
+				Map.of("name",form.getName(),
+						"email",form.getEmail(),
+						"id",form.getId()
+				));
+		
+		//update into student
+		template.update("update student set phone = :phone, education = :education,realId = :readId where id= :id",
+				Map.of(
+						"phone",form.getPhone(),
+						"education",form.getEducation(),
+						"realId",form.getRealId(),
+						"id",form.getId()
+						));
+		return form.getId();
 	}
 }

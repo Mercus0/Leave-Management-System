@@ -21,4 +21,5 @@ http://www.springframework.org/schema/mvc https://www.springframework.org/schema
 <mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 
 <mvc:view-controller path="/signin" view-name="signin"/>  
+
 </beans>

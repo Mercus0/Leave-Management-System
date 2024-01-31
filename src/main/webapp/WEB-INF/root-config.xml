@@ -11,6 +11,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 ">
 
+	<bean id="webSecurityExpressionHandler"
+        class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	
+
 	<context:component-scan
 		base-package="com.yan.leaves.model.service">
 	</context:component-scan>
@@ -89,5 +93,9 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 		<security:intercept-url pattern="/resources/**"
 			access="permitAll" />
 	</security:http>
-
+	
+	<security:global-method-security secured-annotations="enabled">
+		<security:expression-handler ref="webSecurityExpressionHandler"/>
+	</security:global-method-security>
+	
 </beans>

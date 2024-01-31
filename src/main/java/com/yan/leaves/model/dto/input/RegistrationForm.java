@@ -8,34 +8,40 @@ import jakarta.validation.constraints.NotEmpty;
 
 public class RegistrationForm {
 	public RegistrationForm() {
-		
+
 	}
-	public RegistrationForm(int classId, int studentId, LocalDate registDate, String studentName, String email,
-			String phone, String education) {
+
+	public RegistrationForm(int classId, int studentId, LocalDate registDate, String realId, String studentName,
+			String email, String phone, String education) {
 		super();
 		this.classId = classId;
 		this.studentId = studentId;
-		this.registDate=registDate;
-		this.studentName=studentName;
-		this.email=email;
-		this.phone=phone;
-		this.education=education;
+		this.registDate = registDate;
+		this.realId = realId;
+		this.studentName = studentName;
+		this.email = email;
+		this.phone = phone;
+		this.education = education;
 	}
-	
+
 	private int classId;
 	private int studentId;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate registDate;
-	
+
+	@NotEmpty(message = "Please enter student Id.")
+	private String realId;
+
 	@NotEmpty(message = "Please enter student name.")
 	private String studentName;
-	
+
 	@NotEmpty(message = "Please enter Email Address.")
 	private String email;
-	
+
 	@NotEmpty(message = "Please enter Phone number.")
 	private String phone;
-	
+
 	@NotEmpty(message = "Please enter Education.")
 	private String education;
 
@@ -61,6 +67,14 @@ public class RegistrationForm {
 
 	public void setRegistDate(LocalDate registDate) {
 		this.registDate = registDate;
+	}
+
+	public String getRealId() {
+		return realId;
+	}
+
+	public void setRealId(String realId) {
+		this.realId = realId;
 	}
 
 	public String getStudentName() {

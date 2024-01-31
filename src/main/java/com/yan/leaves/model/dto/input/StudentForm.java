@@ -4,6 +4,7 @@ public class StudentForm {
 	public StudentForm() {
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public StudentForm(int id, String name, String phone, String email, String education) {
 		super();
@@ -11,7 +12,18 @@ public class StudentForm {
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
+		Education = education;
+	}
+
+
+	public StudentForm(int id, String name, String phone, String email, String education,String realId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
 		this.Education = education;
+		this.realId = realId;
 	}
 
 	private int id;
@@ -19,6 +31,15 @@ public class StudentForm {
 	private String phone;
 	private String email;
 	private String Education;
+	private String realId;
+
+	public String getRealId() {
+		return realId;
+	}
+
+	public void setRealId(String realId) {
+		this.realId = realId;
+	}
 
 	public int getId() {
 		return id;

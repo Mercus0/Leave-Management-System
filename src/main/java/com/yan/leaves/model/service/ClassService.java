@@ -74,11 +74,25 @@ public class ClassService {
 	        sb.append(" and c.start_date <= :to");
 	    });
 		
-		
 		sb.append(SELECT_GROUPBY);
 		
 		return template.query(sb.toString(), param,new BeanPropertyRowMapper<>(ClassListVO.class));
 	}
+	
+	
+	public List<ClassListVO> searchId(String email) {
+		var sql="""
+				SELECT c.description FROM account a 
+                     JOIN registration r ON a.id = r.student_id 
+                     JOIN classes c ON r.classes_id = c.id 
+                     WHERE a.email = :email
+				""";
+		return template.query(sql, Map.of(
+				"email",email
+				),new BeanPropertyRowMapper<>(ClassListVO.class));
+	}
+
+	
 	
 	public ClassForm findById(int id) {
 		return template.queryForObject("select * from Classes where id = :id", Map.of("id",id),new ClassFormRowMapper());
@@ -137,6 +151,5 @@ public class ClassService {
 		return genratedId.intValue();
 	}
 
-	
 	
 }

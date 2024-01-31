@@ -103,9 +103,9 @@ public class ClassController {
 		if(studentId>0) {
 			return regService.getFormById(classId,studentId);
 		}
+		
 		var form=new RegistrationForm();
 		form.setClassId(classId);
 		return form;
 	}
-	
 }

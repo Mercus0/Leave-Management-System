@@ -41,13 +41,15 @@
 				</div>
 				<div class="mb-3">
 					<label class="form-label">Phone</label>
-					<sf:input path="phone" type="tel"
-						placeholder="Enter Student Phone" cssClass="form-control" />
+					<sf:input path="phone" type="tel" placeholder="Enter Student Phone"
+						cssClass="form-control" />
 				</div>
 
-				<label class="form-label">Email</label>
-				<sf:input path="email" type="email"
-					placeholder="Enter Student email" cssClass="form-control" />
+				<div class="mb-3">
+					<label class="form-label">Email</label>
+					<sf:input path="email" type="email"
+						placeholder="Enter Student email" cssClass="form-control" />
+				</div>
 
 				<div class="mb-3">
 					<label class="form-label">Education</label>

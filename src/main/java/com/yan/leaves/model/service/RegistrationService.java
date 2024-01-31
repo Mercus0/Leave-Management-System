@@ -80,7 +80,7 @@ public class RegistrationService {
 	public RegistrationForm getFormById(int classId, int studentId) {
 		var sql="""
 				select r.classes_id classId, r.student_id studentId, r.registration_date registDate,
-				a.name studentName, a.email, s.phone, s.education
+				a.name studentName, a.email, s.phone, s.education, s.realId
 				from registration r join student s on r.student_id = s.id join account a on s.id = a.id
 				where r.classes_id = :classId and r.student_id = :studentId
 				""";
@@ -138,8 +138,16 @@ public class RegistrationService {
 						"education",form.getEducation(),
 						"id",form.getStudentId()
 						));
+		
+		template.update("""
+				update account
+				set name = :name,
+				email = :email
+				where id = :id
+				""", Map.of(
+						"name",form.getStudentName(),
+						"email",form.getEmail(),
+						"id",form.getStudentId()
+						));
 	}
-
-	
-	
 }

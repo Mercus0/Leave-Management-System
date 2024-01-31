@@ -33,7 +33,7 @@
 				<sf:hidden path="classId"/>
 				<sf:hidden path="registDate"/>
 				
-				<sf:errors path=""></sf:errors>
+				<sf:errors path="*"></sf:errors>
 
 				<div class="mb-3">
 					<label class="form-label">Start Date</label>
@@ -47,6 +47,11 @@
 					<span class="form-control">
 						${param.teacherName}
 					</span>
+				</div>
+				
+				<div class="mb-3 ${empty param.studentId ? '' : 'd-none' }">
+					<label class="form-label">Student Id</label>
+					<sf:input path="realId" placeholder="Enter Student Id" cssClass="form-control"/>
 				</div>
 				
 				<div class="mb-3">
@@ -65,7 +70,7 @@
 				</div>
 				
 				<div class="mb-3">
-					<label class="form-label">Last Education</label>
+					<label class="form-label">Education</label>
 					<sf:input path="education" type="text" placeholder="Enter Last Education" cssClass="form-control"/>
 				</div>
 				

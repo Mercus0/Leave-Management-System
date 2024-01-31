@@ -5,14 +5,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yan.leaves.model.dto.input.StudentForm;
 import com.yan.leaves.model.dto.output.StudentListVO;
 import com.yan.leaves.model.service.StudentService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/students")
@@ -33,6 +37,15 @@ public class StudentController {
 	@GetMapping("edit")
 	public String edit(@RequestParam(name = "id", required = false) Optional<Integer> id) {
 		return "students-edit";
+	}
+	
+	@PostMapping
+	public String Save(@Valid @ModelAttribute(name="form") StudentForm form,BindingResult result) {
+		if(result.hasErrors()) {
+			return "students-edit";
+		}
+		service.editStudent(form);
+		return "redirect:/students";
 	}
 	
 	

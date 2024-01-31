@@ -13,16 +13,16 @@ public class LeaveForm {
 		
 	}
 	
-	public LeaveForm(int classId, int student) {
+	public LeaveForm(int classId, int studentId) {
 		super();
 		this.classId = classId;
-		this.student = student;
+		this.studentId = studentId;
 	}
 
 	public LeaveForm(int classId, int studentName, LocalDate applyDate, LocalDate startDate, int days, String reason) {
 		super();
 		this.classId=classId;
-		this.student=studentName;
+		this.studentId=studentName;
 		this.applyDate=applyDate;
 		this.startDate=startDate;
 		this.days=days;
@@ -30,15 +30,18 @@ public class LeaveForm {
 	}
 
 	private int classId;
-	private int student;
+	private int studentId;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate applyDate;
 	
 	@NotNull(message = "Please enter the Start date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
+	
 	@Min(value=1, message="Please enter the leave day")
 	private int days;
+	
 	@NotEmpty(message="Please enter the Reason for leaves")
 	private String reason;
 
@@ -50,12 +53,12 @@ public class LeaveForm {
 		this.classId = classId;
 	}
 
-	public int getStudent() {
-		return student;
+	public int getStudentId() {
+		return studentId;
 	}
 
-	public void setStudent(int student) {
-		this.student = student;
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
 
 	public LocalDate getApplyDate() {
