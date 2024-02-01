@@ -23,5 +23,4 @@ public class StudentDetailsVO {
 	public void setRegistrations(List<RegistrationListVO> registrations) {
 		this.registrations = registrations;
 	}
-
 }

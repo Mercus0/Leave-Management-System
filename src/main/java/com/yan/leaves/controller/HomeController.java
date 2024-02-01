@@ -21,38 +21,26 @@ import com.yan.leaves.model.service.StudentService;
 @Controller
 @RequestMapping("/home")
 public class HomeController {
-	
+
 	@Autowired
 	private LeaveService leaveService;
-	
+
 	@Autowired
 	private StudentService studentService;
-	
-	@Autowired
-	private ClassService classService;
-	
-	
+
 	@GetMapping
 	public String index(@RequestParam(name = "targetDate") Optional<LocalDate> targetDate, ModelMap model) {
-		
+
 		Function<String, Boolean> hasAuthority = authority -> SecurityContextHolder.getContext().getAuthentication()
 				.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(authority));
-		
-		if(hasAuthority.apply("Admin") || hasAuthority.apply("Teacher")) {
+
+		if (hasAuthority.apply("Admin") || hasAuthority.apply("Teacher")) {
 			model.put("targetDate", targetDate.orElse(LocalDate.now()));
 			model.put("list", leaveService.searchSummary(targetDate));
-			return "teacher-home"; 
+			return "teacher-home";
 		}
-		
-		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-		String email=auth.getName();
-		
 		StudentDetailsVO student = studentService.findDetailsByLoginId(SecurityContextHolder.getContext().getAuthentication().getName());
 		model.put("dto", student);
-		
-		var result=classService.searchId(email);
-		model.put("list", result);
-		
 		return "student-home";
 	}
 }

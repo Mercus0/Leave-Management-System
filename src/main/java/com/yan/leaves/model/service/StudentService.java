@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
 public class StudentService {
 
 	private static final String SELECT_PROJECTION = """
-			select s.id, a.name, s.phone, a.email, s.education, count(r.classes_id) classCount
+			select a.id, s.realId, a.name, s.phone, a.email, s.education, count(r.classes_id) classCount
 			from student s
 			join account a on s.id = a.id
 			left join registration r on s.id = r.student_id
@@ -118,7 +118,6 @@ public class StudentService {
 		var studentId = findStudentByEmail(email);
 		result.setStudent(findInfoById(studentId));
 		result.setRegistrations(registrationService.searchByStudentId(studentId));
-
 		return result;
 	}
 	

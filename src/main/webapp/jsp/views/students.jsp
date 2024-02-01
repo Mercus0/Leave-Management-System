@@ -45,13 +45,6 @@
 				<button class="btn btn-outline-success me-2" type="submit">
 					<i class="bi bi-search"></i> Search
 				</button>
-
-				<!-- 
-				<c:url var="addNew" value=""></c:url>
-				<a class="btn btn-outline-success my-2 my-sm-0" href="${addNew}">
-					<i class="bi bi-plus-lg"></i>Add
-				</a>
-				 --> 
 			</div>
 		</form>
 		<c:choose>
@@ -75,16 +68,24 @@
 					<tbody>
 						<c:forEach items="${ list }" var="t">
 							<tr>
-								<td>${ t.id }</td>
+								<td>${ t.realId }</td>
 								<td>${ t.name }</td>
 								<td>${ t.phone }</td>
 								<td>${ t.email }</td>
 								<td>${ t.education }</td>
 								<td>${ t.classCount }</td>
 
-								<td><c:url var="edit" value="/students/edit">
+								<td>
+									<c:url var="edit" value="/students/edit">
 										<c:param name="id" value="${ t.id }"></c:param>
-									</c:url> <a href="${edit}"><i class="bi bi-pencil"></i></a></td>
+									</c:url> 
+									<a href="${edit}"><i class="bi bi-pencil me-3"></i></a>
+									
+									<c:url var="details" value="/students/details">
+										<c:param name="email" value="${ t.email }"></c:param>
+									</c:url>
+									<a href="${ details }"><i class="bi bi-cursor"></i></a>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -92,6 +93,5 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-
 </body>
 </html>

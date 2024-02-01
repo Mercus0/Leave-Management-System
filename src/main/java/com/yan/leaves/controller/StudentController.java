@@ -8,11 +8,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yan.leaves.model.dto.input.StudentForm;
+import com.yan.leaves.model.dto.output.StudentDetailsVO;
 import com.yan.leaves.model.dto.output.StudentListVO;
 import com.yan.leaves.model.service.StudentService;
 
@@ -37,6 +39,13 @@ public class StudentController {
 	@GetMapping("edit")
 	public String edit(@RequestParam(name = "id", required = false) Optional<Integer> id) {
 		return "students-edit";
+	}
+	
+	@GetMapping("/details")
+	public String showDetails(@RequestParam(name ="email",required=false) String email,ModelMap model) {
+		StudentDetailsVO result=service.findDetailsByLoginId(email);
+		model.put("dto", result);
+		return "student-details";
 	}
 	
 	@PostMapping

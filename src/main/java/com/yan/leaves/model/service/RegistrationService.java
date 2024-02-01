@@ -23,7 +23,7 @@ public class RegistrationService {
 	
 	private static final String SELECT_BY_CLASS="""
 			select r.classes_id classId, c.teacher_id teacherId, ta.name teacher,
-			c.start_date startDate, r.student_id studentId, sa.name student, s.phone studentPhone, r.registration_date
+			c.start_date startDate, r.student_id studentId, sa.name student, s.phone studentPhone, r.registration_date,c.description classInfo
 			from registration r
 			join classes c on r.classes_id = c.id
 			join teacher t on c.teacher_id = t.id join account ta on t.id = ta.id
@@ -33,7 +33,7 @@ public class RegistrationService {
 	
 	private static final String SELECT_BY_STUDENT="""
 			select r.classes_id classId, c.teacher_id teacherId, ta.name teacher,
-			c.start_date startDate, r.student_id studentId, sa.name student, s.phone studentPhone, r.registration_date
+			c.start_date startDate, r.student_id studentId, sa.name student, s.phone studentPhone, r.registration_date,c.description classInfo
 			from registration r
 			join classes c on r.classes_id = c.id
 			join teacher t on c.teacher_id = t.id join account ta on t.id = ta.id
@@ -46,6 +46,7 @@ public class RegistrationService {
 	
 	@Autowired
 	private StudentService studentService;
+	
 	@Autowired
 	private ClassService classsService;
 	

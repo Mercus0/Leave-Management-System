@@ -9,7 +9,7 @@ public class StudentListVO {
 	}
 	
 	
-	public StudentListVO(int id, String name, String phone, String email, String education, long classCount) {
+	public StudentListVO(int id, String name, String phone, String email, String education, long classCount,String realId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -17,6 +17,7 @@ public class StudentListVO {
 		this.email = email;
 		this.education = education;
 		this.classCount = classCount;
+		this.realId=realId;
 	}
 
 
@@ -26,11 +27,24 @@ public class StudentListVO {
 	private String email;
 	private String education;
 	private long classCount;
+	private String realId;
+	
 	
 	public StudentForm form() {
 		return new StudentForm(id,name,phone,email,education);
 	}
 	
+	
+
+	public String getRealId() {
+		return realId;
+	}
+
+
+	public void setRealId(String realId) {
+		this.realId = realId;
+	}
+
 
 	public int getId() {
 		return id;

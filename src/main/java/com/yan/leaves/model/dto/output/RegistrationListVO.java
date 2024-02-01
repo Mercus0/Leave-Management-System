@@ -12,7 +12,7 @@ public class RegistrationListVO {
 	}
 
 	public RegistrationListVO(int classId, int teacherId, String teacher, LocalDate startDate, int studentId,
-			String student, String studentPhone, LocalDate registrationDate) {
+			String student, String studentPhone, LocalDate registrationDate,String classInfo) {
 		super();
 		this.classId = classId;
 		this.teacherId = teacherId;
@@ -22,6 +22,7 @@ public class RegistrationListVO {
 		this.student = student;
 		this.studentPhone = studentPhone;
 		this.registrationDate = registrationDate;
+		this.classInfo=classInfo;
 	}
 
 	private int classId;

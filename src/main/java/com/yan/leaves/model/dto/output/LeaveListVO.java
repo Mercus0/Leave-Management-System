@@ -18,7 +18,7 @@ public class LeaveListVO {
 		this.teacher=teacher;
 		this.startDate=startDate;
 		this.days=days;
-		this.reasion=reason;
+		this.reason=reason;
 	}
 	private LocalDate applyDate;
 	private int classId;
@@ -29,7 +29,8 @@ public class LeaveListVO {
 	private String teacher;
 	private LocalDate startDate;
 	private int days;
-	private String reasion;
+	private String reason;
+	
 	public LocalDate getApplyDate() {
 		return applyDate;
 	}
@@ -84,11 +85,11 @@ public class LeaveListVO {
 	public void setDays(int days) {
 		this.days = days;
 	}
-	public String getReasion() {
-		return reasion;
+	public String getReason() {
+		return reason;
 	}
-	public void setReasion(String reasion) {
-		this.reasion = reasion;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 	
 }

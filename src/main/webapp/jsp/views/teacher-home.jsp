@@ -56,7 +56,9 @@
 						</div>
 						<div class="row mt-4">
 							<div class="col">
-							<c:url var="details" value="/classes/${item.classId }"></c:url>
+							<c:url var="details" value="/classes/${item.classId }">
+								<c:param name="targetDate" value="${targetDate}"></c:param>
+							</c:url>
 								<a href="${details}" class="btn btn-outline-success"><i class="bi bi-send"></i> Show Details</a>
 							</div>
 						</div>

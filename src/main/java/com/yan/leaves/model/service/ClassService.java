@@ -114,10 +114,27 @@ public class ClassService {
 		result.setRegistrations(regService.searchByClassId(classId));
 		
 		//leaves for Classes
-		result.setLeaves(leaService.search(Optional.of(classId), Optional.empty(), Optional.empty(), Optional.empty()));
+		result.setLeaves(leaService.search(classId));
 		
 		return result;
 	}
+	
+	public ClassDetailsVO findDetailsByIdAndDate(Integer id, Optional<LocalDate> targetDate) {
+		var result=new ClassDetailsVO();
+		//class information
+		var sql="%s where c.id = :id %s".formatted(SELECT_PROJECTION,SELECT_GROUPBY);
+		var classListVo=template.queryForObject(sql, Map.of("id",id), new ClassListVoRowMapper());
+		result.setClassInfo(classListVo);
+		
+		//Registrations
+		result.setRegistrations(regService.searchByClassId(id));
+		
+		//leaves students by date
+		result.setLeaves(leaService.searchByclassIdAndDate(id,targetDate));;
+		
+		return result;
+	}
+
 	
 	public int save(ClassForm form) {
 		if(form.getId()==0) {
@@ -150,6 +167,7 @@ public class ClassService {
 				));
 		return genratedId.intValue();
 	}
+
 
 	
 }

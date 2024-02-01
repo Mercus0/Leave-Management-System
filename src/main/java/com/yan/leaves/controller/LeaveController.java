@@ -47,13 +47,16 @@ public class LeaveController {
 			return "leaves-edit";
 		}
 		service.save(form);
-		return "redriect:/leaves";
+		return "redirect:/leaves";
 	}
 	
 	@ModelAttribute(name="form")
 	LeaveForm form(@RequestParam(name="classId",required = false,defaultValue = "0") Integer classId,
 			@RequestParam(name="studentId",required = false,defaultValue = "0") Integer studentId) {
 		var form=new LeaveForm();
+		form.setClassId(classId);
+		form.setStudentId(studentId);
+		form.setApplyDate(LocalDate.now());
 		return form;
 	}
 }

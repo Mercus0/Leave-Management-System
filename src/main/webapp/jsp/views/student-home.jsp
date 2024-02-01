@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -56,9 +56,8 @@
 						<div class="col-6">
 							<div class="card card-body">
 								<!-- Details -->
+									<h5>${ item.classInfo }</h5>
 
-								<c:forEach items="${ list }" var="t">
-									<h5>${ t.description }</h5>
 
 									<div class="d-flex justify-content-between text-secondary mb-4">
 										<span>${ item.startDate }</span> <span>${ item.teacher }</span>
@@ -68,14 +67,13 @@
 										<c:url var="applyLeave" value="/leaves/edit">
 											<c:param name="classId" value="${ item.classId }"></c:param>
 											<c:param name="studentId" value="${ item.studentId }"></c:param>
-											<c:param name="className" value="${ t.description }"></c:param>
+											<c:param name="className" value="${ item.classInfo }"></c:param>
 											<c:param name="teacherName" value="${ item.teacher }"></c:param>
 										</c:url>
 										<a href="${ applyLeave }" class="btn btn-outline-success">
 											<i class="bi bi-send"></i> Apply Leave
 										</a>
 									</div>
-								</c:forEach>
 							</div>
 						</div>
 					</c:forEach>
