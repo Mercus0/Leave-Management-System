@@ -1,5 +1,7 @@
 package com.yan.leaves.controller;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,11 @@ public class StudentController {
 		return "students-edit";
 	}
 	
+	@GetMapping("add")
+	public String addNewStudent() {
+		return "students-add";
+	}
+	
 	@GetMapping("/details")
 	public String showDetails(@RequestParam(name ="email",required=false) String email,ModelMap model) {
 		StudentDetailsVO result=service.findDetailsByLoginId(email);
@@ -48,7 +54,21 @@ public class StudentController {
 		return "student-details";
 	}
 	
-	@PostMapping
+	@PostMapping("/add")
+	public String AddNewStudent(@Valid @ModelAttribute(name="form") StudentForm form,BindingResult result) {
+		if(result.hasErrors()) {
+			return "students-add";
+		}	
+		
+		if(!service.checkStudent(form)) {
+			service.createStudent(form);
+			form.setAssignDate(LocalDate.now());
+			return "redirect:/students";
+		}
+		return "redirect:/students/add";
+	}
+	
+	@PostMapping("edit")
 	public String Save(@Valid @ModelAttribute(name="form") StudentForm form,BindingResult result) {
 		if(result.hasErrors()) {
 			return "students-edit";

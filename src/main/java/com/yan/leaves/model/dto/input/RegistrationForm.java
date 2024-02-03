@@ -24,6 +24,14 @@ public class RegistrationForm {
 		this.education = education;
 	}
 
+	public RegistrationForm(int classId, int studentId, LocalDate registDate,String realId) {
+		super();
+		this.classId = classId;
+		this.studentId = studentId;
+		this.registDate = registDate;
+		this.realId = realId;
+	}
+
 	private int classId;
 	private int studentId;
 

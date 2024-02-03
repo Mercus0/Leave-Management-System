@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Register | Edit</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -23,65 +24,65 @@
 		<c:param name="view" value="classes"></c:param>
 	</c:import>
 	<div class="container">
-		<h3 class="my-4">
-			${ empty param.studentId ? 'Add New' :'Edit'} Registration
-		</h3>
-		
-		<div class="row">
-			<sf:form method="post" modelAttribute="registForm" cssClass="col-6">
-				<sf:hidden path="studentId"/>
-				<sf:hidden path="classId"/>
-				<sf:hidden path="registDate"/>
-				
-				<sf:errors path="*"></sf:errors>
+		<h3 class="my-4">${ empty param.studentId ? 'Add New' :'Edit'}
+			Registration</h3>
 
-				<div class="mb-3">
-					<label class="form-label">Start Date</label>
-					<span class="form-control">
-						${param.startDate}
-					</span>
-				</div>
-				
-				<div class="mb-3">
-					<label class="form-label">Teacher</label>
-					<span class="form-control">
-						${param.teacherName}
-					</span>
-				</div>
-				
-				<div class="mb-3 ${empty param.studentId ? '' : 'd-none' }">
-					<label class="form-label">Student Id</label>
-					<sf:input path="realId" placeholder="Enter Student Id" cssClass="form-control"/>
-				</div>
-				
-				<div class="mb-3">
-					<label class="form-label">Student Name</label>
-					<sf:input path="studentName" placeholder="Enter Student Name" cssClass="form-control"/>
-				</div>
-				
-				<div class="mb-3">
-					<label class="form-label">Email</label>
-					<sf:input path="email" type="email" placeholder="Enter Email Address" cssClass="form-control"/>
-				</div>
-				
-				<div class="mb-3">
-					<label class="form-label">Phone</label>
-					<sf:input path="phone" type="tel" placeholder="Enter Phone Number" cssClass="form-control"/>
-				</div>
-				
-				<div class="mb-3">
-					<label class="form-label">Education</label>
-					<sf:input path="education" type="text" placeholder="Enter Last Education" cssClass="form-control"/>
-				</div>
-				
-				<div>
-					<button class="btn btn-outline-danger" type="submit">
-						<i class="bi bi-save"> Save</i>
-					</button>
-				</div>
-			</sf:form>
-			
+			<div class="row">
+				<!--  Old Student -->
+				<sf:form method="post" modelAttribute="registForm" cssClass="col-6">
+					<sf:hidden path="studentId" />
+					<sf:hidden path="classId" />
+					<sf:hidden path="registDate" />
+
+					<sf:errors path="*"></sf:errors>
+
+					<div class="mb-3">
+						<label class="form-label">Start Date</label> <span
+							class="form-control"> ${param.startDate} </span>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Teacher</label> <span
+							class="form-control"> ${param.teacherName} </span>
+					</div>
+
+					<div class="mb-3 ${empty param.studentId ? '' : 'd-none' }">
+						<label class="form-label">Student Id</label>
+						<sf:input path="realId" placeholder="Enter Student Id"
+							cssClass="form-control" />
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Student Name</label>
+						<sf:input path="studentName" placeholder="Enter Student Name"
+							cssClass="form-control" />
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Email</label>
+						<sf:input path="email" type="email"
+							placeholder="Enter Email Address" cssClass="form-control" />
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Phone</label>
+						<sf:input path="phone" type="tel" placeholder="Enter Phone Number"
+							cssClass="form-control" />
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Education</label>
+						<sf:input path="education" type="text"
+							placeholder="Enter Last Education" cssClass="form-control" />
+					</div>
+					<div>
+						<button class="btn btn-outline-danger" type="submit">
+							<i class="bi bi-save"> Save</i>
+						</button>
+					</div>
+				</sf:form>
+			</div>
 		</div>
-	</div>
+		<!-- End -->
 </body>
 </html>

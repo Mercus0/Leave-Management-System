@@ -18,6 +18,8 @@ import com.yan.leaves.model.dto.input.RegistrationForm;
 import com.yan.leaves.model.dto.output.RegistrationDetailsVO;
 import com.yan.leaves.model.dto.output.RegistrationListVO;
 
+import jakarta.validation.Valid;
+
 @Service
 public class RegistrationService {
 	
@@ -66,6 +68,8 @@ public class RegistrationService {
 		 create(form);
 	}
 	
+	
+
 	public RegistrationDetailsVO findDetailsById(int classId, int studentId) {
 		var result = new RegistrationDetailsVO();
 		var registDate = template.queryForObject("""
@@ -118,6 +122,7 @@ public class RegistrationService {
 				"registration_date",Date.valueOf(form.getRegistDate())
 				));
 	}
+	
 
 	private void update(RegistrationForm form) {
 		template.update("""

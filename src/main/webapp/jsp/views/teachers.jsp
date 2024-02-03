@@ -80,9 +80,22 @@
 						<td>${ t.assignDate }</td>
 						<td>${ t.classCount }</td>
 						
-						<td><c:url var="edit" value="/teachers/edit">
+						<td>
+						<c:url var="edit" value="/teachers/edit">
 								<c:param name="id" value="${ t.id }"></c:param>
-							</c:url> <a href="${edit}"><i class="bi bi-pencil"></i></a></td>
+							</c:url> <a href="${edit}"><i class="bi bi-pencil me-3"></i></a>
+							
+						<c:url var="details" value="/teachers/details">
+							<c:param name="email" value="${ t.email }"></c:param>
+							<c:param name="name" value="${ t.name }"></c:param>
+							<c:param name="phone" value="${ t.phone }"></c:param>
+							<c:param name="id" value="${ t.id }"></c:param>
+						</c:url>
+						<a href="${ details }">
+							<i class="bi bi-cursor"></i>
+						</a>
+							
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

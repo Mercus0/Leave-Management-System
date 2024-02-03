@@ -94,6 +94,12 @@ public class StudentService {
 				select s.id from student s join account a on s.id= a.id where a.email = :email
 				""", Map.of("email", email), Integer.class).stream().findFirst().orElse(null);
 	}
+	
+//	public Integer findStudentById(String realId) {
+//		return template.queryForList("""
+//				select s.id from student where realId = :realId
+//				""", Map.of("realId",realId),Integer.class).stream().findFirst().orElse(null);
+//	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Integer createStudent(RegistrationForm form) {
@@ -104,13 +110,35 @@ public class StudentService {
 				"email", form.getEmail(),
 				"password", passwordEncoder.encode(form.getPhone())));
 
-		// insert into teacher
+		// insert into Student
 		studentInsert.execute(
 				Map.of("id", generatedId.intValue(),
 						"phone", form.getPhone(),
 						"education", form.getEducation(),
 						"realId",form.getRealId()));
 		return generatedId.intValue();
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void createStudent(StudentForm form) {
+		//insert into account
+		var generatedId = accountInsert.executeAndReturnKey(Map.of(
+				"name", form.getName(),
+				"role", "Student",
+				"email", form.getEmail(),
+				"password", passwordEncoder.encode(form.getPhone())));
+		
+		// insert into Student
+		
+		studentInsert.execute(Map.of(
+				"id",generatedId.intValue(),
+				"phone", form.getPhone(),
+				"education", form.getEducation(),
+				"realId",form.getRealId(),
+				"gender",form.getGender(),
+				"address",form.getAddress(),
+				"assign_date",form.getAssignDate()
+				));
 	}
 
 	public StudentDetailsVO findDetailsByLoginId(String email) {
@@ -140,4 +168,18 @@ public class StudentService {
 						));
 		return form.getId();
 	}
+
+	public boolean checkStudent(StudentForm form) {
+	    List<Integer> result = template.query(
+	            "select id from student where realId = :realId",
+	            Map.of("realId", form.getRealId()),
+	            (rs, rowNum) -> rs.getInt("id")
+	    );
+
+	    return !result.isEmpty();
+	}
+
+
+
+
 }

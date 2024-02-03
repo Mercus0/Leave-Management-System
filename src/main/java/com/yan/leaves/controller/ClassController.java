@@ -66,7 +66,7 @@ public class ClassController {
 	public String showDetails(@PathVariable(name = "id") Integer id,
 			@RequestParam(name = "targetDate", required = false) Optional<LocalDate> targetDate, ModelMap model) {
 		if (targetDate.isPresent()) {
-			var result=clsService.findDetailsByIdAndDate(id,targetDate);
+			var result = clsService.findDetailsByIdAndDate(id, targetDate);
 			model.put("dto", result);
 			return "classes-details";
 		} else {
@@ -118,4 +118,5 @@ public class ClassController {
 		form.setClassId(classId);
 		return form;
 	}
+
 }

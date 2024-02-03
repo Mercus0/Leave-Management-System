@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yan.leaves.model.dto.input.TeacherForm;
 import com.yan.leaves.model.dto.output.TeacherListVO;
+import com.yan.leaves.model.service.ClassService;
 import com.yan.leaves.model.service.TeacherService;
 
 import jakarta.validation.Valid;
@@ -23,6 +24,9 @@ import jakarta.validation.Valid;
 public class TeacherController {
 	@Autowired
 	private TeacherService service;
+	
+	@Autowired
+	private ClassService clsService;
 	
 	@GetMapping
 	public String index(
@@ -38,6 +42,19 @@ public class TeacherController {
 	@GetMapping("edit")
 	public String edit(@RequestParam(name="id",required=false) Optional<Integer> id) {
 		return "teachers-edit";
+	}
+	
+	@GetMapping("/details")
+	public String showDetails(
+			@RequestParam(name = "name",    required = false) Optional<String> name,
+			@RequestParam(name = "phone", required = false) Optional<String> phone,
+			@RequestParam(name = "email", required = false) Optional<String> email, 
+			@RequestParam(name = "id", required = false) Optional<Integer> id,
+	ModelMap model) {
+		var result=service.search(name, phone, email);
+		model.put("dto", clsService.searchId(id));
+		model.put("list", result);
+		return "teacher-details";
 	}
 
 	@PostMapping

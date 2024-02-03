@@ -45,6 +45,11 @@
 				<button class="btn btn-outline-success me-2" type="submit">
 					<i class="bi bi-search"></i> Search
 				</button>
+				
+				<c:url var="addNew" value="/students/add"></c:url>
+				<a class="btn btn-outline-success my-2 my-sm-0" href="${addNew}">
+					<i class="bi bi-plus-lg"></i>Add
+				</a>
 			</div>
 		</form>
 		<c:choose>

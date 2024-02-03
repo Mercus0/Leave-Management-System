@@ -34,8 +34,6 @@ public class StudentListVO {
 		return new StudentForm(id,name,phone,email,education);
 	}
 	
-	
-
 	public String getRealId() {
 		return realId;
 	}
