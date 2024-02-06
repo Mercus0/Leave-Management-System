@@ -60,12 +60,18 @@ public class RegistrationService {
 	
 	@Transactional
 	public void save(RegistrationForm form) {
-		//update
-		if(form.getStudentId()>0) {
-			update(form);
+//		//update
+//		if(form.getStudentId()>0) {
+//			update(form);
+//			return;
+//		}
+		
+		var studentId = studentService.findStudentByRealId(form.getRealId());
+		if(studentId == null) {
 			return;
 		}
-		 create(form);
+			form.setStudentId(studentId);
+			create(form);
 	}
 	
 	
@@ -106,11 +112,9 @@ public class RegistrationService {
 	
 	
 	private void create(RegistrationForm form) {
-		var studentId = studentService.findStudentByEmail(form.getEmail());
-		if(null == studentId) {
-			studentId=studentService.createStudent(form);
-		}
-		form.setStudentId(studentId);
+//		if(null == studentId) {
+//			studentId=studentService.createStudent(form);
+//		}
 		
 		if(form.getRegistDate()==null) {
 			form.setRegistDate(LocalDate.now());
@@ -123,37 +127,53 @@ public class RegistrationService {
 				));
 	}
 	
-
-	private void update(RegistrationForm form) {
-		template.update("""
-				update registration
-				set registration_date = :registDate
-				where classes_id = :classId and student_id = :studentId
-				""", Map.of(
-						"registDate",Date.valueOf(form.getRegistDate()),
-						"classId",form.getClassId(),
-						"studentId",form.getStudentId()
-						));
-		
-		template.update("""
-				update student
-				set phone = :phone, education = :education
-				where id = :id
-				""", Map.of(
-						"phone",form.getPhone(),
-						"education",form.getEducation(),
-						"id",form.getStudentId()
-						));
-		
-		template.update("""
-				update account
-				set name = :name,
-				email = :email
-				where id = :id
-				""", Map.of(
-						"name",form.getStudentName(),
-						"email",form.getEmail(),
-						"id",form.getStudentId()
-						));
+	public boolean checkNotExistStudentId(RegistrationForm form) {
+		List<Integer> result=template.query("""
+				select id from student where realId= :realId;
+				""",Map.of("realId",form.getRealId()),(rs,row) -> rs.getInt("id"));
+		return !result.isEmpty();
 	}
+	
+	public boolean checkStudentExistInTheClass(RegistrationForm form) {
+		List<Integer> result=template.query("""
+				select student_id from registration r
+				JOIN student s on r.student_id = s.id
+				WHERE s.realId = :realId;
+				""",Map.of("realId",form.getRealId()),(rs,row) -> rs.getInt("student_id"));
+		return !result.isEmpty();
+	}
+	
+
+//	private void update(RegistrationForm form) {
+//		template.update("""
+//				update registration
+//				set registration_date = :registDate
+//				where classes_id = :classId and student_id = :studentId
+//				""", Map.of(
+//						"registDate",Date.valueOf(form.getRegistDate()),
+//						"classId",form.getClassId(),
+//						"studentId",form.getStudentId()
+//						));
+//		
+//		template.update("""
+//				update student
+//				set phone = :phone, education = :education
+//				where id = :id
+//				""", Map.of(
+//						"phone",form.getPhone(),
+//						"education",form.getEducation(),
+//						"id",form.getStudentId()
+//						));
+//		
+//		template.update("""
+//				update account
+//				set name = :name,
+//				email = :email
+//				where id = :id
+//				""", Map.of(
+//						"name",form.getStudentName(),
+//						"email",form.getEmail(),
+//						"id",form.getStudentId()
+//						));
+//	}
 }

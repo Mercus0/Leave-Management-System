@@ -7,55 +7,53 @@
 <head>
 <meta charset="UTF-8">
 <title>Leave | Sign In</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-	crossorigin="anonymous"></script>
-<c:url var="commonCss" value="/resources/application.css"></c:url>
-<link rel="stylesheet" href="${commonCss}" type="text/css">
+<c:url var="loginCss" value="/resources/login.css"></c:url>
+<link rel="stylesheet" href="${loginCss}" type="text/css">
 </head>
 <body class="wh-100">
-	<div class="d-flex vh-100 justify-content-center align-items-center">
-		<div class="card login-form">
-			<div class="card-header">
-				<i class="bi-door-open"></i>Sign In
-			</div>
-
-			<div class="card-body">
+	<section class="container">
+		<div class="login-container">
+			<div class="circle circle-one"></div>
+			<div class="form-container">
+				<div class="container-logo">
+					<img class="logo"
+						src="https://cdn.discordapp.com/attachments/1118377328993636473/1203324918939262976/Logo-3.png?ex=65d0aea9&is=65be39a9&hm=05eaf89a22e9350cf4bbd90a5fa54ba1463ad25cf9bd16808f1276d0d60cb511&"
+						alt="logo" />
+				</div>
 				<c:url var="signin" value="/signin"></c:url>
 				<sf:form action="${signin}" method="POST">
-				
+
 					<c:if test="${not empty param.error}">
 						<div class="alert alert-warning">Login Error.</div>
 					</c:if>
-					
+
 					<div class="mb-3">
 						<label class="form-label">Email</label> <input type="email"
 							name="username" placeholder="Enter Email Address"
-							class="form-control" />
+							class="form-control" autocomplete="off"/>
 					</div>
 
 					<div class="mb-3">
 						<label class="form-label">Password</label> <input type="password"
 							name="password" placeholder="Enter your password"
-							class="form-control" />
+							class="form-control" autocomplete="off"/>
 					</div>
 
 					<div class="mb-3">
-						<button type="submit" class="btn btn-outline-success">
+						<button type="submit" class="opacity">
 							<i class="bi bi-door-open"></i>Sign In
 						</button>
 					</div>
 				</sf:form>
+				<div class="register-forget opacity">
+					<a href="">Register</a> <a href="">Forgot Password</a>
+				</div>
 			</div>
+			<div class="circle circle-two"></div>
 		</div>
-	</div>
+		<div class="theme-btn-container"></div>
+	</section>
 </body>
+<c:url var="loginJs" value="/resources/login.js"></c:url>
+<link rel="stylesheet" href="${loginJs}" type="text/javascript">
 </html>

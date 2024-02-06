@@ -30,6 +30,11 @@
 			<sf:form method="post" action="${save}" modelAttribute="form"
 				cssClass="col-lg-6 col-md-9 col-sm-12">
 
+
+				<c:if test="${not empty error}">
+					<div class="error-message">${error}</div>
+				</c:if>
+
 				<sf:errors path="*" cssClass="alert alert-warning" element="div"></sf:errors>
 
 				<sf:hidden path="id" />

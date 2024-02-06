@@ -45,7 +45,7 @@
 				<button class="btn btn-outline-success me-2" type="submit">
 					<i class="bi bi-search"></i> Search
 				</button>
-				
+
 				<c:url var="addNew" value="/students/add"></c:url>
 				<a class="btn btn-outline-success my-2 my-sm-0" href="${addNew}">
 					<i class="bi bi-plus-lg"></i>Add
@@ -67,6 +67,7 @@
 							<th>Email</th>
 							<th>Education</th>
 							<th>Class Count</th>
+							<th>Status</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -79,18 +80,21 @@
 								<td>${ t.email }</td>
 								<td>${ t.education }</td>
 								<td>${ t.classCount }</td>
-
 								<td>
-									<c:url var="edit" value="/students/edit">
-										<c:param name="id" value="${ t.id }"></c:param>
-									</c:url> 
-									<a href="${edit}"><i class="bi bi-pencil me-3"></i></a>
-									
-									<c:url var="details" value="/students/details">
-										<c:param name="email" value="${ t.email }"></c:param>
-									</c:url>
-									<a href="${ details }"><i class="bi bi-cursor"></i></a>
+									${t.deleted ? '<i class="bi bi-record-circle-fill text-danger"></i>' : '<i class="bi bi-record-circle-fill text-success"></i>'}
 								</td>
+
+								<td><c:url var="edit" value="/students/edit">
+										<c:param name="id" value="${ t.id }"></c:param>
+									</c:url> <a href="${edit}"><i class="bi bi-pencil me-3"></i></a> 
+									
+									<c:url
+										var="details" value="/students/details">
+										<c:param name="email" value="${ t.email }"></c:param>
+										<c:param name="status" value="${ t.deleted }"></c:param>
+									</c:url> 
+									<a href="${ details }"><i class="bi bi-cursor"></i></a></td>
+									
 							</tr>
 						</c:forEach>
 					</tbody>

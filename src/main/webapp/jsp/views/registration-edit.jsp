@@ -33,10 +33,20 @@
 					<sf:hidden path="studentId" />
 					<sf:hidden path="classId" />
 					<sf:hidden path="registDate" />
+					
+						<sf:errors path="*">
+							<div class="alert alert-info">Please Enter Student Id.</div>
+						</sf:errors>
+					
+					<c:if test="${ not empty alreadyExist }">
+						<div class="alert alert-danger">${alreadyExist}</div>
+					</c:if>
+					
+					<c:if test="${ not empty notExist }">
+						<div class="alert alert-warning">${notExist}</div>
+					</c:if>
 
-					<sf:errors path="*"></sf:errors>
-
-					<div class="mb-3">
+					<!--  <div class="mb-3">
 						<label class="form-label">Start Date</label> <span
 							class="form-control"> ${param.startDate} </span>
 					</div>
@@ -45,35 +55,14 @@
 						<label class="form-label">Teacher</label> <span
 							class="form-control"> ${param.teacherName} </span>
 					</div>
+					
+					 -->
+					 
 
-					<div class="mb-3 ${empty param.studentId ? '' : 'd-none' }">
+					<div class="mb-3">
 						<label class="form-label">Student Id</label>
 						<sf:input path="realId" placeholder="Enter Student Id"
 							cssClass="form-control" />
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label">Student Name</label>
-						<sf:input path="studentName" placeholder="Enter Student Name"
-							cssClass="form-control" />
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label">Email</label>
-						<sf:input path="email" type="email"
-							placeholder="Enter Email Address" cssClass="form-control" />
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label">Phone</label>
-						<sf:input path="phone" type="tel" placeholder="Enter Phone Number"
-							cssClass="form-control" />
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label">Education</label>
-						<sf:input path="education" type="text"
-							placeholder="Enter Last Education" cssClass="form-control" />
 					</div>
 					<div>
 						<button class="btn btn-outline-danger" type="submit">

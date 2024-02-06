@@ -28,7 +28,8 @@ import jakarta.validation.Valid;
 public class StudentService {
 
 	private static final String SELECT_PROJECTION = """
-			select a.id, s.realId, a.name, s.phone, a.email, s.education, count(r.classes_id) classCount
+			select a.id, s.realId, a.name, s.phone, a.email, s.education, count(r.classes_id) classCount,
+			s.realId,s.gender,s.address,s.assign_date assignDate,a.deleted
 			from student s
 			join account a on s.id = a.id
 			left join registration r on s.id = r.student_id
@@ -85,60 +86,33 @@ public class StudentService {
 	}
 
 	public StudentListVO findInfoById(int studentId) {
-		var sql = "%s where s.id = :id %s".formatted(SELECT_PROJECTION, SELECT_GROUPBY);
+		 var sql = "%s where s.id = :id %s".formatted(SELECT_PROJECTION,SELECT_GROUPBY);
 		return template.queryForObject(sql, Map.of("id", studentId), new BeanPropertyRowMapper<>(StudentListVO.class));
 	}
 
-	public Integer findStudentByEmail(String email) {
-		return template.queryForList("""
-				select s.id from student s join account a on s.id= a.id where a.email = :email
-				""", Map.of("email", email), Integer.class).stream().findFirst().orElse(null);
-	}
-	
-//	public Integer findStudentById(String realId) {
-//		return template.queryForList("""
-//				select s.id from student where realId = :realId
-//				""", Map.of("realId",realId),Integer.class).stream().findFirst().orElse(null);
+//	@Transactional(propagation = Propagation.REQUIRED)
+//	public Integer createStudent(RegistrationForm form) {
+//		// insert into account
+//		var generatedId = accountInsert.executeAndReturnKey(Map.of("name", form.getStudentName(), "role", "Student",
+//				"email", form.getEmail(), "password", passwordEncoder.encode(form.getPhone())));
+//
+//		// insert into Student
+//		studentInsert.execute(Map.of("id", generatedId.intValue(), "phone", form.getPhone(), "education",
+//				form.getEducation(), "realId", form.getRealId()));
+//		return generatedId.intValue();
 //	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Integer createStudent(RegistrationForm form) {
+	public void createStudent(StudentForm form) {
 		// insert into account
-		var generatedId = accountInsert.executeAndReturnKey(Map.of(
-				"name", form.getStudentName(),
-				"role", "Student",
-				"email", form.getEmail(),
-				"password", passwordEncoder.encode(form.getPhone())));
+		var generatedId = accountInsert.executeAndReturnKey(Map.of("name", form.getName(), "role", "Student", "email",
+				form.getEmail(), "password", passwordEncoder.encode(form.getPhone())));
 
 		// insert into Student
-		studentInsert.execute(
-				Map.of("id", generatedId.intValue(),
-						"phone", form.getPhone(),
-						"education", form.getEducation(),
-						"realId",form.getRealId()));
-		return generatedId.intValue();
-	}
-	
-	@Transactional(propagation = Propagation.REQUIRED)
-	public void createStudent(StudentForm form) {
-		//insert into account
-		var generatedId = accountInsert.executeAndReturnKey(Map.of(
-				"name", form.getName(),
-				"role", "Student",
-				"email", form.getEmail(),
-				"password", passwordEncoder.encode(form.getPhone())));
-		
-		// insert into Student
-		
-		studentInsert.execute(Map.of(
-				"id",generatedId.intValue(),
-				"phone", form.getPhone(),
-				"education", form.getEducation(),
-				"realId",form.getRealId(),
-				"gender",form.getGender(),
-				"address",form.getAddress(),
-				"assign_date",form.getAssignDate()
-				));
+
+		studentInsert.execute(Map.of("id", generatedId.intValue(), "phone", form.getPhone(), "education",
+				form.getEducation(), "realId", form.getRealId(), "gender", form.getGender(), "address",
+				form.getAddress(), "assign_date", form.getAssignDate()));
 	}
 
 	public StudentDetailsVO findDetailsByLoginId(String email) {
@@ -148,38 +122,37 @@ public class StudentService {
 		result.setRegistrations(registrationService.searchByStudentId(studentId));
 		return result;
 	}
-	
+
 	@Transactional
 	public Integer editStudent(@Valid StudentForm form) {
-		//update into account
-		template.update("update account set name = :name, email = :email where id = :id", 
-				Map.of("name",form.getName(),
-						"email",form.getEmail(),
-						"id",form.getId()
-				));
-		
-		//update into student
-		template.update("update student set phone = :phone, education = :education,realId = :readId where id= :id",
-				Map.of(
-						"phone",form.getPhone(),
-						"education",form.getEducation(),
-						"realId",form.getRealId(),
-						"id",form.getId()
-						));
+		// update into account
+		template.update("update account set name = :name, email = :email where id = :id",
+				Map.of("name", form.getName(), "email", form.getEmail(), "id", form.getId()));
+
+		// update into student
+		template.update(
+				"update student set phone = :phone, education = :education,realId = :realId,gender = :gender, address = :address where id= :id",
+				Map.of("phone", form.getPhone(), "education", form.getEducation(), "realId", form.getRealId(), "gender",
+						form.getGender(), "address", form.getAddress(), "id", form.getId()));
 		return form.getId();
 	}
 
 	public boolean checkStudent(StudentForm form) {
-	    List<Integer> result = template.query(
-	            "select id from student where realId = :realId",
-	            Map.of("realId", form.getRealId()),
-	            (rs, rowNum) -> rs.getInt("id")
-	    );
+		List<Integer> result = template.query("select id from student where realId = :realId",
+				Map.of("realId", form.getRealId()), (rs, rowNum) -> rs.getInt("id"));
 
-	    return !result.isEmpty();
+		return !result.isEmpty();
+	}
+	
+	public Integer findStudentByEmail(String email) {
+		return template.queryForList("""
+				select s.id from student s join account a on s.id= a.id where a.email = :email
+				""", Map.of("email", email), Integer.class).stream().findFirst().orElse(null);
 	}
 
-
-
-
+	public Integer findStudentByRealId(String realId) {
+		return template.queryForList("""
+				select s.id from student s join account a on s.id= a.id where s.realId = :realId
+				""", Map.of("realId", realId), Integer.class).stream().findFirst().orElse(null);
+	}
 }

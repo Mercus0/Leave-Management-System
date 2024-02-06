@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yan.leaves.model.dto.input.ClassForm;
 import com.yan.leaves.model.dto.input.RegistrationForm;
 import com.yan.leaves.model.service.ClassService;
 import com.yan.leaves.model.service.LeaveService;
 import com.yan.leaves.model.service.RegistrationService;
+import com.yan.leaves.model.service.StudentService;
 import com.yan.leaves.model.service.TeacherService;
 
 import jakarta.validation.Valid;
@@ -34,6 +36,8 @@ public class ClassController {
 	private TeacherService teaService;
 	@Autowired
 	private LeaveService levService;
+	@Autowired
+	private StudentService studentService;
 
 	@GetMapping
 	public String index(@RequestParam(name = "teacher", required = false) Optional<String> teacher,
@@ -85,12 +89,27 @@ public class ClassController {
 
 	@PostMapping("registration")
 	public String saveRegistration(@Valid @ModelAttribute(name = "registForm") RegistrationForm form,
-			BindingResult result) {
+			BindingResult result,RedirectAttributes redirectAttributes) {
+		
 		if (result.hasErrors()) {
 			return "registration-edit";
 		}
-		regService.save(form);
-		return "redirect:/classes/registration/%d/%d".formatted(form.getClassId(), form.getStudentId());
+		
+		//check student exist
+		if(regService.checkNotExistStudentId(form)) {	
+			//check this student exist in the classes
+			if(!regService.checkStudentExistInTheClass(form)) {
+				//save
+				regService.save(form);
+				return "redirect:/classes/registration/%d/%d".formatted(form.getClassId(), form.getStudentId());
+			}else {
+				redirectAttributes.addFlashAttribute("alreadyExist", "This Student is Already register in this class.");
+				return "redirect:/classes/registration";
+			}
+		}
+		//if not exist
+		redirectAttributes.addFlashAttribute("notExist", "Invalid Student Id.");
+		return "redirect:/classes/registration";
 	}
 
 	@GetMapping("registration/{classId}/{studentId}")
@@ -109,11 +128,6 @@ public class ClassController {
 	@ModelAttribute(name = "registForm")
 	RegistrationForm registform(@RequestParam(name = "studentId", required = false, defaultValue = "0") int studentId,
 			@RequestParam(name = "classId", required = false, defaultValue = "0") int classId) {
-		// edit
-		if (studentId > 0) {
-			return regService.getFormById(classId, studentId);
-		}
-
 		var form = new RegistrationForm();
 		form.setClassId(classId);
 		return form;

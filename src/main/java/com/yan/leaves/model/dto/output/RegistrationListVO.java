@@ -12,7 +12,7 @@ public class RegistrationListVO {
 	}
 
 	public RegistrationListVO(int classId, int teacherId, String teacher, LocalDate startDate, int studentId,
-			String student, String studentPhone, LocalDate registrationDate,String classInfo) {
+			String student, String studentPhone, LocalDate registrationDate, String classInfo) {
 		super();
 		this.classId = classId;
 		this.teacherId = teacherId;
@@ -22,7 +22,7 @@ public class RegistrationListVO {
 		this.student = student;
 		this.studentPhone = studentPhone;
 		this.registrationDate = registrationDate;
-		this.classInfo=classInfo;
+		this.classInfo = classInfo;
 	}
 
 	private int classId;
@@ -112,7 +112,7 @@ public class RegistrationListVO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(classId, registrationDate, startDate, student, studentId, studentPhone, teacher,
+		return Objects.hash(classId, classInfo, registrationDate, startDate, student, studentId, studentPhone, teacher,
 				teacherId);
 	}
 
@@ -125,7 +125,7 @@ public class RegistrationListVO {
 		if (getClass() != obj.getClass())
 			return false;
 		RegistrationListVO other = (RegistrationListVO) obj;
-		return classId == other.classId
+		return classId == other.classId && Objects.equals(classInfo, other.classInfo)
 				&& Objects.equals(registrationDate, other.registrationDate)
 				&& Objects.equals(startDate, other.startDate) && Objects.equals(student, other.student)
 				&& studentId == other.studentId && Objects.equals(studentPhone, other.studentPhone)

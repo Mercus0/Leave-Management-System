@@ -1,5 +1,6 @@
 package com.yan.leaves.controller;
 
+import java.io.Console;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yan.leaves.model.dto.input.StudentForm;
 import com.yan.leaves.model.dto.output.StudentDetailsVO;
@@ -48,14 +50,16 @@ public class StudentController {
 	}
 	
 	@GetMapping("/details")
-	public String showDetails(@RequestParam(name ="email",required=false) String email,ModelMap model) {
+	public String showDetails(@RequestParam(name ="email",required=false) String email,
+			@RequestParam(name = "status",required = false) boolean status,
+			ModelMap model) {
 		StudentDetailsVO result=service.findDetailsByLoginId(email);
 		model.put("dto", result);
 		return "student-details";
 	}
 	
 	@PostMapping("/add")
-	public String AddNewStudent(@Valid @ModelAttribute(name="form") StudentForm form,BindingResult result) {
+	public String AddNewStudent(@Valid @ModelAttribute(name="form") StudentForm form,BindingResult result,RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
 			return "students-add";
 		}	
@@ -65,10 +69,11 @@ public class StudentController {
 			form.setAssignDate(LocalDate.now());
 			return "redirect:/students";
 		}
+		redirectAttributes.addFlashAttribute("error","This id is already exist");
 		return "redirect:/students/add";
 	}
 	
-	@PostMapping("edit")
+	@PostMapping("/edit")
 	public String Save(@Valid @ModelAttribute(name="form") StudentForm form,BindingResult result) {
 		if(result.hasErrors()) {
 			return "students-edit";

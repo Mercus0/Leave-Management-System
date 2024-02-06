@@ -11,19 +11,6 @@ public class RegistrationForm {
 
 	}
 
-	public RegistrationForm(int classId, int studentId, LocalDate registDate, String realId, String studentName,
-			String email, String phone, String education) {
-		super();
-		this.classId = classId;
-		this.studentId = studentId;
-		this.registDate = registDate;
-		this.realId = realId;
-		this.studentName = studentName;
-		this.email = email;
-		this.phone = phone;
-		this.education = education;
-	}
-
 	public RegistrationForm(int classId, int studentId, LocalDate registDate,String realId) {
 		super();
 		this.classId = classId;
@@ -40,18 +27,6 @@ public class RegistrationForm {
 
 	@NotEmpty(message = "Please enter student Id.")
 	private String realId;
-
-	@NotEmpty(message = "Please enter student name.")
-	private String studentName;
-
-	@NotEmpty(message = "Please enter Email Address.")
-	private String email;
-
-	@NotEmpty(message = "Please enter Phone number.")
-	private String phone;
-
-	@NotEmpty(message = "Please enter Education.")
-	private String education;
 
 	public int getClassId() {
 		return classId;
@@ -83,38 +58,6 @@ public class RegistrationForm {
 
 	public void setRealId(String realId) {
 		this.realId = realId;
-	}
-
-	public String getStudentName() {
-		return studentName;
-	}
-
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEducation() {
-		return education;
-	}
-
-	public void setEducation(String education) {
-		this.education = education;
 	}
 
 }

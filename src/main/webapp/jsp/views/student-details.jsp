@@ -25,29 +25,70 @@
 
 	<div class="container">
 		<h3 class="my-4">Student Details</h3>
+
+		<c:url var="edit" value="/students/edit">
+			<c:param name="id" value="${ dto.student.id }"></c:param>
+		</c:url>
+		
+		<a class="btn btn-outline-info mb-3" href="${edit}"><i class="bi bi-pencil me-3"></i>Edit</a>
+		
+		<c:url var="edit" value="/students/edit">
+			<c:param name="id" value="${ dto.student.id }"></c:param>
+		</c:url>
+		
+		<c:choose>
+			<c:when test="${param.status eq true}">
+					<a class="btn btn-outline-danger mb-3" href="${edit}"><i class="bi bi-trash"></i>Activate</a>
+			</c:when>
+			<c:otherwise>
+        			<a class="btn btn-outline-danger mb-3" href="${edit}"><i class="bi bi-trash"></i>Delete</a>
+    		</c:otherwise>
+		</c:choose>
+		
+		
+
 		<div class="card mb-4">
 			<div class="card-header">Student Information</div>
 			<div class="card-body row mb-3">
-				<div class="col">
-					<label for="" class="form-label">Student Id</label> <span
-						class="form-control">${dto.student.realId }</span>
+
+				<div class="row mb-3">
+					<div class="col">
+						<label for="" class="form-label">Student Id</label> <span
+							class="form-control">${dto.student.realId }</span>
+					</div>
+					<div class="col">
+						<label for="" class="form-label">Name</label> <span
+							class="form-control">${dto.student.name }</span>
+					</div>
+					<div class="col">
+						<label for="" class="form-label">Phone</label> <span
+							class="form-control">${dto.student.phone }</span>
+					</div>
+					<div class="col">
+						<label for="" class="form-label">Email</label> <span
+							class="form-control">${dto.student.email }</span>
+					</div>
 				</div>
-				<div class="col">
-					<label for="" class="form-label">Name</label> <span
-						class="form-control">${dto.student.name }</span>
+
+				<div class="row mb-3">
+					<div class="col">
+						<label for="" class="form-label">Gender</label> <span
+							class="form-control">${dto.student.gender }</span>
+					</div>
+					<div class="col">
+						<label for="" class="form-label">Address</label> <span
+							class="form-control">${dto.student.address }</span>
+					</div>
+					<div class="col">
+						<label for="" class="form-label">Assign Date</label> <span
+							class="form-control">${dto.student.assignDate }</span>
+					</div>
+					<div class="col">
+						<label for="" class="form-label">Education</label> <span
+							class="form-control">${dto.student.education }</span>
+					</div>
 				</div>
-				<div class="col">
-					<label for="" class="form-label">Phone</label> <span
-						class="form-control">${dto.student.phone }</span>
-				</div>
-				<div class="col">
-					<label for="" class="form-label">Email</label> <span
-						class="form-control">${dto.student.email }</span>
-				</div>
-				<div class="col">
-					<label for="" class="form-label">Education</label> <span
-						class="form-control">${dto.student.education }</span>
-				</div>
+
 			</div>
 		</div>
 		<div class="row g-3">
