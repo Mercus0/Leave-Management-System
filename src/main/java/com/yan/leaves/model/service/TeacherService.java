@@ -25,7 +25,7 @@ import com.yan.leaves.model.dto.output.TeacherListVO;
 public class TeacherService {
 
 	private static final String SELECT_PROJECTION = """
-			select t.id,a.name,t.phone,a.email,t.assign_date assignDate,count(c.id) classCount 
+			select t.id,a.name,t.phone,a.email,t.assign_date assignDate,count(c.id) classCount,a.deleted 
 			from teacher t join account a on a.id=t.id left join classes c on c.teacher_id=t.id
 			""";
 	private static final String SELECT_GROUP_BY = "group by t.id,a.name,t.phone,a.email,t.assign_date";
@@ -61,11 +61,16 @@ public class TeacherService {
 		return update(form);
 	}
 
-	public List<TeacherListVO> search(Optional<String> name, Optional<String> phone, Optional<String> email) {
+	public List<TeacherListVO> search(Optional<Integer> status, Optional<String> name, Optional<String> phone, Optional<String> email) {
 		var where = new StringBuffer();
 		var params = new HashMap<String, Object>();
 		// dynamic query
-
+		
+		where.append(status.filter(s -> s!=2).map(a -> {
+			params.put("status",a);
+			return "and a.deleted= :status ";
+		}).orElse(""));
+		
 		where.append(email.filter(StringUtils::hasLength).map(a -> {
 			params.put("email", a.concat("%"));
 			return "and a.email like :email ";
@@ -114,6 +119,14 @@ public class TeacherService {
 		return template.query("select t.id,a.name from teacher t join account a on t.id=a.id where a.deleted=:del",
 				Map.of("del",false),
 				new BeanPropertyRowMapper<>(IdWithName.class));
+	}
+	
+	@Transactional
+	public void status(Optional<Integer> id, Optional<Integer> status) {
+		template.update("""
+				update account set deleted= :deleted where id= :id
+				""", Map.of("id",id.orElse(null),
+						"deleted",status.orElse(0) == 1 ? 0:1));
 	}
 
 }

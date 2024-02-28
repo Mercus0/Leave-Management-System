@@ -30,13 +30,32 @@ public class TeacherController {
 	
 	@GetMapping
 	public String index(
+			@RequestParam(name = "status",required = false) Optional<Integer> status,
 			@RequestParam(name = "name",    required = false) Optional<String> name,
 			@RequestParam(name = "phone", required = false) Optional<String> phone,
 			@RequestParam(name = "email", required = false) Optional<String> email, 
 			ModelMap model) {
-		var result=service.search(name, phone, email);
+		var result=service.search(status,name, phone, email);
 		model.put("list", result);
 		return "teachers";
+	}
+	
+	@GetMapping("status")
+	public String status(
+			@RequestParam(name = "id", required = false) Optional<Integer> id,
+			@RequestParam(name ="status",required = false) Optional<Integer> status,
+			@RequestParam(name = "name",    required = false) Optional<String> name,
+			@RequestParam(name = "phone", required = false) Optional<String> phone,
+			@RequestParam(name = "email", required = false) Optional<String> email, 
+	ModelMap model
+			) {
+		
+		service.status(id,status);
+		
+		var result=service.search(Optional.of(2),name, phone, email);
+		model.put("dto", clsService.searchId(id));
+		model.put("list", result);
+		return "teacher-details"; 
 	}
 
 	@GetMapping("edit")
@@ -46,12 +65,13 @@ public class TeacherController {
 	
 	@GetMapping("/details")
 	public String showDetails(
+			@RequestParam(name = "id", required = false) Optional<Integer> id,
+			@RequestParam(name ="status",required = false) Optional<Integer> status,
 			@RequestParam(name = "name",    required = false) Optional<String> name,
 			@RequestParam(name = "phone", required = false) Optional<String> phone,
 			@RequestParam(name = "email", required = false) Optional<String> email, 
-			@RequestParam(name = "id", required = false) Optional<Integer> id,
 	ModelMap model) {
-		var result=service.search(name, phone, email);
+		var result=service.search(status,name, phone, email);
 		model.put("dto", clsService.searchId(id));
 		model.put("list", result);
 		return "teacher-details";

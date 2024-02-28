@@ -7,7 +7,7 @@ public class LeaveListVO {
 		
 	}
 	public LeaveListVO(LocalDate applyDate, int classId, int studentId,String student,String studentPhone,
-			int teacherId,String teacher,LocalDate startDate,int days,String reason) {
+			int teacherId,String teacher,LocalDate startDate,int days,String reason, String status) {
 		super();
 		this.applyDate=applyDate;
 		this.classId=classId;
@@ -19,6 +19,7 @@ public class LeaveListVO {
 		this.startDate=startDate;
 		this.days=days;
 		this.reason=reason;
+		this.status=status;
 	}
 	private LocalDate applyDate;
 	private int classId;
@@ -30,7 +31,15 @@ public class LeaveListVO {
 	private LocalDate startDate;
 	private int days;
 	private String reason;
+	private String status;
 	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public LocalDate getApplyDate() {
 		return applyDate;
 	}

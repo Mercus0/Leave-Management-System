@@ -20,6 +20,10 @@ http://www.springframework.org/schema/mvc https://www.springframework.org/schema
 
 <mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 
-<mvc:view-controller path="/signin" view-name="signin"/>  
+<mvc:resources location="file:images/" mapping="/images/**"></mvc:resources>
+
+<mvc:resources location="classpath:/static/" mapping="/static/**"></mvc:resources>
+
+<mvc:view-controller path="/signin" view-name="signin"/> 
 
 </beans>

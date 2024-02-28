@@ -8,7 +8,7 @@
 			<th>Registration Date</th>
 			<th>Student</th>
 			<th>Phone</th>
-			<th></th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,8 +29,9 @@
 				</a>
 				
 				<c:url var="details" value="/classes/registration/${item.classId }/${item.studentId }">
-				</c:url> <a href="${details}">
-				<i class="bi bi-cursor"></i>
+				</c:url> 
+					<a href="${details}">
+					<i class="bi bi-cursor"></i>
 				</a>
 			</td>
 		</tr>

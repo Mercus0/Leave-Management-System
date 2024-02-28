@@ -24,28 +24,36 @@
 	</c:import>
 
 	<div class="container">
-		<h3 class="my-4">Student Details</h3>
+		<div class="d-flex justify-content-between my-4">
+			<h3>Student Details</h3>
 
-		<c:url var="edit" value="/students/edit">
-			<c:param name="id" value="${ dto.student.id }"></c:param>
-		</c:url>
-		
-		<a class="btn btn-outline-info mb-3" href="${edit}"><i class="bi bi-pencil me-3"></i>Edit</a>
-		
-		<c:url var="edit" value="/students/edit">
-			<c:param name="id" value="${ dto.student.id }"></c:param>
-		</c:url>
-		
-		<c:choose>
-			<c:when test="${param.status eq true}">
-					<a class="btn btn-outline-danger mb-3" href="${edit}"><i class="bi bi-trash"></i>Activate</a>
-			</c:when>
-			<c:otherwise>
-        			<a class="btn btn-outline-danger mb-3" href="${edit}"><i class="bi bi-trash"></i>Delete</a>
-    		</c:otherwise>
-		</c:choose>
-		
-		
+			<div class="d-flex">
+				<c:url var="edit" value="/students/edit">
+					<c:param name="id" value="${ dto.student.id }"></c:param>
+				</c:url>
+
+				<a class="btn btn-outline-primary me-3" href="${edit}"><i
+					class="bi bi-pencil"></i> Edit</a>
+					
+				<c:url var="status" value="/students/status">
+					<c:param name="id" value="${ dto.student.id }"></c:param>
+					<c:param name="email" value="${ dto.student.email }"></c:param>
+					<c:param name="status" value="${ dto.student.deleted }"></c:param>
+				</c:url>
+				<a class="btn btn-outline-danger" href="${ status }"> <i
+					class="${dto.student.deleted ? 'bi-check' : 'bi-trash'}"></i> <span>
+						<c:choose>
+							<c:when test="${ dto.student.deleted }">
+						Activate
+					</c:when>
+							<c:otherwise>
+						Delete
+					</c:otherwise>
+						</c:choose>
+				</span>
+				</a>
+			</div>
+		</div>
 
 		<div class="card mb-4">
 			<div class="card-header">Student Information</div>
@@ -91,12 +99,27 @@
 
 			</div>
 		</div>
-		<div class="row g-3">
+		
+		<c:choose>
+			<c:when test="${empty dto.registrations }">
+				<div class="alert alert-info">There is no class for ${ dto.student.name }.</div>
+			</c:when>
+			<c:otherwise>
+				<div class="row g-3">
 			<c:forEach items="${ dto.registrations }" var="item">
 				<div class="col-6">
 					<div class="card card-body">
 						<!-- Details -->
-						<h5>${ item.classInfo }</h5>
+						
+						<c:choose>
+							<c:when test="${item.deleted ==1}">
+								<h5>${ item.classInfo } <span class="badge text-bg-danger">Closed</span></h5>
+							</c:when>
+							<c:otherwise>
+								<h5>${ item.classInfo } <span class="badge text-bg-success">Open</span></h5>
+							</c:otherwise>
+						</c:choose>
+						
 
 
 						<div class="d-flex justify-content-between text-secondary mb-4">
@@ -115,6 +138,9 @@
 				</div>
 			</c:forEach>
 		</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
+
 </body>
 </html>

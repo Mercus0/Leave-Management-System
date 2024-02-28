@@ -29,7 +29,6 @@ public class RegistrationListVO {
 	private int teacherId;
 	private String teacher;
 	private String classInfo;
-
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
 	private int studentId;
@@ -37,6 +36,15 @@ public class RegistrationListVO {
 	private String studentPhone;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate registrationDate;
+	private int deleted;
+
+	public int getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
+	}
 
 	public int getClassId() {
 		return classId;

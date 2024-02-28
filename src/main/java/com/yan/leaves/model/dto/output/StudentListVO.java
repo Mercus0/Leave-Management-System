@@ -21,7 +21,7 @@ public class StudentListVO {
 	}
 
 	public StudentListVO(int id, String name, String phone, String email, String gender, String address,
-			String education, String assignDate, String realId,boolean deleted) {
+			String education, String assignDate, String realId,boolean deleted,String profileImage) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -33,7 +33,7 @@ public class StudentListVO {
 		this.assignDate = assignDate;
 		this.realId = realId;
 		this.deleted=deleted;
-	}
+		this.profileImage=profileImage;	}
 
 	private int id;
 	private String name;
@@ -46,7 +46,16 @@ public class StudentListVO {
 	private long classCount;
 	private String realId;
 	private boolean deleted;
+	private String profileImage;
 	
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
 
 	public boolean isDeleted() {
 		return deleted;

@@ -19,7 +19,7 @@ public class LeaveForm {
 		this.studentId = studentId;
 	}
 
-	public LeaveForm(int classId, int studentName, LocalDate applyDate, LocalDate startDate, int days, String reason) {
+	public LeaveForm(int classId, int studentName, LocalDate applyDate, LocalDate startDate, int days, String reason,String status) {
 		super();
 		this.classId=classId;
 		this.studentId=studentName;
@@ -27,6 +27,7 @@ public class LeaveForm {
 		this.startDate=startDate;
 		this.days=days;
 		this.reason=reason;
+		this.status=status;
 	}
 
 	private int classId;
@@ -44,6 +45,17 @@ public class LeaveForm {
 	
 	@NotEmpty(message="Please enter the Reason for leaves")
 	private String reason;
+	
+	private String status;
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public int getClassId() {
 		return classId;

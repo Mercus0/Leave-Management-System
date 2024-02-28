@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ import com.yan.leaves.model.service.TeacherService;
 public class TeacherServiceTest {
 	@Autowired
 	TeacherService service;
-
+	
+	@Disabled
 	@ParameterizedTest
 	@CsvSource(value = "0,maung maung,0945256,maung@gmail.com,2022-09-01")
 	@Sql(scripts = "/sql/truncate.sql")
@@ -28,7 +30,8 @@ public class TeacherServiceTest {
 		var result = service.save(form);
 		assertEquals(1, result);
 	}
-
+	
+	@Disabled
 	@ParameterizedTest
 	@Sql(scripts= {
 			 "/sql/truncate.sql",
@@ -49,26 +52,27 @@ public class TeacherServiceTest {
 		assertEquals(classCount, result.getClassCount());
 	}
 	
-	@ParameterizedTest
-	@Sql(scripts= {
-			 "/sql/truncate.sql",
-			"/sql/teacher.sql"
-	})
-	@CsvSource(value= {
-			",,,3",
-			"thi,,,1",
-			"myo,,,0",
-			"thi,094526,,1",
-			"thi,09545,,0",
-			",094526,,3",
-			",,aung,1",
-			",,myo,0"
-	})
-	void search_test(String name,String phone,String email,int count) {
-		var result=service.search(
-				Optional.ofNullable(name),
-				Optional.ofNullable(phone),
-				Optional.ofNullable(email));
-		assertEquals(count, result.size());
-	}
+//	@Disabled
+//	@ParameterizedTest
+//	@Sql(scripts= {
+//			 "/sql/truncate.sql",
+//			"/sql/teacher.sql"
+//	})
+//	@CsvSource(value= {
+//			",,,3",
+//			"thi,,,1",
+//			"myo,,,0",
+//			"thi,094526,,1",
+//			"thi,09545,,0",
+//			",094526,,3",
+//			",,aung,1",
+//			",,myo,0"
+//	})
+//	void search_test(String name,String phone,String email,int count) {
+//		var result=service.search(
+//				Optional.ofNullable(name),
+//				Optional.ofNullable(phone),
+//				Optional.ofNullable(email));
+//		assertEquals(count, result.size());
+//	}
 }

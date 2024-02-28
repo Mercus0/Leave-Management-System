@@ -18,6 +18,7 @@ public class ClassListVoRowMapper implements org.springframework.jdbc.core.RowMa
 		vo.setTeacherId(rs.getInt("teacherId"));
 		vo.setTeacherName(rs.getString("teacherName"));
 		vo.setTeacherPhone(rs.getString("teacherPhone"));
+		vo.setDeleted(rs.getInt("deleted"));
 		return vo;
 	}
 	

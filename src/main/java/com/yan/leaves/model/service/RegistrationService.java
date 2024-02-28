@@ -35,7 +35,8 @@ public class RegistrationService {
 	
 	private static final String SELECT_BY_STUDENT="""
 			select r.classes_id classId, c.teacher_id teacherId, ta.name teacher,
-			c.start_date startDate, r.student_id studentId, sa.name student, s.phone studentPhone, r.registration_date,c.description classInfo
+			c.start_date startDate, r.student_id studentId, sa.name student, s.phone studentPhone, r.registration_date,c.description classInfo,
+			c.deleted
 			from registration r
 			join classes c on r.classes_id = c.id
 			join teacher t on c.teacher_id = t.id join account ta on t.id = ta.id
@@ -112,10 +113,6 @@ public class RegistrationService {
 	
 	
 	private void create(RegistrationForm form) {
-//		if(null == studentId) {
-//			studentId=studentService.createStudent(form);
-//		}
-		
 		if(form.getRegistDate()==null) {
 			form.setRegistDate(LocalDate.now());
 		}
@@ -138,42 +135,10 @@ public class RegistrationService {
 		List<Integer> result=template.query("""
 				select student_id from registration r
 				JOIN student s on r.student_id = s.id
-				WHERE s.realId = :realId;
-				""",Map.of("realId",form.getRealId()),(rs,row) -> rs.getInt("student_id"));
+				WHERE s.realId = :realId AND r.classes_id = :classId;
+				""",Map.of("realId",form.getRealId(),
+						"classId",form.getClassId()
+						),(rs,row) -> rs.getInt("student_id"));
 		return !result.isEmpty();
 	}
-	
-
-//	private void update(RegistrationForm form) {
-//		template.update("""
-//				update registration
-//				set registration_date = :registDate
-//				where classes_id = :classId and student_id = :studentId
-//				""", Map.of(
-//						"registDate",Date.valueOf(form.getRegistDate()),
-//						"classId",form.getClassId(),
-//						"studentId",form.getStudentId()
-//						));
-//		
-//		template.update("""
-//				update student
-//				set phone = :phone, education = :education
-//				where id = :id
-//				""", Map.of(
-//						"phone",form.getPhone(),
-//						"education",form.getEducation(),
-//						"id",form.getStudentId()
-//						));
-//		
-//		template.update("""
-//				update account
-//				set name = :name,
-//				email = :email
-//				where id = :id
-//				""", Map.of(
-//						"name",form.getStudentName(),
-//						"email",form.getEmail(),
-//						"id",form.getStudentId()
-//						));
-//	}
 }

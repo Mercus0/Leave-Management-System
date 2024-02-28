@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +24,19 @@
 		<c:param name="view" value="teachers"></c:param>
 	</c:import>
 	<div class="container">
-		<h3 class="my-4">Teacher Management</h3>
+	<c:set var="listCount" value="${fn:length(list)}" />
+		<h3 class="my-4">Teacher Management <span class="badge text-bg-danger">${ listCount }</span></h3>
 		<form class="mb-4 row">
+		
+			<div class="col-auto">
+				<label class="form-label">Status</label>
+				<select class="form-select" name="status">
+					<option value="2" ${param.status == 2 ? 'selected' : ''}>All</option>
+					<option value="0" ${param.status == 0 ? 'selected' : ''}>Activate</option>
+					<option value="1" ${param.status == 1 ? 'selected' : ''}>Deleted</option>
+				</select>
+			</div>
+			
 			<div class="col-auto">
 				<label for="" class="form-label">Name</label> <input
 					class="form-control" value="${ param.name }" type="text" placeholder="Search Name"
@@ -42,13 +54,14 @@
 			</div>
 			<div class="col mt-4">
 				<button class="btn btn-outline-success me-2" type="submit">
-				<i class="bi bi-search"></i>
-				Search</button>
+				<i class="bi bi-search"></i> Search</button>
 				
-				<c:url var="addNew" value="/teachers/edit"></c:url>
-				<a class="btn btn-outline-success my-2 my-sm-0" href="${addNew}">
-					<i class="bi bi-plus-lg"></i>Add
-				</a>
+				<sec:authorize access="hasAuthority('Admin')">
+					<c:url var="addNew" value="/teachers/edit"></c:url>
+					<a class="btn btn-outline-danger my-2 my-sm-0" href="${addNew}">
+						<i class="bi bi-plus-lg"></i>Add New
+					</a>
+				</sec:authorize>
 			</div>
 		</form>
 		
@@ -61,24 +74,28 @@
 				<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Name</th>
 					<th>Phone</th>
 					<th>Email</th>
 					<th>Assign Date</th>
 					<th>Classes</th>
+					<th>Status</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${ list }" var="t">
+				<c:forEach items="${ list }" var="t" varStatus="loop">
 					<tr>
-						<td>${ t.id }</td>
+						<td>${loop.index+1}</td>
 						<td>${ t.name }</td>
 						<td>${ t.phone }</td>
 						<td>${ t.email }</td>
 						<td>${ t.assignDate }</td>
 						<td>${ t.classCount }</td>
+						<td>
+						${t.deleted == 1 ? '<i class="bi bi-circle-fill text-danger"></i>' : '<i class="bi bi-circle-fill text-success"></i>'}
+						</td>
 						
 						<td>
 						<c:url var="edit" value="/teachers/edit">
@@ -86,10 +103,11 @@
 							</c:url> <a href="${edit}"><i class="bi bi-pencil me-3"></i></a>
 							
 						<c:url var="details" value="/teachers/details">
-							<c:param name="email" value="${ t.email }"></c:param>
-							<c:param name="name" value="${ t.name }"></c:param>
-							<c:param name="phone" value="${ t.phone }"></c:param>
 							<c:param name="id" value="${ t.id }"></c:param>
+							<c:param name="name" value="${ t.name }"></c:param>						
+							<c:param name="phone" value="${ t.phone }"></c:param>
+							<c:param name="email" value="${ t.email }"></c:param>
+							
 						</c:url>
 						<a href="${ details }">
 							<i class="bi bi-cursor"></i>

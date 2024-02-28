@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.yan.leaves.model.dto.input.MemberStatusForm;
 import com.yan.leaves.model.dto.input.RegistrationForm;
 import com.yan.leaves.model.dto.input.StudentForm;
 import com.yan.leaves.model.dto.output.StudentDetailsVO;
@@ -29,7 +30,7 @@ public class StudentService {
 
 	private static final String SELECT_PROJECTION = """
 			select a.id, s.realId, a.name, s.phone, a.email, s.education, count(r.classes_id) classCount,
-			s.realId,s.gender,s.address,s.assign_date assignDate,a.deleted
+			s.realId,s.gender,s.address,s.assign_date assignDate,a.deleted,a.profile_image profileImage
 			from student s
 			join account a on s.id = a.id
 			left join registration r on s.id = r.student_id
@@ -109,7 +110,6 @@ public class StudentService {
 				form.getEmail(), "password", passwordEncoder.encode(form.getPhone())));
 
 		// insert into Student
-
 		studentInsert.execute(Map.of("id", generatedId.intValue(), "phone", form.getPhone(), "education",
 				form.getEducation(), "realId", form.getRealId(), "gender", form.getGender(), "address",
 				form.getAddress(), "assign_date", form.getAssignDate()));
@@ -154,5 +154,26 @@ public class StudentService {
 		return template.queryForList("""
 				select s.id from student s join account a on s.id= a.id where s.realId = :realId
 				""", Map.of("realId", realId), Integer.class).stream().findFirst().orElse(null);
+	}
+	
+	@Transactional
+	public void updateStatus(Optional<Integer> id, boolean deleted) {
+			if(deleted) {
+				template.update("""
+						update account set deleted = 0 where id= :id
+						""",Map.of("id",id.orElse(null)));
+			}else {
+				template.update("""
+						update account set deleted = 1 where id= :id
+						""",Map.of("id",id.orElse(null)));
+			}
+	}
+
+	public void addProfileImage(String profileImage, String email) {
+		template.update("""
+				update account set profile_image = :profileImage where
+				email = :email;
+				""", Map.of("profileImage",profileImage,
+							"email",email));
 	}
 }

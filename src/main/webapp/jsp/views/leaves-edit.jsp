@@ -27,53 +27,80 @@
 	</c:import>
 
 	<div class="container">
-		<h3 class="my-4">Leave Application</h3>
+		<h3 class="my-4 text-primary">Leave Application</h3>
 
 		<div class="row">
-			<div class="col-lg-6 col-md-9 col-sm-12">
+			<div class="col-lg-6 col-md-9 col-sm-12 mt-3">
+			
+			<!-- Class Name -->
+					
 
 				<sf:form method="Post" modelAttribute="form" cssClass="col-6">
-				
-					<sf:hidden path="studentId"/>
-					<sf:hidden path="classId"/>
+
+					<sf:hidden path="studentId" />
+					<sf:hidden path="classId" />
 					
-					<sf:errors path="*"></sf:errors>
+					<c:if test="${not empty error}">
 					
-					<!-- Class Name -->
+						<div class="alert alert-info">${error}</div>
+					</c:if>
+					
 					<div class="mb-3">
-						<label for="" class="form-label">Class Name</label> 
-						<span class="form-control">${param.className}</span>
+						<label for="" class="form-label ">Class Name</label> 
+						<span class="form-control">${classAndTeacher.className}</span>
 					</div>
-					
+
 					<!-- Teacher Name -->
 					<div class="mb-3">
-						<label for="" class="form-label">Teacher Name</label> 
-						<span class="form-control">${ param.teacherName }</span>
+						<label for="" class="form-label">Teacher Name</label>
+						<span class="form-control">${ classAndTeacher.teacherName }</span>
 					</div>
-					
+
+
 					<!-- Start Date -->
 					<div class="mb-3">
 						<label for="" class="form-label">Start Date</label>
-						<sf:input path="startDate" type="date" class="form-control"/>
+						<sf:errors path="startDate">
+							<div class="alert alert-warning" role="alert">Please Select
+								Start Date.</div>
+						</sf:errors>
+						<sf:input path="startDate" type="date" class="form-control" />
 					</div>
-					
+
 					<!-- Days -->
 					<div class="mb-3">
+
 						<label for="" class="form-label">Leaves Days</label>
-						<sf:input path="days" type="number" class="form-control"/>
+						<sf:errors path="days">
+							<div class="alert alert-warning" role="alert">Please Enter
+								Leaves days.</div>
+						</sf:errors>
+						<sf:input path="days" type="number" class="form-control" min="1"
+							max="7" />
 					</div>
-					
+
 					<!-- Reason -->
 					<div class="mb-3">
+
 						<label for="" class="form-label">Reason</label>
-						<sf:input path="reason" type="text" class="form-control"/>
+						<sf:errors path="reason">
+							<div class="alert alert-warning" role="alert">Please Enter
+								Reason.</div>
+						</sf:errors>
+						<sf:input path="reason" type="text" class="form-control" />
 					</div>
+
 					<div>
 						<button class="btn btn-outline-danger" type="submit">
-						<i class="bi bi-save"> Save</i>
-					</button>
+							<i class="bi bi-save"> Save</i>
+						</button>
 					</div>
 				</sf:form>
+			</div>
+			<div class="col-6 align-items-center">
+				<img class="img-fluid" alt="Mail Picture"
+					src="<c:url value='/static/image/mail.png'/>" width="800"
+					height="800">
 			</div>
 		</div>
 

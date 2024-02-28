@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +24,20 @@
 	</c:import>
 
 	<div class="container">
-		<h3 class="my-4">Class Management</h3>
+		<c:set var="listCount" value="${fn:length(list)}" />
+		<h3 class="my-4">Class Management <span class="badge text-bg-danger">${ listCount }</span></h3>
 
 		<form class="row mb-4">
+			
+			<div class="col-auto">
+				<label class="form-label">Status</label>
+				<select class="form-select" name="status">
+					<option value="2" ${param.status == 2 ? 'selected' : ''}>All</option>
+					<option value="0" ${param.status == 0 ? 'selected' : ''}>Activate</option>
+					<option value="1" ${param.status == 1 ? 'selected' : ''}>Deleted</option>
+				</select>
+			</div>
+			
 			<div class="col-auto">
 				<label class="form-label">Name</label>
 				<input type="text" value="${ param.teacher }" placeholde="search" class="form-control" name="teacher" />
@@ -33,15 +45,15 @@
 			
 			<div class="col-auto">
 				<label class="form-label">From</label>
-				<input type="date" name="from" value="${ param.from } placeholde="search" class="form-control" />
+				<input type="date" name="from" value="${ param.from }" class="form-control" />
 			</div>
 			<div class="col-auto">
 				<label class="form-label">To</label>
-				<input type="date" placeholde="search" class="form-control" name="to" value="${ param.to }"/>
+				<input type="date" class="form-control" name="to" value="${ param.to }"/>
 			</div>
 			
-			<div class="col">
-				<button class="btn btn-outline-success me-2"><i class="bi bi-search"></i>Search</button>
+			<div class="col mt-4">
+				<button class="btn btn-outline-success me-2"><i class="bi bi-search"></i> Search</button>
 				
 				<c:url var="addNew" value="/classes/edit"></c:url>
 				<a href="${addNew}" class="btn btn-outline-danger"><i class="bi bi-plus-lg"></i>Add New</a>
@@ -55,26 +67,30 @@
 				<table class="table table-hover">
 			<thead>
 				<tr>
-					<td>Id</td>
+					<td>No</td>
 					<td>Teacher Name</td>
 					<td>Teacher Phone</td>
 					<td>Start Date</td>
 					<td>Months</td>
 					<td>Description</td>
 					<td>Student count</td>
+					<td>Status</td>
 					<td>Actions</td>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${list}" var="item">
+			<c:forEach items="${list}" var="item" varStatus="loop">
 				<tr>
-					<td>${ item.id }</td>
+					<td>${loop.index+1 }</td>
 					<td>${ item.teacherName}</td>
 					<td>${ item.teacherPhone}</td>
 					<td>${ item.startDate}</td>
 					<td>${ item.months}</td>
 					<td>${ item.description}</td>
 					<td>${ item.studentCount }</td>
+					<td>
+						${item.deleted == 1 ? '<i class="bi bi-circle-fill text-danger"></i>' : '<i class="bi bi-circle-fill text-success"></i>'}
+					</td>
 					<td>
 						<c:url var="edit" value="/classes/edit">
 							<c:param name="id" value="${ item.id }"></c:param>

@@ -24,7 +24,35 @@
 	</c:import>
 
 	<div class="container">
-		<h3 class="my-4">Teacher Details</h3>
+		<div class="d-flex justify-content-between my-4">
+			<h3>Teacher Details</h3>
+			<c:forEach items="${ list }" var= "item" >
+			
+			<c:url var="status" value="/teachers/status">
+				<c:param name="id" value="${ item.id }"></c:param>
+				<c:param name="status" value="${ item.deleted }"></c:param>
+				<c:param name="name" value="${ item.name }"></c:param>						
+				<c:param name="phone" value="${ item.phone }"></c:param>
+				<c:param name="email" value="${ item.email }"></c:param>
+			</c:url>
+			
+			<a class="btn btn-outline-danger" href="${ status }">
+				<i class="${item.deleted == 1 ? 'bi-check' : 'bi-trash'}"></i>
+				<span>
+					<c:choose>
+						<c:when test="${ item.deleted == 1 }">
+							Activate
+						</c:when>
+						<c:otherwise>
+							Delete
+						</c:otherwise>
+					</c:choose>
+				</span>
+			</a>
+			</c:forEach>
+			
+		</div>
+
 		<div class="card mb-4">
 			<c:forEach items="${ list }" var="item">
 				<div class="card-header">Teacher Information</div>

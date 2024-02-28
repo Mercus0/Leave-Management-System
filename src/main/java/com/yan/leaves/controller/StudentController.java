@@ -1,8 +1,6 @@
 package com.yan.leaves.controller;
 
-import java.io.Console;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +42,19 @@ public class StudentController {
 		return "students-edit";
 	}
 	
+	@GetMapping("status")
+	public String status(@RequestParam(name = "id", required = false) Optional<Integer> id,
+			@RequestParam(name ="email",required=false) String email,
+			@RequestParam(name ="status",required=false) boolean deleted,
+			ModelMap model) {
+		
+		service.updateStatus(id,deleted);
+		
+		StudentDetailsVO result=service.findDetailsByLoginId(email);
+		model.put("dto", result);
+		return "student-details";
+	}
+	
 	@GetMapping("add")
 	public String addNewStudent() {
 		return "students-add";
@@ -51,7 +62,6 @@ public class StudentController {
 	
 	@GetMapping("/details")
 	public String showDetails(@RequestParam(name ="email",required=false) String email,
-			@RequestParam(name = "status",required = false) boolean status,
 			ModelMap model) {
 		StudentDetailsVO result=service.findDetailsByLoginId(email);
 		model.put("dto", result);

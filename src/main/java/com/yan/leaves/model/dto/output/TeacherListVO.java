@@ -10,7 +10,7 @@ public class TeacherListVO {
 		
 	}
 	
-	public TeacherListVO(int id, String name, String phone, String email, LocalDate assignDate, Long classCount) {
+	public TeacherListVO(int id, String name, String phone, String email, LocalDate assignDate, Long classCount,int deleted) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -18,6 +18,7 @@ public class TeacherListVO {
 		this.email = email;
 		this.assignDate = assignDate;
 		this.classCount = classCount;
+		this.deleted=deleted;
 	}
 
 	private int id;
@@ -26,7 +27,16 @@ public class TeacherListVO {
 	private String email;
 	private LocalDate assignDate;
 	private Long classCount;
+	private int deleted;
 	
+
+	public int getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
+	}
 
 	public TeacherForm form() {
 		return new TeacherForm(id,name,phone,email,assignDate);

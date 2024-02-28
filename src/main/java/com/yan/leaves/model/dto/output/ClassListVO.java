@@ -2,15 +2,27 @@ package com.yan.leaves.model.dto.output;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ClassListVO {
 	private int id;
 	private int teacherId;
 	private String teacherName;
 	private String teacherPhone;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
 	private int months;
 	private String description;
 	private long studentCount;
+	private int deleted;
+
+	public int getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
+	}
 
 	public int getId() {
 		return id;

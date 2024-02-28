@@ -22,19 +22,30 @@
 		<c:param name="view" value="classes"></c:param>
 	</c:import>
 	<div class="container">
-		<h3 class="my-4">
-			Registration Details
-		</h3>
+	
+	<div class="d-flex justify-content-between my-4">
+		<h3>Registration Details</h3>
+		<c:url var="edit" value="/classes/registration">
+			<c:param name="classId" value="${ dto.classInfo.id }"></c:param>
+			<c:param name="studentId" value="${ dto.student.id }"></c:param>
+			<c:param name="teacherName" value="${ dto.classInfo.teacherName }"></c:param>
+			<c:param name="startDate" value="${ dto.classInfo.startDate }"></c:param>
+		</c:url>
+			<a href="${edit}" class="btn btn-outline-danger me-2">
+				<i class="bi bi-pencil"></i> Edit Registration
+			</a>
+	</div>
+		
 		<div class="row">
 			<div class="col">
 				<div class="card">
-					<div class="card-header bg-primary">
+					<div class="card-header">
 						Student Information
 					</div>
 				 
 					<div class="card-body">
 						<div class="mb-3">
-							<label for="" class="form-label">Student Name</label>
+							<label for="" class="form-label ">Student Name</label>
 							<span class="form-control">${ dto.student.name }</span>
 						</div>
 						<div class="mb-3">
@@ -80,19 +91,18 @@
 			</div>
 		</div>
 		<div class="mt-4">
-		<c:url var="edit" value="/classes/registration">
-			<c:param name="classId" value="${ dto.classInfo.id }"></c:param>
-			<c:param name="studentId" value="${ dto.student.id }"></c:param>
-			<c:param name="teacherName" value="${ dto.classInfo.teacherName }"></c:param>
-			<c:param name="startDate" value="${ dto.classInfo.startDate }"></c:param>
-		</c:url>
-			<a href="${edit}" class="btn btn-outline-danger me-2">
-				<i class="bi bi-pencil"></i>Edit Registration
-			</a>
 			<c:url var="classDetails" value="/classes/${ dto.classInfo.id }"></c:url>
-			<a href="${classDetails}" class="btn btn-outline-success">
-				<i class="bi bi-mortarboard"></i>Class Details
+			<a href="${classDetails}" class="btn btn-outline-success me-2">
+				<i class="bi bi-mortarboard"></i> Class Details
 			</a>
+			
+			<c:url var="studentDetails" value="/students/details">
+				<c:param name="email" value="${ dto.student.email }"></c:param>
+			</c:url>
+			<a href="${ studentDetails }" class="btn btn-outline-primary">
+				<i class="bi bi-people-fill"></i> Student Details
+			</a>
+			
 		</div>
 	</div>
 </body>

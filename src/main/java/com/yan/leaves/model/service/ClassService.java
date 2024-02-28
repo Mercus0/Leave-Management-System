@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yan.leaves.model.dto.input.ClassForm;
 import com.yan.leaves.model.dto.output.ClassDetailsVO;
@@ -26,7 +27,7 @@ public class ClassService {
 
 	private static final String SELECT_PROJECTION = """
 			SELECT c.id AS id, t.id AS teacherId, a.name AS teacherName, t.phone AS teacherPhone,
-			c.start_date AS startDate, c.months, c.description, COUNT(r.student_id) AS studentCount
+			c.start_date AS startDate, c.months, c.description, COUNT(r.student_id) AS studentCount,c.deleted
 			FROM classes c
 			JOIN teacher t ON t.id = c.teacher_id
 			JOIN account a ON a.id = t.id
@@ -55,7 +56,7 @@ public class ClassService {
 	public List<ClassListVO> search(Optional<String> teacher, Optional<LocalDate> from, Optional<LocalDate> to) {
 
 		var sb = new StringBuffer(SELECT_PROJECTION);
-		sb.append(" where 1 =1 ");
+		sb.append(" where 1 =1 and c.deleted = 0");
 
 		var param = new HashMap<String, Object>();
 
@@ -73,7 +74,39 @@ public class ClassService {
 			param.put("to", Date.valueOf(a));
 			sb.append(" and c.start_date <= :to");
 		});
+		sb.append(SELECT_GROUPBY);
 
+		return template.query(sb.toString(), param, new BeanPropertyRowMapper<>(ClassListVO.class));
+	}
+	
+	public List<ClassListVO> searchAll(Optional<Integer> status, Optional<String> teacher, Optional<LocalDate> from, Optional<LocalDate> to) {
+
+		var sb = new StringBuffer(SELECT_PROJECTION);
+		sb.append(" where 1 =1");
+
+		var param = new HashMap<String, Object>();
+		
+		status.ifPresent(a -> {
+			if(a !=2) {
+				param.put("status", a);
+				sb.append(" and c.deleted =:status");
+			}
+		});
+
+		teacher.ifPresent(a -> {
+			param.put("teacher", a.toLowerCase().concat("%"));
+			sb.append(" and lower(a.name) like :teacher");
+		});
+
+		from.ifPresent(a -> {
+			param.put("from", Date.valueOf(a));
+			sb.append(" and c.start_date >= :from");
+		});
+
+		to.ifPresent(a -> {
+			param.put("to", Date.valueOf(a));
+			sb.append(" and c.start_date <= :to");
+		});
 		sb.append(SELECT_GROUPBY);
 
 		return template.query(sb.toString(), param, new BeanPropertyRowMapper<>(ClassListVO.class));
@@ -107,6 +140,7 @@ public class ClassService {
 		// class information
 		var sql = "%s where c.id = :id %s".formatted(SELECT_PROJECTION, SELECT_GROUPBY);
 		var classListVo = template.queryForObject(sql, Map.of("id", classId), new ClassListVoRowMapper());
+		
 		result.setClassInfo(classListVo);
 
 		// Registrations
@@ -156,5 +190,13 @@ public class ClassService {
 				Date.valueOf(form.getStart()), "months", form.getMonths(), "description", form.getDescription()));
 		return genratedId.intValue();
 	}
+	
+	@Transactional
+	public void updateStatus(int id, int deleted) {
+		template.update("""
+				update classes set deleted = :deleted where id = :id
+				""", Map.of("id",id,"deleted", deleted == 1 ? 0:1));
+	}
+
 
 }

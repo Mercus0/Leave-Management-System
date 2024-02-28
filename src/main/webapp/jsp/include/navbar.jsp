@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <c:url var="home" value="/home"></c:url>
 <c:url var="classes" value="/classes"></c:url>
@@ -15,7 +14,7 @@
 <c:url var="signoutJs" value="/resources/logout.js"></c:url>
 
 
-<nav class="navbar nav-pills navbar-expand-lg navbar-light bg-light">
+<nav class="navbar nav-pills navbar-expand-lg navbar-light bg-light sticky-top">
 	<div class="container">
 		<a class="navbar-brand" href="${home}">British University College</a>
 		<button class="navbar-toggler d-lg-none" type="button"

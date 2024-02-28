@@ -20,7 +20,6 @@ import com.yan.leaves.model.dto.input.RegistrationForm;
 import com.yan.leaves.model.service.ClassService;
 import com.yan.leaves.model.service.LeaveService;
 import com.yan.leaves.model.service.RegistrationService;
-import com.yan.leaves.model.service.StudentService;
 import com.yan.leaves.model.service.TeacherService;
 
 import jakarta.validation.Valid;
@@ -36,25 +35,34 @@ public class ClassController {
 	private TeacherService teaService;
 	@Autowired
 	private LeaveService levService;
-	@Autowired
-	private StudentService studentService;
 
 	@GetMapping
-	public String index(@RequestParam(name = "teacher", required = false) Optional<String> teacher,
+	public String index(
+			@RequestParam(name = "status",required = false) Optional<Integer> status,
+			@RequestParam(name = "teacher", required = false) Optional<String> teacher,
 			@RequestParam(name = "from", required = false) Optional<LocalDate> from,
 			@RequestParam(name = "to", required = false) Optional<LocalDate> to, ModelMap model) {
 
-		var result = clsService.search(teacher, from, to);
+		var result = clsService.searchAll(status,teacher, from, to);
 		model.put("list", result);
 		return "classes";
 	}
-
+	
+	@GetMapping("status")
+	public String status(@RequestParam(name = "id",required = false) int id,
+							@RequestParam(name = "status", required = false ) int deleted,
+							ModelMap model){
+		clsService.updateStatus(id, deleted);
+		var result = clsService.findDetailsById(id);
+		model.put("dto", result);
+		return "classes-details";
+	}
+	
 	@GetMapping("edit")
 	public String edit(@RequestParam(name = "id", required = false) Optional<Integer> id, ModelMap model) {
 		model.put("teachers", teaService.getAvailableTeacher());
 		return "classes-edit";
 	}
-
 	@PostMapping
 	public String save(@Valid @ModelAttribute(name = "classForm") ClassForm form, BindingResult result) {
 		if (result.hasErrors()) {
@@ -64,6 +72,15 @@ public class ClassController {
 		var id = clsService.save(form);
 		// redirect to details view
 		return "redirect:/classes/%d".formatted(id);
+	}
+	
+	@PostMapping("/{classId}/approval")
+	public String approval(@PathVariable (name="classId",required = false) int classId,
+			@RequestParam String action,
+            @RequestParam int studentId,
+            @RequestParam String targetDate){
+			levService.pending(classId,studentId,targetDate,action);
+		return "redirect:/classes/%d?targetDate=%s".formatted(classId,targetDate);
 	}
 
 	@GetMapping("{id}")

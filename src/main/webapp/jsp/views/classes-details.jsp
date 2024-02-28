@@ -22,7 +22,29 @@
 		<c:param name="view" value="leaves"></c:param>
 	</c:import>
 	<div class="container">
-		<h3 class="my-4">Class Details</h3>
+		<div class="d-flex justify-content-between my-4">
+			<h3>Class Details</h3>
+			
+			<c:url var="status" value="/classes/status">
+				<c:param name="id" value="${ dto.classInfo.id }"></c:param>
+				<c:param name="status" value="${ dto.classInfo.deleted }"></c:param>
+			</c:url>
+			<a class="btn btn-outline-danger" href="${ status }">
+			<i class="${dto.classInfo.deleted == 1 ? 'bi-check' : 'bi-trash'}"></i>
+			<span>
+				<c:choose>
+					<c:when test="${ dto.classInfo.deleted == 1}">
+						Activate
+					</c:when>
+					<c:otherwise>
+						Delete
+					</c:otherwise>
+				</c:choose>
+			</span>
+		</a>
+			
+		</div>
+		
 		<div class="card mb-4">
 			<div class="card-header">Class Information</div>
 			<div class="card-body row mb-3">
@@ -68,15 +90,26 @@
 				<a href="${editClass}" class="btn btn-outline-danger"> 
 				<i class="bi bi-pencil"></i>
 				Edit Class </a>
-			<c:url var="addRegistration" value="/classes/registration">
-				<c:param name="classId" value="${dto.classInfo.id }"></c:param>
-				<c:param name="startDate" value="${dto.classInfo.startDate }"></c:param>
-				<c:param name="teacherName" value="${dto.classInfo.teacherName }"></c:param>
-			</c:url>
+				
+				<c:choose>
+					<c:when test="${ dto.classInfo.deleted == 1 }">
+						
+					</c:when>
+					<c:otherwise>
+						<c:url var="addRegistration" value="/classes/registration">
+							<c:param name="classId" value="${dto.classInfo.id }"></c:param>
+							<c:param name="startDate" value="${dto.classInfo.startDate }"></c:param>
+							<c:param name="teacherName" value="${dto.classInfo.teacherName }"></c:param>
+						</c:url>
 				<a href="${addRegistration}" class="btn btn-outline-primary"> 
 				<i class="bi bi-plus-lg"></i>
 				Add New Registration </a>
+					</c:otherwise>
+				</c:choose>
+				
+			
 			</div>
+			
 		</div>
 		<div class="tab-content" id="contents">
 			<div class="tab-pane fade show active" id="registrations">

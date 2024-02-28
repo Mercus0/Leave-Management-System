@@ -26,6 +26,44 @@ public class LeaveSummaryVO {
 	private long students;
 	private long leaves;
 	private String details;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private LocalDate applyDate;
+	private int days;
+	private String reason;
+	private String approvalStatus;
+	
+
+	public int getDays() {
+		return days;
+	}
+
+	public void setDays(int days) {
+		this.days = days;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
+	public LocalDate getApplyDate() {
+		return applyDate;
+	}
+
+	public void setApplyDate(LocalDate applyDate) {
+		this.applyDate = applyDate;
+	}
 
 	public int getClassId() {
 		return classId;
@@ -77,7 +115,7 @@ public class LeaveSummaryVO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(classId, details, leaves, startDate, students, teacher);
+		return Objects.hash(applyDate, classId, details, leaves, startDate, students, teacher);
 	}
 
 	@Override
@@ -89,8 +127,11 @@ public class LeaveSummaryVO {
 		if (getClass() != obj.getClass())
 			return false;
 		LeaveSummaryVO other = (LeaveSummaryVO) obj;
-		return classId == other.classId && Objects.equals(details, other.details) && leaves == other.leaves
+		return Objects.equals(applyDate, other.applyDate) && classId == other.classId
+				&& Objects.equals(details, other.details) && leaves == other.leaves
 				&& Objects.equals(startDate, other.startDate) && students == other.students
 				&& Objects.equals(teacher, other.teacher);
 	}
+
+	
 }

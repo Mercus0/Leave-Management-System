@@ -16,9 +16,8 @@
 			<div class="circle circle-one"></div>
 			<div class="form-container">
 				<div class="container-logo">
-					<img class="logo"
-						src="https://cdn.discordapp.com/attachments/1118377328993636473/1203324918939262976/Logo-3.png?ex=65d0aea9&is=65be39a9&hm=05eaf89a22e9350cf4bbd90a5fa54ba1463ad25cf9bd16808f1276d0d60cb511&"
-						alt="logo" />
+					 <img class="logo" alt="Profile Image"
+			                src="<c:url value='/images/BUC.png' />" />
 				</div>
 				<c:url var="signin" value="/signin"></c:url>
 				<sf:form action="${signin}" method="POST">
@@ -55,5 +54,5 @@
 	</section>
 </body>
 <c:url var="loginJs" value="/resources/login.js"></c:url>
-<link rel="stylesheet" href="${loginJs}" type="text/javascript">
+<script src="${ loginJs }"></script>
 </html>

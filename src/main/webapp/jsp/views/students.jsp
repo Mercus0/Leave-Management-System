@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,8 @@
 	</c:import>
 
 	<div class="container">
-		<h3 class="my-4">Student Management</h3>
+	<c:set var="listCount" value="${fn:length(list)}" />
+		<h3 class="my-4">Student Management <span class="badge text-bg-danger">${listCount}</span></h3>
 		<form class="mb-4 row">
 			<div class="col-auto">
 				<label for="" class="form-label">Name</label> <input
@@ -47,8 +49,8 @@
 				</button>
 
 				<c:url var="addNew" value="/students/add"></c:url>
-				<a class="btn btn-outline-success my-2 my-sm-0" href="${addNew}">
-					<i class="bi bi-plus-lg"></i>Add
+				<a class="btn btn-outline-danger my-2 my-sm-0" href="${addNew}">
+					<i class="bi bi-plus-lg"></i>Add New
 				</a>
 			</div>
 		</form>
@@ -81,7 +83,7 @@
 								<td>${ t.education }</td>
 								<td>${ t.classCount }</td>
 								<td>
-									${t.deleted ? '<i class="bi bi-record-circle-fill text-danger"></i>' : '<i class="bi bi-record-circle-fill text-success"></i>'}
+									${t.deleted ? '<i class="bi bi-circle-fill text-danger"></i>' : '<i class="bi bi-circle-fill text-success"></i>'}
 								</td>
 
 								<td><c:url var="edit" value="/students/edit">
@@ -91,7 +93,6 @@
 									<c:url
 										var="details" value="/students/details">
 										<c:param name="email" value="${ t.email }"></c:param>
-										<c:param name="status" value="${ t.deleted }"></c:param>
 									</c:url> 
 									<a href="${ details }"><i class="bi bi-cursor"></i></a></td>
 									

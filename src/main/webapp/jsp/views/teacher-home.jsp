@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeLeaf.org">
 <head>
@@ -21,21 +22,29 @@
 <body>
 	<c:import url="/jsp/include/navbar.jsp"></c:import>
 	<div class="container">
-		<h3 class="my-4">Teacher Home</h3>
-		<form class="row mb-4">
+	<c:set var="listCount" value="${fn:length(list)}" />
+		<h3 class="my-4">Teacher Home <span class="badge text-bg-danger">${listCount}</span></h3>
+		
+		<form class="row mb-4">	
+			
 			<div class="col-auto">
 				<input type="date" name="targetDate" class="form-control"
 					value="${targetDate}" />
 			</div>
+			
 			<div class="col-auto">
 				<button class="btn btn-outline-success" type="submit">
 					<i class="bi bi-search"></i> Search
 				</button>
-		
 			</div>
 		</form>
 		<div class="row g-3">
-		<c:forEach items = "${ list }" var="item">
+		<c:choose>
+			<c:when test="${empty list}">
+				<div class="alert alert-info">There is no data.</div>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items = "${ list }" var="item">
 			<div class="col-4">
 				<div class="card">
 					<div class="card-body">
@@ -66,6 +75,8 @@
 				</div>
 			</div>
 		</c:forEach>
+			</c:otherwise>
+		</c:choose>
 		</div>
 	</div>
 </body>
