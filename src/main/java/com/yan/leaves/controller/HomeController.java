@@ -37,6 +37,7 @@ public class HomeController {
 		if (hasAuthority.apply("Admin") || hasAuthority.apply("Teacher")) {
 			model.put("targetDate", targetDate.orElse(LocalDate.now()));
 			model.put("list", leaveService.searchSummary(targetDate));
+			model.put("toast", leaveService.findNameAndCount(targetDate));
 			return "teacher-home";
 		}
 		StudentDetailsVO student = studentService.findDetailsByLoginId(SecurityContextHolder.getContext().getAuthentication().getName());

@@ -2,10 +2,12 @@ package com.yan.leaves.model.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Optional;import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.sql.DataSource;
 
@@ -42,7 +44,7 @@ public class LeaveService {
 			""";
 
 	private static final String LIST_LEAVES = """
-			select c.description details,l.apply_date applyDate,l.start_date startDate,
+			select c.id classId, c.description details,l.apply_date applyDate,l.start_date startDate,
 			l.days,l.reason,l.approval_status approvalStatus,a.name teacher
 			FROM leaves l
 			JOIN classes c ON l.classes_id = c.id
@@ -93,19 +95,20 @@ public class LeaveService {
 
 	@Transactional
 	public void save(LeaveForm form) {
-		levInsert.execute(Map.of("apply_date", form.getApplyDate(), "classes_id", form.getClassId(), "student_id",
-				form.getStudentId(), "start_date", form.getStartDate(), "days", form.getDays(), "reason",
-				form.getReason(), "approval_status", form.getStatus()));
+		levInsert.execute(Map.of(
+				"apply_date", form.getApplyDate(), 
+				"classes_id", form.getClassId(), 
+				"student_id",form.getStudentId(), 
+				"start_date", form.getStartDate(), 
+				"days", form.getDays(), 
+				"reason",form.getReason(), 
+				"approval_status", form.getStatus()));
 	}
 
 	public boolean checkLeaves(LeaveForm form) {
 		List<Integer> result = template.queryForList(
-				"SELECT count(*) FROM leaves " + "WHERE student_id = :studentId " + "AND classes_id = :classId "
-						+ "AND apply_date = :applyDate",
-				Map.of("studentId", form.getStudentId(), "classId", form.getClassId(), "applyDate",
-						form.getApplyDate()),
-				Integer.class);
-
+				"SELECT count(*) FROM leaves WHERE student_id = :studentId AND classes_id = :classId AND apply_date = :applyDate",
+				Map.of("studentId", form.getStudentId(), "classId", form.getClassId(), "applyDate",form.getApplyDate()),Integer.class);
 		return result != null && !result.isEmpty() && result.get(0) > 0;
 	}
 
@@ -165,27 +168,51 @@ public class LeaveService {
 			param.put("startDate", Date.valueOf(a));
 			sb.append(" and l.start_date = :startDate");
 		});
-
 		return template.query(sb.toString(), param, new BeanPropertyRowMapper<>(LeaveSummaryVO.class));
 	}
 
-	public ClassNameAndTeacherNameVO findClassAndTeacher(Optional<Integer> classId, Optional<Integer> studentId) {
-		return template.queryForObject("""
-				SELECT c.description AS class_description,a.name AS teacher_name FROM
-				leaves l
-				JOIN classes c ON l.classes_id = c.id 
+	public List<ClassNameAndTeacherNameVO> findClassAndTeacher(Optional<Integer> classId) {
+		return template.query("""
+				SELECT c.description AS className, a.name AS teacherName
+				FROM classes c
 				JOIN teacher t ON c.teacher_id = t.id
 				JOIN account a ON t.id = a.id
-				WHERE l.student_id = :studentId AND l.classes_id = :classId limit 1;
+				WHERE c.id = :classId;
 				""", Map.of(
-						"studentId",studentId.orElse(null),
 						"classId",classId.orElse(null)
-						),(resultSet,i) ->{
-							ClassNameAndTeacherNameVO result=new ClassNameAndTeacherNameVO();
-							result.setClassName(resultSet.getString("class_description"));
-				            result.setTeacherName(resultSet.getString("teacher_name"));
-				            return result;
-						});
+						),new BeanPropertyRowMapper<>(ClassNameAndTeacherNameVO.class));
 	}
 
+	
+	public void deleteLeave(Integer studentId, Optional<Integer> classId, Optional<LocalDate> applyDate) {
+		template.update("""
+				delete from leaves where classes_id = :classId and student_id = :studentId and apply_date = :applyDate;
+				""", Map.of(
+						"classId",classId.orElse(null),
+						"studentId",studentId,
+						"applyDate",applyDate.orElse(LocalDate.now())
+						));	
+	}
+
+	public List<LeaveSummaryVO> findNameAndCount(Optional<LocalDate> targetDate) {
+		return template.query("""
+				SELECT l.approval_status AS approvalStatus, c.description AS details
+				FROM leaves l
+				JOIN classes c ON l.classes_id = c.id
+				WHERE l.apply_date = :targetDate and
+				l.approval_status = 'Pending';
+				;
+				""", Map.of(
+					"targetDate",targetDate.orElse(LocalDate.now())
+				),new BeanPropertyRowMapper<>(LeaveSummaryVO.class));
+	}
+	
+	public void addLeaveImages(List<String> images, Integer studentId) {
+		template.update("""
+				update leaves set images= :images where student_id= :studentId
+				""", Map.of(
+						"images",images.stream().collect(Collectors.joining(",")),
+						"studentId",studentId
+						));
+	}
 }

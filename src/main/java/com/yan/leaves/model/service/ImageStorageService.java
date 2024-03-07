@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -45,5 +47,14 @@ public class ImageStorageService {
 			return array[array.length-1];
 		}
 		return "";
+	}
+
+	public List<String> saveAll(List<MultipartFile> files) {
+		var list = new ArrayList<String>();
+		for(var i = 0; i <files.size(); i ++) {
+			var fileName = save (files.get(i),ImageType.Post,i+1);
+			list.add(fileName);
+		}
+		return list;
 	}
 }

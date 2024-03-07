@@ -28,38 +28,30 @@
 
 	<div class="container">
 		<h3 class="my-4 text-primary">Leave Application</h3>
-
 		<div class="row">
-			<div class="col-lg-6 col-md-9 col-sm-12 mt-3">
-			
-			<!-- Class Name -->
-					
-
-				<sf:form method="Post" modelAttribute="form" cssClass="col-6">
-
+			<div class="col-4">
+				<!-- Class Name -->
+				<sf:form method="Post" modelAttribute="form" >
 					<sf:hidden path="studentId" />
 					<sf:hidden path="classId" />
-					
 					<c:if test="${not empty error}">
-					
 						<div class="alert alert-info">${error}</div>
 					</c:if>
-					
+
 					<div class="mb-3">
-						<label for="" class="form-label ">Class Name</label> 
-						<span class="form-control">${classAndTeacher.className}</span>
+						<label class="form-label ">Class Name</label>
+						<div class="form-control">${classAndTeacher[0].className}</div>
 					</div>
 
 					<!-- Teacher Name -->
 					<div class="mb-3">
-						<label for="" class="form-label">Teacher Name</label>
-						<span class="form-control">${ classAndTeacher.teacherName }</span>
+						<label for="" class="form-label">Teacher Name</label> <span
+							class="form-control">${ classAndTeacher[0].teacherName }</span>
 					</div>
-
 
 					<!-- Start Date -->
 					<div class="mb-3">
-						<label for="" class="form-label">Start Date</label>
+						<label class="form-label">Start Date</label>
 						<sf:errors path="startDate">
 							<div class="alert alert-warning" role="alert">Please Select
 								Start Date.</div>
@@ -69,7 +61,6 @@
 
 					<!-- Days -->
 					<div class="mb-3">
-
 						<label for="" class="form-label">Leaves Days</label>
 						<sf:errors path="days">
 							<div class="alert alert-warning" role="alert">Please Enter
@@ -81,29 +72,60 @@
 
 					<!-- Reason -->
 					<div class="mb-3">
-
-						<label for="" class="form-label">Reason</label>
+						<label class="form-label">Reason</label>
 						<sf:errors path="reason">
 							<div class="alert alert-warning" role="alert">Please Enter
 								Reason.</div>
 						</sf:errors>
 						<sf:input path="reason" type="text" class="form-control" />
 					</div>
-
 					<div>
-						<button class="btn btn-outline-danger" type="submit">
+						<!-- upload photo button -->
+						<button id="photosUploadBtn" type="button"
+							class="btn btn-outline-primary me-2">
+							<i class="bi-camera"></i> Photos
+						</button>
+						<button id="saveBtn" class="btn btn-outline-danger" type="submit">
 							<i class="bi bi-save"> Save</i>
 						</button>
 					</div>
 				</sf:form>
 			</div>
-			<div class="col-6 align-items-center">
-				<img class="img-fluid" alt="Mail Picture"
-					src="<c:url value='/static/image/mail.png'/>" width="800"
-					height="800">
+
+			<div class="col-8">
+				<div id="display">
+					<img class="img-fluid" alt="Mail Picture"
+						src="<c:url value='/static/image/mail.png'/>" width="800"
+						height="800">
+				</div>
+   
 			</div>
 		</div>
-
 	</div>
+
+	<form id="photoUploadForm" action="<c:url value='/leave/images/controller' />"
+		enctype="multipart/form-data" method="post" class="d-none">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+		<input path="files" multiple="multiple" type="file" name="file"
+			id="photosInput" />
+
+		<button id="saveImageBtn" class="btn btn-danger" type="submit" /> Submit
+	<form>
+
+	<c:url var="leaveEdit" value="/resources/leave-edit.js"></c:url>
+	<script src="${leaveEdit}"></script>
+
+ 	<c:url var="buttonControl" value="/resources/leave-button-control.js"></c:url>
+	<script src="${buttonControl}"></script> 
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var startDateInput = document
+					.querySelector('input[name="startDate"]');
+			var today = new Date().toISOString().split('T')[0];
+			startDateInput.min = today;
+		});
+	</script>
 </body>
 </html>

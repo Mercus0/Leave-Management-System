@@ -88,10 +88,13 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 			access="hasAnyAuthority('Admin','Teacher')" />
 
 		<security:intercept-url pattern="/leaves/**"
-			access="hasAnyAuthority('Student')" />
+			access="hasAuthority('Student')" />
 
 		<security:intercept-url
 			pattern="/member/profile/image" access="permitAll" />
+			
+			<security:intercept-url
+			pattern="/leave/images/controller" access="permitAll" />
 
 		<security:intercept-url pattern="/resources/**"
 			access="permitAll" />

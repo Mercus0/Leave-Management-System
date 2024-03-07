@@ -1,12 +1,15 @@
 package com.yan.leaves.model.dto.input;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 public class LeaveForm {
 	public LeaveForm() {
@@ -19,15 +22,18 @@ public class LeaveForm {
 		this.studentId = studentId;
 	}
 
-	public LeaveForm(int classId, int studentName, LocalDate applyDate, LocalDate startDate, int days, String reason,String status) {
+	public LeaveForm(int classId, int studentId, LocalDate applyDate,
+			@NotNull(message = "Please enter the Start date") LocalDate startDate,
+			@Min(value = 1, message = "Please enter the leave day") int days,
+			@NotEmpty(message = "Please enter the Reason for leaves") String reason, String status) {
 		super();
-		this.classId=classId;
-		this.studentId=studentName;
-		this.applyDate=applyDate;
-		this.startDate=startDate;
-		this.days=days;
-		this.reason=reason;
-		this.status=status;
+		this.classId = classId;
+		this.studentId = studentId;
+		this.applyDate = applyDate;
+		this.startDate = startDate;
+		this.days = days;
+		this.reason = reason;
+		this.status = status;
 	}
 
 	private int classId;
@@ -47,7 +53,6 @@ public class LeaveForm {
 	private String reason;
 	
 	private String status;
-	
 
 	public String getStatus() {
 		return status;

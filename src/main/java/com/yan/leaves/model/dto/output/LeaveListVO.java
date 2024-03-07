@@ -33,7 +33,6 @@ public class LeaveListVO {
 	private String reason;
 	private String status;
 	
-	
 	public String getStatus() {
 		return status;
 	}

@@ -5,6 +5,7 @@ com\yan\leaves\controller\LeaveController.class
 com\yan\leaves\model\dto\input\MemberStatusForm.class
 com\yan\leaves\model\dto\output\IdWithName.class
 com\yan\leaves\controller\HomeController.class
+com\yan\leaves\model\dto\input\LeaveImageForm.class
 com\yan\leaves\model\service\LeaveService.class
 com\yan\leaves\controller\StudentController.class
 com\yan\leaves\model\dto\output\TeacherListVO.class
@@ -24,6 +25,7 @@ com\yan\leaves\model\dto\output\ClassNameAndTeacherNameVO.class
 com\yan\leaves\model\service\TeacherService.class
 com\yan\leaves\controller\MemberProfileImageController.class
 com\yan\leaves\model\dto\input\ClassForm.class
+com\yan\leaves\controller\LeaveImagesController.class
 com\yan\leaves\model\dto\input\RegistrationForm.class
 com\yan\leaves\model\security\AdminUserInitializer.class
 com\yan\leaves\model\dto\output\ClassDetailsVO.class

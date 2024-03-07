@@ -45,9 +45,7 @@
 				<label class="form-label">Start Date</label>
 				<input type="date" class="form-control" name="startDate"/>
 			</div>
-			
-			
-			
+	
 			<div class="col mt-4">
 				<button class="btn btn-outline-success me-2"><i class="bi bi-search"></i>Search</button>
 			</div>
@@ -86,6 +84,12 @@
 						  <c:choose>
 							    <c:when test="${item.approvalStatus == 'Pending'}">
 							      <span class="badge bg-secondary">${item.approvalStatus }</span>
+							      
+							      <c:url var="deleteLeave" value="/leaves/delete">
+							      	<c:param name="classId" value="${ item.classId }"></c:param>
+							      	<c:param name="applyDate" value="${ item.applyDate }"></c:param>
+							      </c:url>
+							      <a href="${ deleteLeave }" class="bi bi-trash text-danger"></a>					  
 							    </c:when>
 							    <c:when test="${item.approvalStatus == 'Accepted'}">
 							      <span class="badge bg-success">${item.approvalStatus }</span>
@@ -97,13 +101,10 @@
 					</td>
 				</tr>
 			</c:forEach>
-				
 			</tbody>
 		</table>
 			</c:otherwise>
 		</c:choose>
-		
-		
 	</div>
 </body>
 </html>

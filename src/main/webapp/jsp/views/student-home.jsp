@@ -96,9 +96,13 @@
 						</div>
 
 						<div class="row mt-3">
-							<div>
+							<div class="col">
 								<span class="text-secondary">Address</span>
 								<h5>${dto.student.address }</h5>
+							</div>
+							<div class="col">
+								<span class="text-secondary">Password</span>
+								<h5>Password is here</h5>
 							</div>
 						</div>
 
@@ -129,7 +133,6 @@
 												<c:param name="className" value="${ item.classInfo }"></c:param>
 												<c:param name="teacherName" value="${ item.teacher }"></c:param>
 											</c:url>
-											
 											<a href="${ applyLeave }" class="btn btn-outline-danger">
 												<i class="bi bi-box-arrow-up"></i> Apply Leave
 											</a>
@@ -137,7 +140,11 @@
 									</c:otherwise>
 								</c:choose>
 								
-								<a href="" class="btn btn-outline-success">
+								<c:url var="details" value="/leaves">
+									<c:param name="className" value="${ item.classInfo }"></c:param>
+									<c:param name="teacherName" value="${ item.teacher }"></c:param>
+								</c:url>
+								<a href="${ details }" class="btn btn-outline-success">
 									<i class="bi bi-send"></i> Details</a>
 							</div>
 						</div>
@@ -150,9 +157,10 @@
 		action="<c:url value='/member/profile/image' />"
 		enctype="multipart/form-data" method="post" class="d-none">
 		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" /> <input type="file" name="file"
+			value="${_csrf.token}" /> 
+			<input type="file" name="file"
 			id="photoUploadInput" />
-	</form>
+	</form> 
 
 	<c:url var="profileEdit" value="/resources/profile-edit.js"></c:url>
 	<script src="${profileEdit}"></script>

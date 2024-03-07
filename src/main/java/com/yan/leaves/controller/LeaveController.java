@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yan.leaves.model.dto.input.LeaveForm;
-import com.yan.leaves.model.dto.output.ClassNameAndTeacherNameVO;
 import com.yan.leaves.model.dto.output.LeaveSummaryVO;
+import com.yan.leaves.model.service.ImageStorageService;
 import com.yan.leaves.model.service.LeaveService;
+import com.yan.leaves.model.service.MemberProfileImageService;
 import com.yan.leaves.model.service.StudentService;
 
 import jakarta.validation.Valid;
@@ -31,6 +32,7 @@ public class LeaveController {
 	private LeaveService service;
 	@Autowired
 	private StudentService studentService;
+	
 	@GetMapping
 	public String index(
 			@RequestParam(name="className",required=false) Optional<String> className,
@@ -50,14 +52,37 @@ public class LeaveController {
 			@RequestParam(name="classId",required=false) Optional<Integer> classId,
 			@RequestParam(name="studentId",required=false) Optional<Integer> studentId,
 			ModelMap model) {
-		ClassNameAndTeacherNameVO result=service.findClassAndTeacher(classId,studentId);
+		var result=service.findClassAndTeacher(classId);
 		model.addAttribute("classAndTeacher",result);
 		return "leaves-edit";
 	}
 	
+	@GetMapping("delete")
+	public String deleteLeave(
+			@RequestParam(name = "classId",required = false) Optional<Integer> classId,
+			@RequestParam(name = "applyDate",required = false) Optional<LocalDate> applyDate,
+			@RequestParam(name="teacherName",required=false) Optional<String> teacherName,
+			@RequestParam(name="startDate",required=false) Optional<LocalDate> startDate,
+			@RequestParam(name="className",required=false) Optional<String> className,
+			ModelMap model) {
+		
+		var studentId=studentService.findStudentByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+		service.deleteLeave(studentId,classId,applyDate);
+		
+		var result=service.searchAllLeaveByStudent(className,teacherName,applyDate,startDate,studentId);
+		result.sort(Comparator.comparing(LeaveSummaryVO::getApplyDate).reversed());
+		model.put("list", result);
+		return "leaves";
+	}
+	
+	
 	@PostMapping("edit")
-	public String save(@Valid @ModelAttribute(name="form") LeaveForm form,BindingResult result,RedirectAttributes redirectAttributes) {
+	public String save(
+			@RequestParam(name="classId",required = false,defaultValue = "0") Optional<Integer> classId,
+			@Valid @ModelAttribute(name="form") LeaveForm form,BindingResult result,RedirectAttributes redirectAttributes,ModelMap model) {
 		if(result.hasErrors()) {
+			var names=service.findClassAndTeacher(classId);
+			model.addAttribute("classAndTeacher",names);
 			return "leaves-edit";
 		}
 		if(!service.checkLeaves(form)) {
@@ -78,4 +103,5 @@ public class LeaveController {
 		form.setStatus("Pending");
 		return form;
 	}
+	
 }
