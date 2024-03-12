@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.yan.leaves.test.services.TeacherServiceTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.155 s -- in com.yan.leaves.test.services.TeacherServiceTest

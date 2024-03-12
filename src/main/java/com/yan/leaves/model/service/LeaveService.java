@@ -2,11 +2,10 @@ package com.yan.leaves.model.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;import java.util.stream.Collector;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.sql.DataSource;
@@ -28,6 +27,9 @@ public class LeaveService {
 
 	private NamedParameterJdbcTemplate template;
 	private SimpleJdbcInsert levInsert;
+	
+	@Autowired
+	private ImageStorageService imgService;
 
 	private static final String LEAVE_COUNT_SQL = """
 			select count(start_date) from leaves
@@ -35,7 +37,7 @@ public class LeaveService {
 			""";
 
 	private static final String LEAVE_STUDENT_DETAIL = """
-			SELECT a.name student, s.phone studentPhone,l.apply_date applyDate,
+			SELECT l.classes_id classId,l.student_id studentId, a.name student, s.phone studentPhone,l.apply_date applyDate,
 			l.start_date startDate,l.days,l.reason reason,l.approval_status status
 			from leaves l
 			join student s on l.student_id = s.id
@@ -56,10 +58,8 @@ public class LeaveService {
 
 	public LeaveService(DataSource dataSource) {
 		template = new NamedParameterJdbcTemplate(dataSource);
-
 		levInsert = new SimpleJdbcInsert(dataSource);
 		levInsert.setTableName("leaves");
-
 	}
 
 	public List<LeaveListVO> search(int classId) {
@@ -71,7 +71,7 @@ public class LeaveService {
 		return template.query("""
 				SELECT a.name student, s.phone studentPhone,l.apply_date applyDate,
 				l.start_date startDate,l.days,l.reason reason,l.approval_status status,
-				l.student_id studentId
+				l.student_id studentId,l.classes_id classId
 				from leaves l
 				join student s on l.student_id = s.id
 				join account a on s.id = a.id
@@ -130,12 +130,12 @@ public class LeaveService {
 		return template.queryForObject(LEAVE_COUNT_SQL, Map.of("classId", classId, "target", date), Long.class);
 	}
 
-	public void pending(int classId, int studentId, String targetDate, String action) {
+	public void pending(Optional<Integer> classId, int studentId, LocalDate targetDate, String action) {
 		template.update("""
 				update leaves set approval_status =:action
 				where classes_id =:classId and student_id =:studentId and
 				apply_date =:targetDate
-				""", Map.of("action", action, "classId", classId, "targetDate", targetDate, "studentId", studentId));
+				""", Map.of("action", action, "classId", classId.orElse(null), "targetDate", targetDate, "studentId", studentId));
 	}
 
 	public List<LeaveSummaryVO> searchAllLeaveByStudent(Optional<String> className, Optional<String> teacherName,
@@ -207,12 +207,34 @@ public class LeaveService {
 				),new BeanPropertyRowMapper<>(LeaveSummaryVO.class));
 	}
 	
-	public void addLeaveImages(List<String> images, Integer studentId) {
+	public void addLeaveImages(List<String> images, Integer studentId, int classId, LocalDate applyDate) {
 		template.update("""
-				update leaves set images= :images where student_id= :studentId
+				update leaves set images= :images where 
+				student_id= :studentId and
+				classes_id= :classId and
+				apply_date= :applyDate
 				""", Map.of(
 						"images",images.stream().collect(Collectors.joining(",")),
-						"studentId",studentId
+						"studentId",studentId,
+						"classId",classId,
+						"applyDate",applyDate
 						));
+	}
+
+	public List<LeaveListVO> findLeaveDetails(LocalDate applyDate, Optional<Integer> classId, int studentId) {
+		return template.query("""
+				SELECT a.name student,l.apply_date applyDate,l.classes_id classId,
+				l.start_date startDate,l.days,l.reason reason,l.approval_status status,
+				l.student_id studentId,l.images
+				from leaves l
+				join student s on l.student_id = s.id
+				join account a on s.id = a.id
+				where l.classes_id = :classId And
+				l.student_id = :studentId And
+				l.apply_date = :applyDate
+					""", Map.of("classId", classId.orElse(null),
+							"applyDate", applyDate,
+							"studentId",studentId),
+				new BeanPropertyRowMapper<>(LeaveListVO.class));
 	}
 }

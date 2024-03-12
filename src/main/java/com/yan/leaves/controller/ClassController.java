@@ -63,6 +63,20 @@ public class ClassController {
 		model.put("teachers", teaService.getAvailableTeacher());
 		return "classes-edit";
 	}
+	
+	@GetMapping("leaves/details")
+	public String leaveDetails(
+			@RequestParam(name = "applyDate", required = false) LocalDate applyDate,
+			@RequestParam(name = "classId", required = false) Optional<Integer> classId,
+			@RequestParam(name = "studentId", required = false) int studentId,ModelMap model
+			) {
+		var result = levService.findLeaveDetails(applyDate,classId,studentId);
+		var names = levService.findClassAndTeacher(classId);
+		model.put("names" , names);
+		model.put("item",result );
+		return "leave-details";
+	}
+	
 	@PostMapping
 	public String save(@Valid @ModelAttribute(name = "classForm") ClassForm form, BindingResult result) {
 		if (result.hasErrors()) {
@@ -75,12 +89,16 @@ public class ClassController {
 	}
 	
 	@PostMapping("/{classId}/approval")
-	public String approval(@PathVariable (name="classId",required = false) int classId,
+	public String approval(@PathVariable (name="classId",required = false) Optional<Integer> classId,
 			@RequestParam String action,
             @RequestParam int studentId,
-            @RequestParam String targetDate){
+            @RequestParam LocalDate targetDate,ModelMap model){
 			levService.pending(classId,studentId,targetDate,action);
-		return "redirect:/classes/%d?targetDate=%s".formatted(classId,targetDate);
+			var result = levService.findLeaveDetails(targetDate,classId,studentId);
+			var names = levService.findClassAndTeacher(classId);
+			model.put("names" , names);
+			model.put("item",result );
+		return "leave-details";
 	}
 
 	@GetMapping("{id}")
@@ -123,10 +141,11 @@ public class ClassController {
 				redirectAttributes.addFlashAttribute("alreadyExist", "This Student is Already register in this class.");
 				return "redirect:/classes/registration";
 			}
-		}
+		}else {
 		//if not exist
 		redirectAttributes.addFlashAttribute("notExist", "Invalid Student Id.");
 		return "redirect:/classes/registration";
+		}
 	}
 
 	@GetMapping("registration/{classId}/{studentId}")

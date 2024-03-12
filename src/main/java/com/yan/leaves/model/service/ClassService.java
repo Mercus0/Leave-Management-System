@@ -164,7 +164,6 @@ public class ClassService {
 
 		// leaves students by date
 		result.setLeaves(leaService.searchByclassIdAndDate(id, targetDate));
-		;
 
 		return result;
 	}

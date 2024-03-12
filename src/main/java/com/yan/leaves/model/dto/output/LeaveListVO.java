@@ -1,6 +1,7 @@
 package com.yan.leaves.model.dto.output;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class LeaveListVO {
 	public LeaveListVO() {
@@ -32,7 +33,15 @@ public class LeaveListVO {
 	private int days;
 	private String reason;
 	private String status;
+	private String images;
 	
+	public List<String> getImages() {
+		return List.of(images.split(","));
+	}
+	
+	public void setImages(String images) {
+		this.images = images;
+	}
 	public String getStatus() {
 		return status;
 	}

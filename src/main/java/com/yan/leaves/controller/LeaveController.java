@@ -74,7 +74,7 @@ public class LeaveController {
 		model.put("list", result);
 		return "leaves";
 	}
-	
+
 	
 	@PostMapping("edit")
 	public String save(

@@ -22,6 +22,7 @@ public class LeaveForm {
 		this.studentId = studentId;
 	}
 
+
 	public LeaveForm(int classId, int studentId, LocalDate applyDate,
 			@NotNull(message = "Please enter the Start date") LocalDate startDate,
 			@Min(value = 1, message = "Please enter the leave day") int days,

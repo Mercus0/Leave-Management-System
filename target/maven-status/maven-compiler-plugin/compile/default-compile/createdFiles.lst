@@ -5,12 +5,12 @@ com\yan\leaves\controller\LeaveController.class
 com\yan\leaves\model\dto\input\MemberStatusForm.class
 com\yan\leaves\model\dto\output\IdWithName.class
 com\yan\leaves\controller\HomeController.class
-com\yan\leaves\model\dto\input\LeaveImageForm.class
 com\yan\leaves\model\service\LeaveService.class
 com\yan\leaves\controller\StudentController.class
 com\yan\leaves\model\dto\output\TeacherListVO.class
 com\yan\leaves\model\dto\output\StudentDetailsVO.class
 com\yan\leaves\model\service\ImageStorageService$ImageType.class
+com\yan\leaves\model\dto\output\NameAndCount.class
 com\yan\leaves\controller\TeacherController.class
 com\yan\leaves\model\dto\output\RegistrationDetailsVO.class
 com\yan\leaves\model\service\ClassService.class
@@ -19,6 +19,7 @@ com\yan\leaves\model\dto\output\StudentListVO.class
 com\yan\leaves\model\service\MemberProfileImageService.class
 com\yan\leaves\model\service\ImageStorageService.class
 com\yan\leaves\model\service\StudentService.class
+com\yan\leaves\controller\rest\SummaryDataApi.class
 com\yan\leaves\model\dto\output\LeaveSummaryVO.class
 com\yan\leaves\model\service\mapper\ClassFormRowMapper.class
 com\yan\leaves\model\dto\output\ClassNameAndTeacherNameVO.class
@@ -26,6 +27,7 @@ com\yan\leaves\model\service\TeacherService.class
 com\yan\leaves\controller\MemberProfileImageController.class
 com\yan\leaves\model\dto\input\ClassForm.class
 com\yan\leaves\controller\LeaveImagesController.class
+com\yan\leaves\model\service\SummaryDataService.class
 com\yan\leaves\model\dto\input\RegistrationForm.class
 com\yan\leaves\model\security\AdminUserInitializer.class
 com\yan\leaves\model\dto\output\ClassDetailsVO.class
@@ -33,6 +35,7 @@ com\yan\leaves\model\dto\output\RegistrationListVO.class
 com\yan\leaves\model\service\mapper\ClassListVoRowMapper.class
 com\yan\leaves\controller\ClassController.class
 com\yan\leaves\model\dto\input\StudentForm.class
+com\yan\leaves\controller\AdminHomeController.class
 com\yan\leaves\model\dto\output\ClassListVO.class
 com\yan\leaves\model\dto\input\TeacherForm.class
 com\yan\leaves\model\service\RegistrationService.class

@@ -107,8 +107,10 @@ public class TeacherService {
 
 	private int update(TeacherForm form) {
 		// update Account Table
-		template.update("update account set name=:name where id=:id",
-				Map.of("name", form.getName(), "id", form.getId()));
+		template.update("update account set name=:name,email= :email where id=:id",
+				Map.of("name", form.getName(),
+						"email",form.getEmail(),
+						"id", form.getId()));
 		// Update Teacher Table
 		template.update("update teacher set phone=:phone, assign_date=:assign_date where id=:id", Map.of("phone",
 				form.getPhone(), "assign_date", Date.valueOf(form.getAssignDate()), "id", form.getId()));
