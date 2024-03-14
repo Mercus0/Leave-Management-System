@@ -82,8 +82,8 @@
 			<div class="col-4">
 				<div class="card">
 					<div class="card-body">
-						<h4>${ item.teacherName }</h4>
-						<div class="text-secondary">${item.description }</div>
+						<h4>${ item.description }</h4>
+						<div class="text-secondary">${item.teacherName }</div>
 						<span class="text-secondary">${ item.startDate }</span>
 						
 						<div class="row mt-4">
@@ -92,6 +92,7 @@
 								<span class="text-secondary">Students</span>
 							</div>
 						</div>
+						
 						<div class="row mt-4">
 							<div class="col">
 							<c:url var="details" value="/classes/${item.id }">

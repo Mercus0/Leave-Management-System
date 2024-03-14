@@ -14,11 +14,11 @@
 
 <c:url var="signoutJs" value="/resources/logout.js"></c:url>
 
-
 <nav class="navbar nav-pills navbar-expand-lg navbar-light bg-light sticky-top">
 	<div class="container">
 	
 		<a class="navbar-brand" href="${chart}">British University College</a>
+		
 		<button class="navbar-toggler d-lg-none" type="button"
 			data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
 			aria-controls="collapsibleNavId" aria-expanded="false"
@@ -30,38 +30,44 @@
 			<ul class="navbar-nav">
 			
 				<sec:authorize access="hasAnyAuthority('Admin','Teacher')">
-				<li class="nav-item"><a
-					class="nav-link ${param.view eq 'home' ? 'active' : ''}"
-					href="${home}"> <i class="bi bi-house"></i> Home
-				</a></li>
+					<li class="nav-item">
+						<a class="nav-link ${param.view eq 'home' 
+						? 'active' : ''}"
+							href="${home}"> <i class="bi bi-house"></i> Home
+						</a>
+					</li>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('Admin','Teacher')">
-				<li class="nav-item"><a
-					class="nav-link ${param.view eq 'classes' ? 'active' : ''}"
-					href="${classes}"> <i class="bi bi-mortarboard"></i> Classes
-				</a></li>
+					<li class="nav-item">
+						<a class="nav-link ${param.view eq 'classes' ? 'active' : ''}"
+							href="${classes}"> <i class="bi bi-mortarboard"></i> Classes
+						</a>
+					</li>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('Admin','Teacher')">
-				<li class="nav-item"><a
-					class="nav-link ${param.view eq 'teachers' ? 'active' : ''}"
-					href="${teachers}"> <i class="bi bi-people"></i> Teachers
-				</a></li>
+					<li class="nav-item">
+						<a class="nav-link ${param.view eq 'teachers' ? 'active' : ''}"
+							href="${teachers}"> <i class="bi bi-people"></i> Teachers
+						</a>
+					</li>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('Admin','Teacher')">
-				<li class="nav-item"><a
-					class="nav-link ${param.view eq 'students' ? 'active' : ''}"
-					href="${students}"> <i class="bi bi-people-fill"></i> Students
-				</a></li>
+					<li class="nav-item">
+						<a class="nav-link ${param.view eq 'students' ? 'active' : ''}"
+							href="${students}"> <i class="bi bi-people-fill"></i> Students
+						</a>
+					</li>
 				</sec:authorize>
 
 				<sec:authorize access="hasAuthority('Student')">
-					<li class="nav-item"><a
-						class="nav-link ${param.view eq 'leaves' ? 'active' : ''}"
-						href="${leaves}"> <i class="bi bi-inbox"></i> Leaves
-					</a></li>
+					<li class="nav-item">
+						<a class="nav-link ${param.view eq 'leaves' ? 'active' : ''}"
+							href="${leaves}"> <i class="bi bi-inbox"></i> Leaves
+						</a>
+					</li>
 				</sec:authorize>
 
 				<li class="nav-item"><a class="nav-link" id="logoutMenu"> <i

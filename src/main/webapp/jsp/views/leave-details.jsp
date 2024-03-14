@@ -143,11 +143,11 @@
 							</c:forEach>
 						</div>
 					</div>
-				</div>
+				</div>                                                                                                                                
 			</div>
 	</div>
 	
-		<c:url var="leaveDetails" value="/resources/leave-details.js"></c:url>
+	<c:url var="leaveDetails" value="/resources/leave-details.js"></c:url>
 	<script src="${leaveDetails}"></script>
 </body>
 </html>
