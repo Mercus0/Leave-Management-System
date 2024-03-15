@@ -1,0 +1,17 @@
+.bg-nav{
+	background-color: #1a1a2e !important
+}
+
+.custom-nav-item .nav-link {
+    color: #e9b563;
+}
+
+.custom-nav-item {
+    color: #e9b563;
+}
+
+.nav-link.active {
+	color:#e9b563 !important;
+    background-color: white !important;
+}
+

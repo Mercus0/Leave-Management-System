@@ -44,9 +44,6 @@
 						</button>
 					</div>
 				</sf:form>
-				<div class="register-forget opacity">
-					<a href="">Register</a> <a href="">Forgot Password</a>
-				</div>
 			</div>
 			<div class="circle circle-two"></div>
 		</div>

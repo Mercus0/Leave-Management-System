@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Teacher | Home</title>
+<c:url var="cardEffect" value="/resources/card-effect.css"></c:url>
+<link rel="stylesheet" href="${cardEffect}" type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
@@ -18,14 +20,18 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
+
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp"></c:import>
 	<div class="container">
 		<c:set var="listCount" value="${fn:length(list)}" />
-		<h3 class="my-4">
-			Teacher Home <span class="badge text-bg-danger">${listCount}</span>
-		</h3>
+		<h2 class="my-4">
+			 <i class="bi bi-people"></i> TEACHER HOME <span class="badge bg-blue">${listCount}</span>
+		</h2>
 		<form class="row mb-4">
 
 			<div class="col-auto">
@@ -34,7 +40,7 @@
 			</div>
 
 			<div class="col-auto">
-				<button class="btn btn-outline-success" type="submit">
+				<button class="btn btn-outline-custom-blue" type="submit">
 					<i class="bi bi-search"></i> Search
 				</button>
 			</div>
@@ -47,7 +53,7 @@
 				<c:otherwise>
 					<c:forEach items="${ list }" var="item">
 						<div class="col-4">
-							<div class="card">
+							<div class="card card-bg">
 								<div class="card-body">
 									<h4>${ item.teacher }</h4>
 									<div class="text-secondary">${item.details }</div>
@@ -73,7 +79,7 @@
 											<c:url var="details" value="/classes/${item.classId }">
 												<c:param name="targetDate" value="${targetDate}"></c:param>
 											</c:url>
-											<a href="${details}" class="btn btn-outline-success"><i
+											<a href="${details}" class="btn btn-outline-custom-white"><i
 												class="bi bi-send"></i> Show Details</a>
 										</div>
 									</div>

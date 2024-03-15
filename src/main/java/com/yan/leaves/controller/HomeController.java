@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yan.leaves.model.dto.output.StudentDetailsVO;
-import com.yan.leaves.model.service.ClassService;
 import com.yan.leaves.model.service.LeaveService;
 import com.yan.leaves.model.service.StudentService;
 
