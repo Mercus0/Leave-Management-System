@@ -1,0 +1,17 @@
+body {
+    font-family: 'Lato', sans-serif !important;
+}
+
+.btn-outline-custom-blue {
+    color: rgb(35, 35, 63) !important; 
+    background-color: transparent;
+    border: 1px solid #1a1a2e !important; 
+    padding: 8px 16px;
+    text-decoration: none; 
+    transition: all 0.3s ease; 
+}
+
+.btn-outline-custom-blue:hover {
+    background-color: #1a1a2e !important; 
+    color: #e9b563 !important; 
+}

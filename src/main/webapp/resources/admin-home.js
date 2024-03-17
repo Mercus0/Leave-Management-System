@@ -138,7 +138,10 @@ const loadCategories = (names, values) => {
 			options: {
 				plugins: {
 					legend: {
-						position: 'bottom'
+						position: 'bottom',
+							labels:{
+								color: 'white'
+							}
 					}
 				}
 			}
@@ -154,7 +157,8 @@ const loadChartData = (names, values) => {
 		datasets: [{
 			label: "Leave Count",
 			data: values,
-			hoverOffset: 4
+			hoverOffset: 4,
+			backgroundColor: '#e9b563'
 		}]			
 	}
 	
@@ -171,8 +175,23 @@ const loadChartData = (names, values) => {
 				options: {
 					plugins: {
 						legend: {
-							position: 'bottom'
-						}	
+							position: 'bottom',
+							labels:{
+								color: 'white'
+							}
+						}
+					},
+					scales:{
+						x:{
+							ticks:{
+								color: 'white'
+							}
+						},
+						y:{
+							ticks:{
+								color: 'white'
+							}
+						}
 					}
 				}
 			})	

@@ -48,7 +48,6 @@ public class StudentForm {
 	private int id;
 	@NotEmpty(message = "Please enter Student name.")
 	private String name;
-
 	@NotEmpty(message = "Please enter Phone number.")
 	private String phone;
 	@NotEmpty(message = "Please enter Email.")
@@ -59,7 +58,6 @@ public class StudentForm {
 	private String gender;
 	@NotEmpty(message = "Please enter Address.")
 	private String Address;
-
 	@NotNull(message = "Please enter assign date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate assignDate;

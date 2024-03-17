@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Student | Details</title>
+<c:url var="classDetails" value="/resources/class-details.css"></c:url>
+<link rel="stylesheet" href="${classDetails}" type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
@@ -18,6 +20,8 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp">
@@ -26,14 +30,14 @@
 
 	<div class="container">
 		<div class="d-flex justify-content-between my-4">
-			<h3>Student Details</h3>
+			<h2><i class="bi bi-clipboard-fill"></i> Student Details</h2>
 
 			<div class="d-flex">
 				<c:url var="edit" value="/students/edit">
 					<c:param name="id" value="${ dto.student.id }"></c:param>
 				</c:url>
 
-				<a class="btn btn-outline-primary me-3" href="${edit}"><i
+				<a class="btn btn-outline-custom-blue me-3" href="${edit}"><i
 					class="bi bi-pencil"></i> Edit</a>
 					
 				<c:url var="status" value="/students/status">

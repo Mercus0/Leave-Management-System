@@ -13,7 +13,7 @@
 <body class="wh-100">
 	<section class="container">
 		<div class="login-container">
-			<div class="circle circle-one"></div>
+			<!-- <div class="circle circle-one"></div> -->
 			<div class="form-container">
 				<div class="container-logo">
 					 <img class="logo" alt="Profile Image"
@@ -38,14 +38,13 @@
 							class="form-control" autocomplete="off"/>
 					</div>
 
-					<div class="mb-3">
-						<button type="submit" class="opacity">
+					<div class="mt-3">
+						<button type="submit" class="opacity bg-gold">
 							<i class="bi bi-door-open"></i>Sign In
 						</button>
 					</div>
 				</sf:form>
 			</div>
-			<div class="circle circle-two"></div>
 		</div>
 		<div class="theme-btn-container"></div>
 	</section>

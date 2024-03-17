@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Class | Details</title>
+<c:url var="classDetails" value="/resources/class-details.css"></c:url>
+<link rel="stylesheet" href="${classDetails}" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -17,6 +19,8 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp">
@@ -24,7 +28,7 @@
 	</c:import>
 	<div class="container">
 		<div class="d-flex justify-content-between my-4">
-			<h3>Class Details</h3>
+			<h2><i class="bi bi-clipboard-fill"></i> Class Details</h2>
 			
 			<c:url var="status" value="/classes/status">
 				<c:param name="id" value="${ dto.classInfo.id }"></c:param>
@@ -42,8 +46,7 @@
 					</c:otherwise>
 				</c:choose>
 			</span>
-		</a>
-			
+		</a>	
 		</div>
 		
 		<div class="card mb-4">
@@ -67,17 +70,18 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="d-flex justify-content-between mb-4">
 			<ul class="nav nav-pills">
 				<li class="nav-item">
-					<button class="nav-link active" data-bs-toggle="pill"
+					<button class="nav-link bg-gold active" data-bs-toggle="pill"
 						data-bs-target="#registrations">
 						<i class="bi bi-people-fill"></i>
 						Registrations</button>
 				</li>
 
 				<li class="nav-item">
-					<button class="nav-link" data-bs-toggle="pill"
+					<button class="nav-link bg-gold" data-bs-toggle="pill"
 						data-bs-target="#leaves">
 						<i class="bi bi-person-add"></i>
 						Leaves Applications</button>
@@ -88,13 +92,11 @@
 			<c:url var="editClass" value="/classes/edit">
 				<c:param name="id" value="${dto.classInfo.id }"></c:param>
 			</c:url>
-				<a href="${editClass}" class="btn btn-outline-danger"> 
-				<i class="bi bi-pencil"></i>
-				Edit Class </a>
+				<a href="${editClass}" class="btn btn-outline-custom-blue"> 
+				<i class="bi bi-pencil"></i> Edit Class</a>
 				
 				<c:choose>
-					<c:when test="${ dto.classInfo.deleted == 1 }">
-						
+					<c:when test="${ dto.classInfo.deleted == 1 }">	
 					</c:when>
 					<c:otherwise>
 						<c:url var="addRegistration" value="/classes/registration">
@@ -102,19 +104,16 @@
 							<c:param name="startDate" value="${dto.classInfo.startDate }"></c:param>
 							<c:param name="teacherName" value="${dto.classInfo.teacherName }"></c:param>
 						</c:url>
-				<a href="${addRegistration}" class="btn btn-outline-primary"> 
+				<a href="${addRegistration}" class="btn btn-outline-custom-blue"> 
 				<i class="bi bi-plus-lg"></i>
 				Add New Registration </a>
 					</c:otherwise>
 				</c:choose>
-				
-			
 			</div>
 			
 		</div>
 		<div class="tab-content" id="contents">
 			<div class="tab-pane fade show active" id="registrations">
-			
 			<c:choose>
 				<c:when test="${empty dto.registrations}">
 					<div class="alert alert-info">There is no registration data.</div>

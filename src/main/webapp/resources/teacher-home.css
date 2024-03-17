@@ -8,7 +8,7 @@
     user-select: none;
     z-index: 5;
     overflow: hidden;
-    background-color: #1a1a2e !important;
+    background-color: rgb(35, 35, 63) !important;
     color: #ffffff !important;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 .btn-outline-custom-blue {
-    color: #1a1a2e !important; 
+    color: rgb(35, 35, 63) !important; 
     background-color: transparent;
     border: 1px solid #1a1a2e !important; 
     padding: 8px 16px;

@@ -32,7 +32,7 @@
 			
 				<sec:authorize access="hasAuthority('Admin')">
 					<li class="nav-item custom-nav-item">
-						<a class="nav-link" href="${chart}"> <i class="bi bi-bar-chart"></i> Chart
+						<a class="nav-link" href="${chart}"> <i class="bi bi-bar-chart"></i> Dashboard
 						</a>
 					</li>
 				</sec:authorize>

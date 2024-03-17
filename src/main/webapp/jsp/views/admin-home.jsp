@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
+<c:url var="adminHome" value="/resources/admin-home.css"></c:url>
+<link rel="stylesheet" href="${adminHome}" type="text/css">
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -18,13 +21,14 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp">
 		<c:param name="view" value="classes"></c:param>
 	</c:import>
 		<div class="container">
-		<h3 class="mt-4">Admin Home</h3>
+		<h3 class="mt-4"><i class="bi bi-bar-chart"></i> Dashboard</h3>
 			<div class="row">
 				<div class="col-3">
 					<div class="card">
@@ -34,7 +38,7 @@
 						</div>
 					</div>
 					<ul id="topLeaveStudents" class="list-group mt-4">
-						<li class="list-group-item">Top Leaves Students</li>
+						<li class="list-group-item bg-blue">Top Leaves Students</li>
 					</ul>
 				</div>
 				<div class="col-9">

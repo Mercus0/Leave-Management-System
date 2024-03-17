@@ -126,17 +126,6 @@
         -o-transform: scale(1.02);
     }
 
-    .circle {
-        width: 8rem;
-        height: 8rem;
-        background: var(--primary-color);
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        -o-border-radius: 50%;
-        position: absolute;
-    }
 
     .container-logo {
         display: flex;
@@ -146,29 +135,7 @@
     .logo {
         width: 250px;
     }
-
-    .circle-one {
-        top: 0;
-        left: 0;
-        z-index: -1;
-        transform: translate(-45%, -45%);
-        -webkit-transform: translate(-45%, -45%);
-        -moz-transform: translate(-45%, -45%);
-        -ms-transform: translate(-45%, -45%);
-        -o-transform: translate(-45%, -45%);
-    }
-
-    .circle-two {
-        bottom: 0;
-        right: 0;
-        z-index: -1;
-        transform: translate(45%, 45%);
-        -webkit-transform: translate(45%, 45%);
-        -moz-transform: translate(45%, 45%);
-        -ms-transform: translate(45%, 45%);
-        -o-transform: translate(45%, 45%);
-    }
-
+    
     .register-forget {
         margin: 1rem 0;
         display: flex;
@@ -229,3 +196,12 @@
             -o-transform: scale(1);
         }
     }
+    
+    .bg-gold{
+	background-color: #e9b563 !important;
+	color:#1a1a2e !important;
+}
+.mt-3{
+	margin-top: 50px
+}
+    

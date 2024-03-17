@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Home | Students</title>
+<c:url var="teacherCss" value="/resources/teacher.css"></c:url>
+<link rel="stylesheet" href="${teacherCss}" type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
@@ -19,6 +23,8 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp">
@@ -27,7 +33,7 @@
 
 	<div class="container">
 	<c:set var="listCount" value="${fn:length(list)}" />
-		<h3 class="my-4">Student Management <span class="badge text-bg-danger">${listCount}</span></h3>
+		<h2 class="my-4"><i class="bi bi-people-fill"></i> Student Management <span class="badge bg-gold">${listCount}</span></h2>
 		<form class="mb-4 row">
 			<div class="col-auto">
 				<label for="" class="form-label">Name</label> <input
@@ -45,14 +51,9 @@
 					placeholder="Search Email" name="email">
 			</div>
 			<div class="col mt-4">
-				<button class="btn btn-outline-success me-2" type="submit">
+				<button class="btn btn-outline-custom-blue me-2" type="submit">
 					<i class="bi bi-search"></i> Search
 				</button>
-
-				<c:url var="addNew" value="/students/add"></c:url>
-				<a class="btn btn-outline-danger my-2 my-sm-0" href="${addNew}">
-					<i class="bi bi-plus-lg"></i>Add New
-				</a>
 			</div>
 		</form>
 		<c:choose>
@@ -61,7 +62,7 @@
 			</c:when>
 
 			<c:otherwise>
-				<table class="table table-hover">
+				<table class="table table-hover custom-table-blue">
 					<thead>
 						<tr>
 							<th>Id</th>
@@ -103,6 +104,17 @@
 				</table>
 			</c:otherwise>
 		</c:choose>
+		<sec:authorize access="hasAuthority('Admin')">
+			<div class="floating-container">
+				<div class="floating-button">
+					
+							<c:url var="addNew" value="/students/add"></c:url>
+							<a href="${addNew}"><i class="bi bi-plus-lg bg-blue"></i>
+						</a>
+	
+				</div>
+			</div>
+		</sec:authorize>
 	</div>
 </body>
 </html>

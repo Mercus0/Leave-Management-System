@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Student | Details</title>
+<c:url var="classDetails" value="/resources/class-details.css"></c:url>
+<link rel="stylesheet" href="${classDetails}" type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
@@ -18,6 +20,8 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp">
@@ -26,7 +30,7 @@
 
 	<div class="container">
 		<div class="d-flex justify-content-between my-4">
-			<h3>Teacher Details</h3>
+			<h2><i class="bi bi-clipboard-fill"></i> Teacher Details</h2>
 			<c:forEach items="${ list }" var= "item" >
 			
 			<c:url var="status" value="/teachers/status">

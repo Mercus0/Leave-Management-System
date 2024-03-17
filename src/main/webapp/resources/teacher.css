@@ -1,0 +1,79 @@
+body {
+    font-family: 'Lato', sans-serif !important;
+}
+
+.custom-table-blue thead th{
+	background-color: #1a1a2e;
+    color: #ffffff;
+}
+
+
+.btn-outline-custom-blue {
+	margin-top: 8px;
+    color: rgb(35, 35, 63) !important; 
+    background-color: transparent;
+    border: 1px solid #1a1a2e !important; 
+    padding: 8px 16px;
+    text-decoration: none; 
+    transition: all 0.3s ease; 
+}
+
+.btn-outline-custom-blue:hover {
+    background-color: #1a1a2e !important; 
+    color: #e9b563 !important; 
+}
+
+.bg-gold{
+	background-color: #e9b563 !important;
+}
+
+.bg-blue{
+	color: #1a1a2e !important;
+}
+
+.floating-container {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  bottom: 0;
+  right: 0;
+  margin: 35px 25px;
+}
+.floating-container:hover {
+  height: 300px;
+}
+.floating-container:hover .floating-button {
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+  -webkit-transform: translatey(5px);
+          transform: translatey(5px);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.floating-container .floating-button {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  background: #e9b563;
+  bottom: 0;
+  border-radius: 50%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  line-height: 65px;
+  text-align: center;
+  font-size: 23px;
+  z-index: 100;
+  box-shadow: 0 10px 25px -5px rgba(255, 215, 0, 0.6);
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+
+
+
+
+
+
+

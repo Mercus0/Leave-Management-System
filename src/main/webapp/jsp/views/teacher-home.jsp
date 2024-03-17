@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Teacher | Home</title>
-<c:url var="cardEffect" value="/resources/card-effect.css"></c:url>
+<c:url var="cardEffect" value="/resources/teacher-home.css"></c:url>
 <link rel="stylesheet" href="${cardEffect}" type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -22,6 +22,7 @@
 	crossorigin="anonymous"></script>
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
 
 </head>
@@ -55,8 +56,8 @@
 						<div class="col-4">
 							<div class="card card-bg">
 								<div class="card-body">
-									<h4>${ item.teacher }</h4>
-									<div class="text-secondary">${item.details }</div>
+									<h4>${ item.details }</h4>
+									<div class="text-secondary">${item.teacher }</div>
 									<span class="text-secondary">${ item.startDate }</span>
 
 									<div class="row mt-4">
@@ -132,8 +133,8 @@
 	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
 				<div id="Toast" class="toast hide" role="alert"
 					aria-live="assertive" aria-atomic="true">
-					<div class="toast-header">
-						<strong class="me-auto">Message</strong>
+					<div class="toast-header bg-blue">
+						<strong class="me-auto"><i class="bi bi-exclamation-triangle-fill text-danger"></i> Message</strong>
 						<button type="button" class="btn-close" data-bs-dismiss="toast"
 							aria-label="Close"></button>
 					</div>

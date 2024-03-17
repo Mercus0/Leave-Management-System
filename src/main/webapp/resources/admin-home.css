@@ -1,0 +1,26 @@
+body {
+    font-family: 'Lato', sans-serif !important;
+}
+
+.bg-blue{
+	background-color: #e9b563 !important;
+	color: rgb(35, 35, 63) !important;
+}
+
+.card {
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    user-select: none;
+    z-index: 5;
+    overflow: hidden;
+    background-color: rgb(35, 35, 63) !important;
+    color: #ffffff !important;
+}
+
+.card:hover {
+    color: #000000;
+    transform: scale(1.025);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px;
+}

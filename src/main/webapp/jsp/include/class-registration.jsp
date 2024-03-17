@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<table class=table table-hover>
+<table class="table table-hover custom-table-blue">
 	<thead>
 		<tr>
 			<th>Registration Date</th>
@@ -25,13 +25,13 @@
 					<c:param name="startDate" value="${item.startDate }"></c:param>
 				</c:url> 
 				<a href="${edit}">
-				<i class="bi bi-pencil me-2"></i>
+				<i class="bi bi-pencil bg-blue me-2"></i>
 				</a>
 				
 				<c:url var="details" value="/classes/registration/${item.classId }/${item.studentId }">
 				</c:url> 
 					<a href="${details}">
-					<i class="bi bi-cursor"></i>
+					<i class="bi bi-cursor bg-blue"></i>
 				</a>
 			</td>
 		</tr>

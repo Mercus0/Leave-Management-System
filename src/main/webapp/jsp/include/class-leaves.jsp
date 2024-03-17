@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<table class="table table-hover text-center">
+<table class="table table-hover custom-table-blue">
 	<thead>
 		<tr>
 			<th>Student</th>
@@ -26,7 +26,7 @@
 				<td>
 					<c:choose>
 					    <c:when test="${item.status == 'Pending'}">
-					      <span class="badge bg-secondary">${item.status }</span>
+					      <span class="badge bd-blue">${item.status }</span>
 					    </c:when>
 					    <c:when test="${item.status == 'Accepted'}">
 					      <span class="badge bg-success">${item.status }</span>
@@ -43,7 +43,7 @@
 					<c:param name="studentId" value="${ item.studentId }"></c:param>
 				</c:url> 
 					<a href="${leaveDetails}">
-					<i class="bi bi-cursor"></i>
+					<i class="bi bi-cursor bg-blue"></i>
 				</a>
 				</td>
 			</tr>
