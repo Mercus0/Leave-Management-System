@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Student | Home</title>
+<c:url var="student" value="/resources/student.css"></c:url>
+<link rel="stylesheet" href="${student}" type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
@@ -18,6 +20,8 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp">
@@ -25,34 +29,36 @@
 	</c:import>
 
 	<div class="container">
-		<h3 class="my-4 ms-4 text-primary">Welcome ${dto.student.name }</h3>
+		<h2 class="my-4 ms-4 bg-blue"><i class="bi-person"></i> Welcome ${dto.student.name }</h2>
 
 		<div class="row">
 
 			<div class="my-3 col-3">
 				<table class="table table-borderless text-center">
 					<tr>
-						<td><c:choose>
-								<c:when test="${empty dto.student.profileImage}">
-									<img class="img img-fluid" alt="Profile Image"
-										src="<c:url value='/static/image/profile.png' />" width="300"
-										height="300" />
-								</c:when>
-								<c:otherwise>
-									<img class="img img-gird img-fluid " alt="Profile Image"
-										src="<c:url value='/images/${dto.student.profileImage}' />" />
-								</c:otherwise>
-							</c:choose></td>
+						<td>
+							<c:choose>
+									<c:when test="${empty dto.student.profileImage}">
+										<img class="img img-fluid" alt="Profile Image"
+											src="<c:url value='/static/image/profile.png' />" width="300"
+											height="300" />
+									</c:when>
+									<c:otherwise>
+										<img class="img img-gird img-fluid " alt="Profile Image"
+											src="<c:url value='/images/${dto.student.profileImage}' />" />
+									</c:otherwise>
+								
+							</c:choose>
+						</td>
 
 					</tr>
 					<tr>
 						<td><button id="photoUploadBtn" type="button"
-								class="btn btn-primary">
+								class="btn btn-outline-custom-blue">
 								<i class="bi-camera"></i> Change Photo
 							</button></td>
 					</tr>
 				</table>
-
 			</div>
 
 			<div class="col mt-5">
@@ -103,7 +109,7 @@
 							</div>
 							<div class="col">
 								<span class="text-secondary">Password</span>
-								<h5>Password is here</h5>
+								<h5>${dto.student.password }</h5>
 							</div>
 						</div>
 

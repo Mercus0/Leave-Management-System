@@ -116,7 +116,7 @@
 			<div class="tab-pane fade show active" id="registrations">
 			<c:choose>
 				<c:when test="${empty dto.registrations}">
-					<div class="alert alert-info">There is no registration data.</div>
+					<div class="alert alert-warning">There is no registration data.</div>
 				</c:when>
 				<c:otherwise>
 					<c:import url="/jsp/include/class-registration.jsp"></c:import>
@@ -126,7 +126,7 @@
 			<div class="tab-pane fade" id="leaves">
 			<c:choose>
 				<c:when test="${empty dto.leaves}">
-					<div class="alert alert-info">There is no leaves.</div>
+					<div class="alert alert-warning">There is no leaves.</div>
 				</c:when>
 				<c:otherwise>
 					 <c:import url="/jsp/include/class-leaves.jsp"></c:import> 

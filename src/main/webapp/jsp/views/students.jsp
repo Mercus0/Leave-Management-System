@@ -35,8 +35,18 @@
 	<c:set var="listCount" value="${fn:length(list)}" />
 		<h2 class="my-4"><i class="bi bi-people-fill"></i> Student Management <span class="badge bg-gold">${listCount}</span></h2>
 		<form class="mb-4 row">
+		
 			<div class="col-auto">
-				<label for="" class="form-label">Name</label> <input
+				<label class="form-label">Status</label>
+				<select class="form-select" name="status">
+					<option value="2" ${param.status == 2 ? 'selected' : ''}>All</option>
+					<option value="0" ${param.status == 0 ? 'selected' : ''}>Activate</option>
+					<option value="1" ${param.status == 1 ? 'selected' : ''}>Deleted</option>
+				</select>
+			</div>
+		
+			<div class="col-auto">
+			<label for="" class="form-label">Name</label> <input
 					class="form-control" value="${ param.name }" type="text"
 					placeholder="Search Name" name="name">
 			</div>
@@ -58,7 +68,7 @@
 		</form>
 		<c:choose>
 			<c:when test="${ empty list }">
-				<div class="alert alert-info">There is no data.</div>
+				<div class="alert alert-warning">There is no data.</div>
 			</c:when>
 
 			<c:otherwise>

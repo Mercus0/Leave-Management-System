@@ -41,7 +41,6 @@
 					</h2>
 
 					<sf:hidden path="id" />
-
 					<div class="row">
 						<div class="col">
 							<div class="mb-3">
@@ -55,8 +54,7 @@
 							<div class="mb-3">
 								<label class="form-label">Name</label>
 								<sf:errors path="name" cssClass="alert alert-warning" element="div"></sf:errors>
-								<sf:input path="name" placeholder="Enter Student Name"
-									type="text" cssClass="form-control" />
+								<sf:input path="name" placeholder="Enter Student Name" type="text" cssClass="form-control" />
 							</div>
 						</div>
 					</div>
@@ -78,8 +76,8 @@
 					<div class="row">
 						<div class="col">
 							<div class="mb-3">
-								<label for="" class="form-label">Gender</label> <select
-									name="gender" class="form-select">
+								<label for="" class="form-label">Gender</label> 
+								<select name="gender" class="form-select">
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
 								</select>
@@ -87,19 +85,19 @@
 						</div>
 						<div class="col">
 							<div class="mb-3">
-								<label class="form-label">Education</label> <select
-									name="education" class="form-select">
-									<option value="HDIT">HDIT</option>
-									<option value="Business">Business</option>
-									<option value="Foundation">Foundation</option>
-									<option value="EAP">EAP</option>
-								</select>
+								<label class="form-label">Education</label> 
+							<select name="education" class="form-select" path="education">
+					                <option value="HDIT" >HDIT</option>
+					                <option value="Business" >Business</option>
+					                <option value="Foundation">Foundation</option>
+					                <option value="EAP">EAP</option>
+					           </select>
 							</div>
 						</div>
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Address</label>
-						<sf:errors path="Address" cssClass="alert alert-warning" element="div"></sf:errors>
+						<sf:errors path="address" cssClass="alert alert-warning" element="div"></sf:errors>
 						<sf:input path="address" type="text"
 							placeholder="Enter Student address" cssClass="form-control" />
 					</div>

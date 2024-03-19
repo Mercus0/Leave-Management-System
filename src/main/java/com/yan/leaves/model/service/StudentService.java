@@ -29,8 +29,8 @@ import jakarta.validation.Valid;
 public class StudentService {
 
 	private static final String SELECT_PROJECTION = """
-			select a.id, s.realId, a.name, s.phone, a.email, s.education, count(r.classes_id) classCount,
-			s.realId,s.gender,s.address,s.assign_date assignDate,a.deleted,a.profile_image profileImage
+			select a.id, a.name,a.password, s.realId, s.phone, a.email, s.education, count(r.classes_id) classCount,
+			s.gender,s.address,s.assign_date assignDate,a.deleted,a.profile_image profileImage
 			from student s
 			join account a on s.id = a.id
 			left join registration r on s.id = r.student_id
@@ -52,20 +52,23 @@ public class StudentService {
 
 	public StudentService(DataSource dataSource) {
 		template = new NamedParameterJdbcTemplate(dataSource);
-
 		studentInsert = new SimpleJdbcInsert(dataSource);
 		studentInsert.setTableName("student");
-
 		accountInsert = new SimpleJdbcInsert(dataSource);
 		accountInsert.setTableName("account");
 		accountInsert.setGeneratedKeyName("id");
 		accountInsert.setColumnNames(List.of("name", "role", "email", "password"));
 	}
 
-	public List<StudentListVO> search(Optional<String> name, Optional<String> phone, Optional<String> email) {
+	public List<StudentListVO> search(Optional<Integer> status, Optional<String> name, Optional<String> phone, Optional<String> email) {
 		var sb = new StringBuffer(SELECT_PROJECTION);
 		sb.append(" where 1=1");
 		var params = new HashMap<String, Object>();
+		
+		sb.append(status.filter(s -> s!=2).map(a -> {
+			params.put("status",a);
+			return " and a.deleted= :status ";
+		}).orElse(""));
 
 		sb.append(email.filter(StringUtils::hasLength).map(a -> {
 			params.put("email", a.toLowerCase().concat("%"));
@@ -90,18 +93,6 @@ public class StudentService {
 		 var sql = "%s where s.id = :id %s".formatted(SELECT_PROJECTION,SELECT_GROUPBY);
 		return template.queryForObject(sql, Map.of("id", studentId), new BeanPropertyRowMapper<>(StudentListVO.class));
 	}
-
-//	@Transactional(propagation = Propagation.REQUIRED)
-//	public Integer createStudent(RegistrationForm form) {
-//		// insert into account
-//		var generatedId = accountInsert.executeAndReturnKey(Map.of("name", form.getStudentName(), "role", "Student",
-//				"email", form.getEmail(), "password", passwordEncoder.encode(form.getPhone())));
-//
-//		// insert into Student
-//		studentInsert.execute(Map.of("id", generatedId.intValue(), "phone", form.getPhone(), "education",
-//				form.getEducation(), "realId", form.getRealId()));
-//		return generatedId.intValue();
-//	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void createStudent(StudentForm form) {

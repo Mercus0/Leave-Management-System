@@ -1,27 +1,24 @@
 package com.yan.leaves.model.dto.output;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.yan.leaves.model.dto.input.StudentForm;
 
 public class StudentListVO {
+	
+	private PasswordEncoder passEncoder;
 
 	public StudentListVO() {
 
 	}
-
-	public StudentListVO(int id, String name, String phone, String email, String education, long classCount,
-			String realId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.education = education;
-		this.classCount = classCount;
-		this.realId = realId;
-	}
+	
 
 	public StudentListVO(int id, String name, String phone, String email, String gender, String address,
-			String education, String assignDate, String realId,boolean deleted,String profileImage) {
+			String education, LocalDate assignDate, long classCount, String realId, boolean deleted,
+			String profileImage, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,9 +28,12 @@ public class StudentListVO {
 		this.address = address;
 		this.education = education;
 		this.assignDate = assignDate;
+		this.classCount = classCount;
 		this.realId = realId;
-		this.deleted=deleted;
-		this.profileImage=profileImage;	}
+		this.deleted = deleted;
+		this.profileImage = profileImage;
+		this.password = password;
+	}
 
 	private int id;
 	private String name;
@@ -42,12 +42,26 @@ public class StudentListVO {
 	private String gender;
 	private String address;
 	private String education;
-	private String assignDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate assignDate;
 	private long classCount;
 	private String realId;
 	private boolean deleted;
 	private String profileImage;
+	private String password;
 	
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public StudentForm form() {
+		return new StudentForm(id, name, phone, email, education,realId,gender,address,assignDate);
+	}
 
 	public String getProfileImage() {
 		return profileImage;
@@ -81,18 +95,13 @@ public class StudentListVO {
 		this.address = address;
 	}
 
-	public String getAssignDate() {
+	public LocalDate getAssignDate() {
 		return assignDate;
 	}
 
-	public void setAssignDate(String assignDate) {
+	public void setAssignDate(LocalDate assignDate) {
 		this.assignDate = assignDate;
 	}
-
-	public StudentForm form() {
-		return new StudentForm(id, name, phone, email, education);
-	}
-
 	public String getRealId() {
 		return realId;
 	}

@@ -29,10 +29,12 @@ public class StudentController {
 	private StudentService service;
 
 	@GetMapping
-	public String index(@RequestParam(name = "name", required = false) Optional<String> name,
+	public String index(
+			@RequestParam(name = "status",required = false) Optional<Integer> status,
+			@RequestParam(name = "name", required = false) Optional<String> name,
 			@RequestParam(name = "phone", required = false) Optional<String> phone,
 			@RequestParam(name = "email", required = false) Optional<String> email, ModelMap model) {
-		var result = service.search(name, phone, email);
+		var result = service.search(status,name, phone, email);
 		model.put("list", result);
 		return "students";
 	}

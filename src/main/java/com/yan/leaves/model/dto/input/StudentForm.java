@@ -12,25 +12,6 @@ public class StudentForm {
 		// TODO Auto-generated constructor stub
 	}
 
-	public StudentForm(int id, String name, String phone, String email, String education) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		Education = education;
-	}
-
-	public StudentForm(int id, String name, String phone, String email, String education, String realId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.Education = education;
-		this.realId = realId;
-	}
-
 	public StudentForm(int id, String name, String phone, String email, String education, String realId, String gender,
 			String address, LocalDate assignDate) {
 		super();
@@ -38,10 +19,10 @@ public class StudentForm {
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
-		Education = education;
+		this.education = education;
 		this.realId = realId;
 		this.gender = gender;
-		Address = address;
+		this.address = address;
 		this.assignDate = assignDate;
 	}
 
@@ -52,12 +33,12 @@ public class StudentForm {
 	private String phone;
 	@NotEmpty(message = "Please enter Email.")
 	private String email;
-	private String Education;
+	private String education;
 	@NotEmpty(message = "Please enter Student Id.")
 	private String realId;
 	private String gender;
 	@NotEmpty(message = "Please enter Address.")
-	private String Address;
+	private String address;
 	@NotNull(message = "Please enter assign date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate assignDate;
@@ -79,11 +60,11 @@ public class StudentForm {
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 
 	public String getRealId() {
@@ -127,11 +108,11 @@ public class StudentForm {
 	}
 
 	public String getEducation() {
-		return Education;
+		return education;
 	}
 
 	public void setEducation(String education) {
-		Education = education;
+		this.education = education;
 	}
 
 }

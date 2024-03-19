@@ -1,7 +1,10 @@
 package com.yan.leaves.model.dto.output;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LeaveListVO {
 	public LeaveListVO() {
@@ -36,9 +39,12 @@ public class LeaveListVO {
 	private String images;
 	
 	public List<String> getImages() {
+		if(images== null) {
+			return Collections.emptyList();
+		}
 		return List.of(images.split(","));
 	}
-	
+
 	public void setImages(String images) {
 		this.images = images;
 	}

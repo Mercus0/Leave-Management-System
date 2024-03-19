@@ -46,7 +46,7 @@
 			</div>
 			
 			<div class="col-auto">
-				<label class="form-label">Name</label>
+				<label class="form-label">Teacher Name</label>
 				<input type="text" value="${ param.teacher }" placeholde="search" class="form-control" name="teacher" />
 			</div>
 			
@@ -57,6 +57,12 @@
 			<div class="col-auto">
 				<label class="form-label">To</label>
 				<input type="date" class="form-control" name="to" value="${ param.to }"/>
+			</div>
+			
+			<div class="col mt-4">
+				<button class="btn btn-outline-custom-blue me-2" type="submit">
+					<i class="bi bi-search"></i> Search
+				</button>
 			</div>
 			
 		</form>

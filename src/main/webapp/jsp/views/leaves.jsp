@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Home | Leaves</title>
+<c:url var="teacherCss" value="/resources/teacher.css"></c:url>
+<link rel="stylesheet" href="${teacherCss}" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -17,6 +19,8 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp">
@@ -24,8 +28,7 @@
 	</c:import>
 	
 	<div class="container">
-		<h3 class="my-4">Leaves Details</h3>
-		
+		<h2 class="my-4"><i class="bi bi-clipboard-fill"></i> Leaves Details</h2>
 		<form class="row mb-4">
 			<div class="col-auto">
 				<label class="form-label">Class Name</label>
@@ -48,7 +51,7 @@
 			</div>
 	
 			<div class="col mt-4">
-				<button class="btn btn-outline-success me-2"><i class="bi bi-search"></i>Search</button>
+				<button class="btn btn-outline-custom-blue me-2"><i class="bi bi-search"></i>Search</button>
 			</div>
 		</form>
 		
@@ -57,7 +60,7 @@
 				<div class="alert alert-info">There is no leaves for you.</div>
 			</c:when>
 			<c:otherwise>
-				<table class="table table-hover">
+				<table class="table table-hover custom-table-blue">
 			<thead>
 				<tr>
 					<th>No</th>

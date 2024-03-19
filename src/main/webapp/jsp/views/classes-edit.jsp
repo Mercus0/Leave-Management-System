@@ -28,44 +28,40 @@
 		<c:param name="view" value="classes"></c:param>
 	</c:import>
 	<div class="container">
-		
 		<div class="row">
-
 			<div class="col-lg-6 col-md-9 col-sm-12">
-				<h2 class="my-4">${empty param.id ? 'Add New' : '<i class="bi-pencil"></i> Edit' } Class</h2>
+				<h2 class="my-4">${empty param.id ? '<i class="bi-plus-lg"></i> Add New' : '<i class="bi-pencil"></i> Edit' } Class</h2>
 				<c:url var="save" value="/classes"></c:url>
 				<sf:form action="${save}" method="post" modelAttribute="classForm">
 					<sf:hidden path="id" />
-					
-					<sf:errors path="*" cssClass="alert alert-warning" element="div"> </sf:errors>
 					<!-- Teacher id -->
 					<div class="mb-3">
-						<label class="form-label">Teacher</label>
+						<label class="form-label">Select Teacher</label>
+						<sf:errors path="teacherName" cssClass="alert alert-warning" element="div"> </sf:errors>
 						<sf:select path="teacherName" items="${teachers}" itemValue="id" itemLabel="name"
 							cssClass="form-select"></sf:select>
-							<sf:errors path="teacherName" cssClass=""></sf:errors>
 					</div>
+					
 					<div class="row mb-2">
 						<!-- Start date -->
 						<div class="col">
 							<label class="form-label">Start Date</label>
+							<sf:errors path="start" cssClass="alert alert-warning" element="div"> </sf:errors>
 							<sf:input path="start" type="date" cssClass="form-control" />
-							<sf:errors path="start"></sf:errors>
 						</div>
 						<!-- months -->
 						<div class="col">
 							<label class="form-label">Months</label>
-							<sf:input path="months" type="number" cssClass="form-control"
-								placeholder="Enter Months" />
-								<sf:errors path="months"></sf:errors>
+							<sf:errors path="months" cssClass="alert alert-warning" element="div"> </sf:errors>
+							<sf:input path="months" type="number" cssClass="form-control"  min="1" />
 						</div>
 					</div>
 
 					<!-- description -->
 					<div class="mb-3">
 						<label class="form-label">Description</label>
+						<sf:errors path="description" cssClass="alert alert-warning" element="div"> </sf:errors>
 						<sf:textarea path="description" cssClass="form-control"/>
-						<sf:errors path="description"></sf:errors>
 					</div>
 					<button type="submit" class="btn btn-outline-custom-blue">Save</button>
 				</sf:form>

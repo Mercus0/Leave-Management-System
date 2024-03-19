@@ -37,28 +37,28 @@
 				<sf:hidden path="id" />
 				
 				<div class="mb-3">
-				<sf:errors path="name" cssClass="alert alert-warning" element="div"></sf:errors>
 					<label class="form-label">Name</label>
+					<sf:errors path="name" cssClass="alert alert-warning" element="div"></sf:errors>
 					<sf:input path="name" placeholder="Enter Teacher Name" type="text"
 						cssClass="form-control" />
 				</div>
 				<div class="mb-3">
-				<sf:errors path="phone" cssClass="alert alert-warning" element="div"></sf:errors>
 					<label class="form-label">Phone</label>
+					<sf:errors path="phone" cssClass="alert alert-warning" element="div"></sf:errors>
 					<sf:input path="phone" type="text" placeholder="Enter Teacher Phone"
 						cssClass="form-control" />
 				</div>
 				
 				<div class="mb-3">
-				<sf:errors path="email" cssClass="alert alert-warning" element="div"></sf:errors>
 					<label class="form-label">Email</label>
+					<sf:errors path="email" cssClass="alert alert-warning" element="div"></sf:errors>
 					<sf:input path="email" type="email" placeholder="Enter Teacher email"
 						cssClass="form-control"/>
 				</div>
 				
 				<div class="mb-3">
-				<sf:errors path="assignDate" cssClass="alert alert-warning" element="div"></sf:errors>
 					<label class="form-label">Assign Date</label>
+					<sf:errors path="assignDate" cssClass="alert alert-warning" element="div"></sf:errors>
 					<sf:input path="assignDate" type="date"
 						cssClass="form-control" />
 				</div>

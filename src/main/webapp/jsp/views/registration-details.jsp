@@ -31,7 +31,7 @@
 	
 	<div class="d-flex justify-content-between my-4">
 		<h2><i class="bi bi-clipboard-fill"></i> Registration Details</h2>
-		<c:url var="edit" value="/classes/registration">
+		<!-- <c:url var="edit" value="/classes/registration">
 			<c:param name="classId" value="${ dto.classInfo.id }"></c:param>
 			<c:param name="studentId" value="${ dto.student.id }"></c:param>
 			<c:param name="teacherName" value="${ dto.classInfo.teacherName }"></c:param>
@@ -39,7 +39,7 @@
 		</c:url>
 			<a href="${edit}" class="btn btn-outline-danger me-2">
 				<i class="bi bi-pencil"></i> Edit Registration
-			</a>
+			</a> -->
 	</div>
 		
 		<div class="row">
@@ -97,17 +97,19 @@
 			</div>
 		</div>
 		<div class="mt-4">
-			<c:url var="classDetails" value="/classes/${ dto.classInfo.id }"></c:url>
-			<a href="${classDetails}" class="btn btn-outline-custom-blue me-2">
-				<i class="bi bi-mortarboard"></i> Class Details
-			</a>
-			
+				
 			<c:url var="studentDetails" value="/classes/leaves/details">
 				<c:param name="email" value="${ dto.student.email }"></c:param>
 			</c:url>
 			<a href="${ studentDetails }" class="btn btn-outline-custom-blue">
 				<i class="bi bi-people-fill"></i> Student Details
 			</a>
+		
+			<c:url var="classDetails" value="/classes/${ dto.classInfo.id }"></c:url>
+			<a href="${classDetails}" class="btn btn-outline-custom-blue me-2">
+				<i class="bi bi-mortarboard"></i> Class Details
+			</a>
+
 			
 		</div>
 	</div>

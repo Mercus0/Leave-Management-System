@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Register | Edit</title>
+<c:url var="editClass" value="/resources/edit-class.css"></c:url>
+<link rel="stylesheet" href="${editClass}" type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link
@@ -19,20 +21,25 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
+	
 </head>
 <body>
 	<c:import url="/jsp/include/navbar.jsp">
 		<c:param name="view" value="classes"></c:param>
 	</c:import>
 	<div class="container">
-		<h3 class="my-4">Add New Registration</h3>
 
 			<div class="row">
+			<div class="col-6">
 				<!--  Old Student -->
-				<sf:form method="post" modelAttribute="registForm" cssClass="col-6">
+				<sf:form method="post" modelAttribute="registForm">
+					<h2 class="my-4"><i class="bi-plus-lg"></i>Add New Registration</h2>
 					<sf:hidden path="studentId" />
 					<sf:hidden path="classId" />
 					<sf:hidden path="registDate" />
+					
 						<sf:errors path="*">
 							<div class="alert alert-info">Please Enter Student Id.</div>
 						</sf:errors>
@@ -55,6 +62,11 @@
 						</button>
 					</div>
 				</sf:form>
+				</div>
+			<div class="col-lg-6 col-md-9 col-sm-12">
+				<img class="img img-fluid" alt="logo Image"
+				src="<c:url value='/images/logo-8.png' />" width="650" height="auto" />
+			</div>
 			</div>
 		</div>
 		<!-- End -->

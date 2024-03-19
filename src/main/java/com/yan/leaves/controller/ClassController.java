@@ -78,8 +78,9 @@ public class ClassController {
 	}
 	
 	@PostMapping
-	public String save(@Valid @ModelAttribute(name = "classForm") ClassForm form, BindingResult result) {
+	public String save(@Valid @ModelAttribute(name = "classForm") ClassForm form, BindingResult result,ModelMap model) {
 		if (result.hasErrors()) {
+			model.put("teachers", teaService.getAvailableTeacher());
 			return "classes-edit";
 		}
 		// save form
