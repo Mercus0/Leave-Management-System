@@ -197,11 +197,28 @@
         }
     }
     
-    .bg-gold{
+.bg-gold{
 	background-color: #e9b563 !important;
 	color:#1a1a2e !important;
 }
+
 .mt-3{
 	margin-top: 50px
+}
+
+.alert {
+  max-width: 100%;
+  border-radius: 12px;
+  display: flex;
+}
+
+.alert-error {
+  background: #e41749;
+}
+
+.alert p {
+  color: #fff;
+  font-family: Verdana;
+  margin-left: 20px;
 }
     

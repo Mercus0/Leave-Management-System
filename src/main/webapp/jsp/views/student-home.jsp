@@ -107,10 +107,6 @@
 								<span class="text-secondary">Address</span>
 								<h5>${dto.student.address }</h5>
 							</div>
-							<div class="col">
-								<span class="text-secondary">Password</span>
-								<h5>${dto.student.password }</h5>
-							</div>
 						</div>
 
 					</div>

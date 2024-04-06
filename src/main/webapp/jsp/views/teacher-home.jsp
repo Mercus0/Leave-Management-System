@@ -118,13 +118,13 @@
 		<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
 			<div id="myToast" class="toast hide" role="alert"
 				aria-live="assertive" aria-atomic="true">
-				<div class="toast-header">
-					<strong class="me-auto">New Request</strong>
+				<div class="toast-header bg-blue">
+					<strong class="me-auto"><i class="bi bi-exclamation-triangle-fill text-danger"></i> New Message</strong>
 					<button type="button" class="btn-close" data-bs-dismiss="toast"
 						aria-label="Close"></button>
 				</div>
 				<div class="toast-body">
-					You have a new request in <b>${ item.details }</b>.
+					You have a new request in <b class="text-danger">${ item.details }</b>.
 				</div>
 			</div>
 		</div>

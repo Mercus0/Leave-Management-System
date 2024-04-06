@@ -130,12 +130,12 @@ public class LeaveService {
 		return template.queryForObject(LEAVE_COUNT_SQL, Map.of("classId", classId, "target", date), Long.class);
 	}
 
-	public void pending(Optional<Integer> classId, int studentId, LocalDate targetDate, String action) {
+	public void pending(Optional<Integer> classId, Optional<Integer> studentId, LocalDate targetDate, String action) {
 		template.update("""
 				update leaves set approval_status =:action
 				where classes_id =:classId and student_id =:studentId and
 				apply_date =:targetDate
-				""", Map.of("action", action, "classId", classId.orElse(null), "targetDate", targetDate, "studentId", studentId));
+				""", Map.of("action", action, "classId", classId.orElse(null), "targetDate", targetDate, "studentId", studentId.orElse(null)));
 	}
 
 	public List<LeaveSummaryVO> searchAllLeaveByStudent(Optional<String> className, Optional<String> teacherName,
@@ -221,7 +221,7 @@ public class LeaveService {
 						));
 	}
 
-	public List<LeaveListVO> findLeaveDetails(LocalDate applyDate, Optional<Integer> classId, int studentId) {
+	public List<LeaveListVO> findLeaveDetails(LocalDate applyDate, Optional<Integer> classId, Optional<Integer> studentId) {
 		return template.query("""
 				SELECT a.name student,l.apply_date applyDate,l.classes_id classId,
 				l.start_date startDate,l.days,l.reason reason,l.approval_status status,
@@ -234,7 +234,7 @@ public class LeaveService {
 				l.apply_date = :applyDate
 					""", Map.of("classId", classId.orElse(null),
 							"applyDate", applyDate,
-							"studentId",studentId),
+							"studentId",studentId.orElse(null)),
 				new BeanPropertyRowMapper<>(LeaveListVO.class));
 	}
 }

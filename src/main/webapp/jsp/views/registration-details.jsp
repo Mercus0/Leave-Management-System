@@ -98,7 +98,7 @@
 		</div>
 		<div class="mt-4">
 				
-			<c:url var="studentDetails" value="/classes/leaves/details">
+			<c:url var="studentDetails" value="/students/details">
 				<c:param name="email" value="${ dto.student.email }"></c:param>
 			</c:url>
 			<a href="${ studentDetails }" class="btn btn-outline-custom-blue">

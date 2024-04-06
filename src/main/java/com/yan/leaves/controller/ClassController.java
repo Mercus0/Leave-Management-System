@@ -68,7 +68,8 @@ public class ClassController {
 	public String leaveDetails(
 			@RequestParam(name = "applyDate", required = false) LocalDate applyDate,
 			@RequestParam(name = "classId", required = false) Optional<Integer> classId,
-			@RequestParam(name = "studentId", required = false) int studentId,ModelMap model
+			@RequestParam(name = "studentId", required = false) Optional<Integer> studentId,ModelMap model
+			
 			) {
 		var result = levService.findLeaveDetails(applyDate,classId,studentId);
 		var names = levService.findClassAndTeacher(classId);
@@ -92,7 +93,7 @@ public class ClassController {
 	@PostMapping("/{classId}/approval")
 	public String approval(@PathVariable (name="classId",required = false) Optional<Integer> classId,
 			@RequestParam String action,
-            @RequestParam int studentId,
+            @RequestParam Optional<Integer> studentId,
             @RequestParam LocalDate targetDate,ModelMap model){
 			levService.pending(classId,studentId,targetDate,action);
 			var result = levService.findLeaveDetails(targetDate,classId,studentId);
