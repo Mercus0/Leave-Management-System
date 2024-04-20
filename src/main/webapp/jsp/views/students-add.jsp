@@ -107,7 +107,7 @@
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Address</label>
-						<sf:errors path="Address" cssClass="alert alert-warning"
+						<sf:errors path="address" cssClass="alert alert-warning"
 							element="div"></sf:errors>
 						<sf:input path="Address" type="text"
 							placeholder="Enter Student address" cssClass="form-control" />
