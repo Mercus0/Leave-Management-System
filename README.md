@@ -1,0 +1,6 @@
+![Screenshot 2024-03-29 222312](https://github.com/Mercus0/Leave-Management-System/assets/146565478/8a8aaf28-6d78-403a-b4c7-622e821fb827)
+![Screenshot 2024-03-19 211813](https://github.com/Mercus0/Leave-Management-System/assets/146565478/79c60de1-f23a-49ea-8e0e-1ad1aadbf02e)
+![Screenshot 2024-03-19 211151](https://github.com/Mercus0/Leave-Management-System/assets/146565478/d2e617fe-965a-449b-9243-ad6bfa1f5f14)
+![Screenshot 2024-03-19 220641](https://github.com/Mercus0/Leave-Management-System/assets/146565478/68749ed7-af05-46d4-9e77-30cd31b35357)
+![Screenshot 2024-03-29 154338](https://github.com/Mercus0/Leave-Management-System/assets/146565478/2d88d3b7-a80b-482c-bae3-33f5ef03dd3c)
+![Screenshot 2024-03-29 171121](https://github.com/Mercus0/Leave-Management-System/assets/146565478/ab9c03e4-ea9a-4f00-9d53-c89d6234c887)
